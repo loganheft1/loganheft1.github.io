@@ -1888,6 +1888,1832 @@ if(window._PHOTOS){
 }
 </script>
 </body>
+</html>  display:flex;flex-direction:column;align-items:center;gap:9px;
+  cursor:pointer;padding:14px 28px;border-radius:4px;transition:background .12s;
+}
+.wc-user:hover{background:rgba(255,255,255,.08)}
+.wc-ava{
+  width:60px;height:60px;border-radius:4px;border:2.5px solid rgba(255,255,255,.4);
+  background:linear-gradient(135deg,#4fffb0,#2563eb);
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;font-weight:800;color:#fff;letter-spacing:-1px;
+}
+.wc-name{color:#fff;font-size:13px;font-weight:700}
+.wc-sub{color:rgba(255,255,255,.5);font-size:10px;margin-top:1px}
+.wc-foot{
+  position:absolute;bottom:0;left:0;right:0;height:48px;
+  background:linear-gradient(90deg,#0E2E96,#1A4DD4,#0E2E96);
+  border-top:1px solid rgba(255,255,255,.2);
+  display:flex;align-items:center;padding:0 20px;
+}
+
+/* ============================================================
+   LOADING
+   ============================================================ */
+#loading{
+  position:fixed;inset:0;z-index:9998;background:#000;
+  display:none;flex-direction:column;align-items:center;justify-content:center;gap:18px;
+  font-family:var(--f);
+}
+.ld-flag{width:38px;height:38px;display:grid;grid-template-columns:1fr 1fr;gap:1.5px;border-radius:2px;overflow:hidden}
+.ld-flag div:nth-child(1){background:#F25022}
+.ld-flag div:nth-child(2){background:#7FBA00}
+.ld-flag div:nth-child(3){background:#00A4EF}
+.ld-flag div:nth-child(4){background:#FFB900}
+.ld-text{color:#fff;font-size:22px;font-weight:200;letter-spacing:3px}
+.ld-xp{font-weight:700;color:#FF8C00}
+.ld-dots{display:flex;gap:2px}
+.ld-dot{width:13px;height:6px;background:linear-gradient(90deg,#1A5CD4,#4A8EF0);border-radius:2px;animation:ldp 1.4s infinite}
+.ld-dot:nth-child(2){animation-delay:.3s}
+.ld-dot:nth-child(3){animation-delay:.6s}
+.ld-dot:nth-child(4){animation-delay:.9s}
+@keyframes ldp{0%,100%{opacity:.2}50%{opacity:1}}
+.ld-bar{width:180px;height:12px;background:#111;border:1px solid #333;border-radius:2px;padding:2px;overflow:hidden}
+.ld-fill{height:100%;background:linear-gradient(90deg,#1A5CD4,#5090F0);border-radius:1px;width:0;transition:width 2.2s ease}
+
+/* ============================================================
+   DESKTOP
+   ============================================================ */
+#desktop{
+  width:100vw;height:100vh;position:relative;overflow:hidden;
+  display:none;font-family:var(--f);
+  background:linear-gradient(175deg,#1C5AAA 0%,#1A5099 20%,#1B5CAE 45%,#3A7ED4 70%,#5A9EE0 88%,#7AB8F0 100%);
+}
+#desktop::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 40% at 30% 25%,rgba(255,255,255,.12) 0%,transparent 55%),
+    radial-gradient(ellipse 35% 25% at 75% 15%,rgba(255,255,255,.07) 0%,transparent 50%);
+  pointer-events:none;
+}
+#desktop::after{content:none}
+
+/* ============================================================
+   DESKTOP ICONS
+   ============================================================ */
+#icons{position:absolute;top:14px;left:14px;display:flex;flex-direction:column;gap:4px;z-index:10}
+.dico{
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+  width:74px;padding:5px 4px 7px;border-radius:2px;cursor:pointer;
+  border:1px solid transparent;outline:1px solid transparent;
+}
+.dico:hover,.dico.sel{
+  background:rgba(49,106,197,.42);
+  border-color:rgba(255,255,255,.32);
+  outline-color:rgba(255,255,255,.18);
+}
+.dico svg{width:48px;height:48px;image-rendering:pixelated;image-rendering:crisp-edges;flex-shrink:0;shape-rendering:crispEdges}
+.dico span{
+  font-size:11px;color:#fff;text-align:center;line-height:1.3;
+  text-shadow:1px 1px 1px #000,0 0 4px rgba(0,0,0,.75);
+  width:70px;word-break:break-word;
+}
+
+/* ============================================================
+   TASKBAR
+   ============================================================ */
+#taskbar{
+  position:fixed;bottom:0;left:0;right:0;height:30px;z-index:8000;
+  background:var(--xp-bar);border-top:1px solid rgba(255,255,255,.35);
+  display:flex;align-items:stretch;
+}
+#startbtn{
+  display:flex;align-items:center;gap:5px;height:100%;
+  background:var(--xp-start);border:none;border-radius:0 13px 13px 0;
+  padding:0 15px 0 8px;cursor:pointer;
+  color:#fff;font-family:var(--f);font-size:13px;font-weight:700;font-style:italic;
+  text-shadow:1px 1px 2px rgba(0,0,0,.5);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.28),2px 0 3px rgba(0,0,0,.22);
+  flex-shrink:0;transition:filter .1s;
+}
+#startbtn:hover{filter:brightness(1.08)}
+#startbtn:active{filter:brightness(.92)}
+.sf{width:20px;height:20px;display:grid;grid-template-columns:1fr 1fr;gap:1px;border-radius:2px;overflow:hidden;flex-shrink:0}
+.sf div:nth-child(1){background:#F25022}
+.sf div:nth-child(2){background:#7FBA00}
+.sf div:nth-child(3){background:#00A4EF}
+.sf div:nth-child(4){background:#FFB900}
+#tbwins{flex:1;display:flex;align-items:center;padding:3px 4px;gap:2px;overflow:hidden}
+.tbw{
+  display:flex;align-items:center;gap:3px;height:22px;min-width:80px;max-width:152px;padding:0 7px;
+  background:linear-gradient(180deg,#3A7CC0,#1C5CA0);border:1px solid rgba(255,255,255,.16);
+  border-bottom-color:rgba(0,0,0,.22);border-radius:3px;cursor:pointer;
+  font-family:var(--f);font-size:11px;color:#fff;text-shadow:0 1px 1px rgba(0,0,0,.4);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex-shrink:0;transition:filter .1s;
+}
+.tbw:hover{filter:brightness(1.12)}
+.tbw.on{background:linear-gradient(180deg,#183880,#2060A8);box-shadow:inset 0 2px 3px rgba(0,0,0,.26)}
+#tray{
+  display:flex;align-items:center;gap:6px;padding:0 10px;
+  background:var(--xp-tray);border-left:1px solid rgba(255,255,255,.14);
+  font-family:var(--f);font-size:11px;color:#fff;flex-shrink:0;
+}
+#clock{font-size:11px;color:#fff;text-align:center;line-height:1.25}
+
+/* ============================================================
+   START MENU
+   ============================================================ */
+#smenu{
+  position:fixed;bottom:30px;left:0;width:322px;
+  background:#fff;border:1px solid #0A246A;border-radius:5px 5px 0 0;
+  box-shadow:2px -2px 8px rgba(0,0,0,.38);z-index:9000;display:none;
+  font-family:var(--f);overflow:hidden;
+}
+#smenu.open{display:block}
+.sm-hd{
+  background:linear-gradient(90deg,#225ECC,#3C91F0);
+  padding:8px 10px 12px;display:flex;align-items:center;gap:9px;
+}
+.sm-ava{
+  width:46px;height:46px;border-radius:4px;border:2px solid rgba(255,255,255,.5);
+  background:linear-gradient(135deg,#4fffb0,#2563eb);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;font-weight:800;color:#fff;letter-spacing:-1px;flex-shrink:0;
+}
+.sm-nm{color:#fff;font-size:13px;font-weight:700;text-shadow:0 1px 2px rgba(0,0,0,.35)}
+.sm-sr{color:rgba(255,255,255,.7);font-size:10px;margin-top:1px}
+.sm-cols{display:flex}
+.sm-L{flex:1;padding:4px 0;border-right:1px solid #D4D0C8}
+.sm-R{width:136px;padding:4px 0;background:#EBE8D4}
+.sm-lbl{font-size:10px;font-weight:700;color:#7171B5;padding:4px 11px 2px;text-transform:uppercase}
+.sm-sep{height:1px;background:#D4D0C8;margin:2px 0}
+.sm-it{
+  display:flex;align-items:center;gap:7px;
+  padding:4px 10px;cursor:pointer;font-size:11.5px;font-family:var(--f);
+}
+.sm-it:hover{background:#316AC5;color:#fff}
+.sm-it svg{width:22px;height:22px;flex-shrink:0}
+.sm-it-wrap{display:flex;flex-direction:column}
+.sm-it-main{font-size:11.5px;font-weight:600;line-height:1.2}
+.sm-it-s{font-size:10px;color:#666;line-height:1.2}
+.sm-it:hover .sm-it-s{color:rgba(255,255,255,.65)}
+.sm-ft{
+  background:linear-gradient(90deg,#0E2E96,#1A4DD4);
+  display:flex;justify-content:flex-end;gap:3px;padding:4px 7px;
+}
+.sm-fb{
+  display:flex;align-items:center;gap:3px;
+  background:linear-gradient(180deg,#3A7FE0,#1A5FCC);
+  border:1px solid rgba(255,255,255,.26);border-radius:2px;
+  padding:3px 11px;cursor:pointer;font-size:11px;font-family:var(--f);color:#fff;
+}
+.sm-fb:hover{filter:brightness(1.1)}
+
+/* ============================================================
+   WINDOWS — chrome
+   ============================================================ */
+.xw{
+  position:absolute;display:none;flex-direction:column;
+  min-width:280px;min-height:180px;
+  border:2px solid #0A246A;border-radius:7px 7px 4px 4px;
+  box-shadow:3px 3px 10px rgba(0,0,0,.52);overflow:hidden;
+}
+.xw.show{display:flex}
+.xw.ftop{z-index:500}
+.tb{
+  height:29px;flex-shrink:0;background:var(--xp-tb);border-radius:5px 5px 0 0;
+  display:flex;align-items:center;padding:0 5px 0 7px;cursor:move;user-select:none;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.42),inset 0 2px 0 rgba(255,255,255,.16);
+}
+.xw.blur .tb{background:var(--xp-tb-blur)}
+.tb-ico{width:15px;height:15px;margin-right:5px;flex-shrink:0}
+.tb-t{
+  flex:1;font-family:var(--f);font-size:11.5px;font-weight:700;color:#fff;
+  text-shadow:0 1px 2px rgba(0,0,0,.48);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.tb-btns{display:flex;gap:2px;margin-left:4px}
+.xb{
+  width:21px;height:21px;border-radius:3px;border:1px solid;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-size:10px;font-weight:900;line-height:1;transition:filter .07s;
+  font-family:var(--f);
+}
+.xb:hover{filter:brightness(1.15)}
+.xb:active{filter:brightness(.84)}
+.xbn{background:linear-gradient(180deg,#6CB4F5,#3A7FD5);border-color:#1A4A9A;color:#fff}
+.xbx{background:linear-gradient(180deg,#F07070,#C83030);border-color:#8A1A1A;color:#fff}
+.wmb{
+  background:#ECE9D8;border-bottom:1px solid #D4D0C8;
+  height:21px;display:flex;align-items:center;padding:0 4px;flex-shrink:0;
+}
+.wmi{padding:2px 7px;font-size:11px;cursor:pointer;border-radius:2px;color:#000;font-family:var(--f)}
+.wmi:hover{background:#316AC5;color:#fff}
+.wbody{flex:1;overflow:auto;background:#fff;position:relative}
+.wst{
+  background:#ECE9D8;border-top:1px solid #D4D0C8;
+  height:20px;display:flex;align-items:center;padding:0 7px;
+  font-size:11px;font-family:var(--f);color:#000;flex-shrink:0;
+}
+.wrz{
+  position:absolute;bottom:0;right:0;width:14px;height:14px;cursor:se-resize;
+  background:repeating-linear-gradient(-45deg,#ACA899 0,#ACA899 1px,transparent 1px,transparent 3px);
+}
+
+/* ============================================================
+   SHARED INNER CHROME
+   ============================================================ */
+.tabbar{
+  flex-shrink:0;background:#ECE9D8;
+  border-bottom:2px solid #ACA899;
+  border-top:1px solid #fff;
+  display:flex;overflow-x:auto;padding:3px 4px 0;gap:2px;
+}
+.tab{
+  padding:3px 10px 4px;font-size:11px;font-weight:600;cursor:pointer;
+  white-space:nowrap;color:#000;
+  background:#D4D0C8;
+  border:1px solid #ACA899;border-bottom:none;
+  border-radius:3px 3px 0 0;
+  font-family:var(--f);
+  margin-bottom:-1px;
+  position:relative;
+}
+.tab:hover{background:#ECE9D8;color:#000}
+.tab.on{background:#ECE9D8;color:#000;border-bottom:1px solid #ECE9D8;z-index:1;padding-bottom:5px}
+.panel{display:none;padding:10px 14px;background:#ECE9D8}
+.panel.on{display:block}
+.p-sec{
+  font-size:11px;font-weight:700;color:#000;
+  margin:8px 0 5px;padding-bottom:3px;
+  border-bottom:1px solid #ACA899;font-family:var(--f);
+}
+.p-p{font-size:11px;color:#000;line-height:1.65;margin-bottom:7px;font-family:var(--f)}
+.p-ul{padding-left:16px;margin-bottom:8px}
+.p-ul li{font-size:11px;color:#000;line-height:1.65;list-style:disc;margin-bottom:3px;font-family:var(--f)}
+.p-hl{
+  background:#fff;border:2px inset #ACA899;
+  padding:5px 9px;font-size:11px;color:#000;margin:6px 0;
+  display:flex;align-items:flex-start;gap:6px;font-family:var(--f);
+}
+.p-hl::before{content:'»';font-weight:700;flex-shrink:0;color:#000080}
+.p-quote{
+  background:#fff;border-left:3px solid #808080;
+  padding:5px 10px;font-size:11px;color:#444;font-style:italic;
+  margin:6px 0;font-family:var(--f);
+}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:12px}
+.kpi{background:#fff;border:2px inset #ACA899;padding:8px;text-align:center}
+.kpi-v{font-size:16px;font-weight:700;color:#000080;line-height:1;font-family:var(--f)}
+.kpi-l{font-size:9px;color:#444;text-transform:uppercase;margin-top:3px;line-height:1.3;font-family:var(--f)}
+.tl{padding-left:16px;border-left:2px solid #808080;margin:6px 0}
+.tl-i{position:relative;margin-bottom:10px}
+.tl-i::before{content:'';position:absolute;left:-20px;top:4px;width:7px;height:7px;background:#000080;border:1px solid #ECE9D8}
+.tl-date{font-size:9.5px;color:#444;font-family:var(--f);margin-bottom:1px}
+.tl-title{font-size:11px;font-weight:700;color:#000;margin-bottom:2px;font-family:var(--f)}
+.tl-desc{font-size:10.5px;color:#222;line-height:1.6;font-family:var(--f)}
+.wsjf{width:100%;border-collapse:collapse;font-size:10.5px;margin:6px 0;font-family:var(--f)}
+.wsjf th{background:#000080;color:#fff;padding:3px 6px;text-align:left;font-size:9.5px}
+.wsjf td{padding:3px 6px;border-bottom:1px solid #D4D0C8;background:#fff}
+.wsjf tr:nth-child(even) td{background:#F5F4EE}
+.wsjf-w td{background:#E8FFE8!important;font-weight:700}
+
+/* ============================================================
+   ABOUT ME — XP Explorer layout
+   ============================================================ */
+.aw-wrap{display:flex;height:100%;overflow:hidden}
+.aw-nav{
+  width:155px;flex-shrink:0;background:#EEF4FF;
+  border-right:1px solid #ACA899;overflow-y:auto;
+}
+.aw-nav-hd{
+  background:#316AC5;color:#fff;
+  font-size:10px;font-weight:700;padding:5px 8px;letter-spacing:.04em;text-transform:uppercase;
+  font-family:var(--f);
+}
+.aw-ni{
+  display:flex;align-items:center;gap:5px;
+  padding:5px 8px;font-size:11px;
+  cursor:pointer;border-bottom:1px solid #D4D0C8;color:#000;font-family:var(--f);
+}
+.aw-ni:hover{background:#CCE4FF;color:#000}
+.aw-ni.on{background:#316AC5;color:#fff}
+.aw-main{flex:1;overflow-y:auto;background:#ECE9D8;padding:0}
+.aw-pane{display:none;padding:10px 12px}
+.aw-pane.on{display:block}
+.aw-h1{
+  font-size:11px;font-weight:700;color:#000;
+  margin-bottom:8px;padding-bottom:4px;
+  border-bottom:1px solid #ACA899;font-family:var(--f);
+  text-transform:uppercase;letter-spacing:.04em;
+}
+.aw-h2{
+  font-size:10px;font-weight:700;color:#000080;
+  text-transform:uppercase;letter-spacing:.04em;
+  margin:10px 0 4px;font-family:var(--f);
+}
+.aw-p{font-size:11px;color:#000;line-height:1.65;margin-bottom:6px;font-family:var(--f)}
+.chip{
+  display:inline-block;font-size:10px;
+  background:#fff;border:1px solid #ACA899;color:#000;
+  padding:1px 6px;margin:2px;font-family:var(--f);
+}
+.stat-g{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin:7px 0}
+.stat-c{background:#fff;border:2px inset #ACA899;padding:7px 8px;text-align:center}
+.stat-v{font-size:16px;font-weight:700;color:#000080;line-height:1;font-family:var(--f)}
+.stat-l{font-size:9px;color:#444;margin-top:2px;text-transform:uppercase;letter-spacing:.03em;font-family:var(--f)}
+
+/* ============================================================
+   ABOUT ME — Skills (Radar)
+   ============================================================ */
+.radar-wrap{display:flex;flex-direction:column;align-items:center;gap:0;padding:4px 0 0}
+.radar-title{font-size:10px;font-weight:700;color:#000080;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;font-family:var(--f)}
+#radar-svg{display:block;background:#fff;border:2px inset #ACA899}
+
+/* ============================================================
+   ABOUT ME — Photo grid (4×5 portrait)
+   ============================================================ */
+.photo-hint{background:#fff;border:2px inset #ACA899;padding:5px 8px;font-size:10px;color:#000;line-height:1.5;margin-bottom:7px;font-family:var(--f)}
+.photo-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin:0 0 8px}
+.photo-slot{
+  aspect-ratio:4/5;border:2px inset #ACA899;
+  background:#fff;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:3px;
+  cursor:pointer;position:relative;overflow:hidden;
+}
+.photo-slot:hover{background:#EEF4FF;border-color:#316AC5}
+.photo-slot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ps-ico{font-size:18px;line-height:1;color:#808080}
+.ps-lbl{font-size:9px;color:#444;text-align:center;line-height:1.3;font-family:var(--f)}
+.photo-slot input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer}
+.strava-link{
+  display:inline-flex;align-items:center;gap:5px;
+  background:linear-gradient(180deg,#F07050,#C83010);
+  border:2px outset #E06040;
+  padding:4px 10px;
+  color:#fff;font-size:11px;font-weight:700;font-family:var(--f);
+  text-decoration:none;cursor:pointer;
+}
+.strava-link:hover{filter:brightness(1.08)}
+.strava-link:active{border-style:inset}
+
+/* ============================================================
+   ABOUT ME — Education blurbs
+   ============================================================ */
+.edu-card{border:1px solid #D4D0C8;border-radius:4px;padding:11px 13px;margin-bottom:9px;background:#FAFAF6}
+.edu-school{font-size:13px;font-weight:700;color:#0A246A;margin-bottom:1px;font-family:var(--f)}
+.edu-degree{font-size:11px;color:#555;margin-bottom:7px;font-family:var(--f)}
+.edu-blurb{
+  width:100%;min-height:52px;font-size:11px;font-family:var(--f);color:#333;
+  border:1px solid #C5D9F1;background:#fff;border-radius:3px;
+  padding:5px 7px;resize:vertical;line-height:1.65;outline:none;
+}
+.edu-blurb:focus{border-color:#245EDC}
+.edu-blurb-hint{font-size:9.5px;color:#999;font-family:var(--f);margin-top:3px}
+
+/* ============================================================
+   RESUME WINDOW
+   ============================================================ */
+.rv-wrap{display:flex;height:100%;overflow:hidden}
+.rv-sb{width:160px;flex-shrink:0;background:#EEF2FA;border-right:1px solid #D4D0C8;padding:10px}
+.rv-dl{
+  display:block;width:100%;text-align:center;
+  background:linear-gradient(180deg,#6CB4F5,#3A7FD5);
+  border:1px solid #1A4A9A;border-radius:3px;
+  color:#fff;font-size:11px;font-weight:700;font-family:var(--f);
+  padding:6px 4px;cursor:pointer;margin-bottom:10px;text-decoration:none;
+}
+.rv-dl:hover{filter:brightness(1.08)}
+.rv-meta{font-size:10.5px;font-family:var(--f);color:#444;line-height:1.7;border-top:1px solid #D4D0C8;padding-top:8px}
+.rv-main{flex:1;overflow:hidden;background:#555}
+.rv-main iframe{width:100%;height:100%;border:none}
+
+/* ============================================================
+   MY WORK WINDOW — header
+   ============================================================ */
+.mw-wrap{height:100%;display:flex;flex-direction:column;overflow:hidden}
+.mw-body{flex:1;overflow:hidden;display:flex;flex-direction:column}
+
+/* ============================================================
+   RECYCLE BIN
+   ============================================================ */
+.rb-body{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  height:100%;gap:8px;color:#555;text-align:center;padding:20px;font-family:var(--f);
+}
+
+/* ============================================================
+   CONTEXT MENU
+   ============================================================ */
+#ctx{
+  position:fixed;z-index:9500;display:none;
+  background:#ECE9D8;border:1px solid #0A246A;
+  box-shadow:2px 2px 5px rgba(0,0,0,.3);
+  padding:2px 0;min-width:165px;font-family:var(--f);
+}
+.cxi{padding:4px 22px;font-size:11px;cursor:pointer;color:#000}
+.cxi:hover{background:#316AC5;color:#fff}
+.cxs{height:1px;background:#D4D0C8;margin:2px 0}
+
+/* XP scrollbar */
+::-webkit-scrollbar{width:16px;height:16px}
+::-webkit-scrollbar-track{background:#ECE9D8;border:1px solid #ACA899}
+::-webkit-scrollbar-thumb{background:linear-gradient(90deg,#E0DDD0,#CCCAB8);border:1px solid #ACA899}
+::-webkit-scrollbar-button:single-button{background:linear-gradient(180deg,#ECE9D8,#D4D0C8);border:1px solid #ACA899;height:16px;display:block}
+
+/* ============================================================
+   MINESWEEPER
+   ============================================================ */
+.mine-wrap{display:flex;flex-direction:column;align-items:center;gap:6px;font-family:Tahoma,sans-serif}
+.mine-topbar{
+  display:flex;align-items:center;justify-content:space-between;
+  width:100%;background:#C0BDB0;border:3px inset #808078;padding:5px 10px;
+}
+.mine-counter{
+  background:#000;color:#FF0000;font-family:"Courier New",monospace;
+  font-size:22px;font-weight:700;padding:2px 6px;min-width:52px;
+  text-align:center;letter-spacing:2px;border:2px inset #808078;
+}
+.mine-face{
+  background:#C0BDB0;border:3px outset #fff;padding:2px 8px;
+  font-size:18px;cursor:pointer;line-height:1;
+}
+.mine-face:active{border-style:inset}
+.mine-grid{
+  display:grid;border:3px inset #808078;background:#C0BDB0;
+  line-height:0;
+}
+.mc{
+  width:22px;height:22px;border:2px outset #fff;background:#C0BDB0;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;font-family:"Courier New",monospace;
+  user-select:none;box-sizing:border-box;
+}
+.mc:active{border-style:inset}
+.mc.rev{border:1px solid #808078;border-top-color:#808078;background:#C0BDB0;cursor:default}
+.mc.boom{background:#FF0000}
+.mc.flagged{background:#C0BDB0}
+.c1{color:#0000CC}.c2{color:#007700}.c3{color:#CC0000}
+.c4{color:#000088}.c5{color:#880000}.c6{color:#008888}.c7{color:#000}.c8{color:#888}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     WELCOME / LOGIN SCREEN
+     ════════════════════════════════════════════════════════════════════
+     This is the first thing visitors see — the XP login screen.
+
+     TO CHANGE YOUR NAME on the login screen:
+       Search for: <div class="wc-name">Logan Heft</div>
+       Replace "Logan Heft" with your name.
+
+     TO CHANGE THE PIXEL AVATAR:
+       The avatar SVG appears twice — once here on the welcome screen
+       and once in the Start Menu. Both are labeled with:
+         <!-- PIXEL AVATAR — 16×16 upscaled to container size -->
+       Edit the fill colors on the labeled rects to change hair/skin/shirt.
+       Hair color:  fill="#602000"  (dark brown)
+       Skin color:  fill="#F0C080"  (light skin)
+       Shirt color: fill="#2060B0"  (navy blue)
+
+     TO ADD/REMOVE THE SUBTITLE LINE UNDER YOUR NAME:
+       Currently deleted. To re-add, insert inside .wc-user:
+         <div class="wc-sub">Your subtitle here</div>
+     ════════════════════════════════════════════════════════════════════ -->
+<div id="welcome">
+  <div class="wc-flag"><div></div><div></div><div></div><div></div></div>
+  <div><span class="wc-brand">Microsoft </span><span class="wc-xp">XP</span></div>
+  <div class="wc-rule"></div>
+  <div class="wc-hint">To begin, click your user name</div>
+  <div class="wc-user" onclick="boot()">
+    <div class="wc-ava" style="background:none;border:2.5px solid rgba(255,255,255,.5);overflow:hidden;padding:0"><svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" style="image-rendering:pixelated;image-rendering:crisp-edges;width:100%;height:100%">
+      <!-- ═══════════════════════════════════════════════
+           PIXEL AVATAR — 16×16 upscaled to container size
+           To change hair color: edit fill="#602000" rects
+           To change skin tone: edit fill="#F0C080" rects
+           To change shirt:     edit fill="#2060B0" rects
+           ═══════════════════════════════════════════════ -->
+      <!-- background -->
+      <rect x="0" y="0" width="16" height="16" fill="#1868C8"/>
+      <rect x="1" y="0" width="14" height="1" fill="#3090F0"/>
+      <rect x="0" y="1" width="1" height="14" fill="#3090F0"/>
+      <!-- face -->
+      <rect x="6" y="2" width="4" height="1" fill="#F0C080"/>
+      <rect x="5" y="3" width="6" height="3" fill="#F0C080"/>
+      <rect x="5" y="3" width="1" height="1" fill="#805020"/>
+      <rect x="10" y="3" width="1" height="1" fill="#805020"/>
+      <rect x="6" y="4" width="1" height="1" fill="#805020"/>
+      <rect x="9" y="4" width="1" height="1" fill="#805020"/>
+      <rect x="6" y="5" width="4" height="1" fill="#C07040"/>
+      <rect x="5" y="6" width="6" height="1" fill="#F0C080"/>
+      <!-- hair -->
+      <rect x="5" y="2" width="6" height="1" fill="#602000"/>
+      <rect x="5" y="3" width="1" height="1" fill="#602000"/>
+      <rect x="10" y="3" width="1" height="1" fill="#602000"/>
+      <!-- neck -->
+      <rect x="7" y="7" width="2" height="2" fill="#F0C080"/>
+      <!-- shirt/body -->
+      <rect x="4" y="9" width="8" height="1" fill="#2060B0"/>
+      <rect x="3" y="10" width="10" height="5" fill="#2060B0"/>
+      <rect x="2" y="11" width="12" height="4" fill="#2060B0"/>
+      <!-- shoulder highlights -->
+      <rect x="3" y="10" width="1" height="1" fill="#4080D0"/>
+      <rect x="12" y="10" width="1" height="1" fill="#4080D0"/>
+      <!-- shadow at bottom -->
+      <rect x="3" y="15" width="10" height="1" fill="#0040A0"/>
+    </svg></div>
+    <div class="wc-name">Logan Heft</div>
+  </div>
+  <div class="wc-foot"></div>
+</div>
+
+<!-- ======================================================== LOADING -->
+<div id="loading">
+  <div style="display:flex;align-items:center;gap:11px">
+    <div class="ld-flag"><div></div><div></div><div></div><div></div></div>
+    <div><span class="ld-text">Microsoft </span><span class="ld-xp">XP</span></div>
+  </div>
+  <div class="ld-dots"><div class="ld-dot"></div><div class="ld-dot"></div><div class="ld-dot"></div><div class="ld-dot"></div></div>
+  <div class="ld-bar"><div class="ld-fill" id="ldfill"></div></div>
+</div>
+
+<!-- ======================================================== DESKTOP -->
+<div id="desktop">
+<!-- ════════════════════════════════════════════════════════════════════
+     DESKTOP ICONS
+     ════════════════════════════════════════════════════════════════════
+     Each icon is a .dico div with:
+       ondblclick="openW('window-id')"  — opens the window on double-click
+       onclick="selI('icon-id')"        — highlights the icon on single-click
+
+     TO ADD A NEW DESKTOP ICON:
+       Copy a .dico block, give it a new id (e.g. id="di-new"),
+       point ondblclick to a new window id (e.g. openW('w-new')),
+       design a 16×16 pixel SVG for the icon,
+       then create the matching window HTML further down in the file.
+
+     TO CHANGE ICON LABEL TEXT:
+       Edit the <span> inside each .dico block.
+
+     TO REORDER ICONS:
+       Icons flow top-to-bottom in the order they appear in this div.
+       Drag the .dico blocks up or down to reorder.
+     ════════════════════════════════════════════════════════════════════ -->
+<div id="icons">
+
+  <!-- About Me -->
+  <div class="dico" id="di-about" ondblclick="openW('w-about');event.stopPropagation()" onclick="selI('di-about')">
+    <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
+      <!-- pixel art user icon — blue background card style -->
+      <rect x="0" y="0" width="16" height="16" fill="#1868C8"/>
+      <rect x="1" y="0" width="14" height="1" fill="#3090F0"/>
+      <rect x="0" y="1" width="1" height="14" fill="#3090F0"/>
+      <!-- face -->
+      <rect x="6" y="2" width="4" height="1" fill="#F0C080"/>
+      <rect x="5" y="3" width="6" height="3" fill="#F0C080"/>
+      <rect x="5" y="3" width="1" height="1" fill="#805020"/>
+      <rect x="10" y="3" width="1" height="1" fill="#805020"/>
+      <rect x="6" y="4" width="1" height="1" fill="#805020"/>
+      <rect x="9" y="4" width="1" height="1" fill="#805020"/>
+      <rect x="6" y="5" width="4" height="1" fill="#C07040"/>
+      <rect x="5" y="6" width="6" height="1" fill="#F0C080"/>
+      <!-- hair -->
+      <rect x="5" y="2" width="6" height="1" fill="#602000"/>
+      <rect x="5" y="3" width="1" height="1" fill="#602000"/>
+      <rect x="10" y="3" width="1" height="1" fill="#602000"/>
+      <!-- shirt/body -->
+      <rect x="4" y="9" width="8" height="1" fill="#2060B0"/>
+      <rect x="3" y="10" width="10" height="5" fill="#2060B0"/>
+      <rect x="2" y="11" width="12" height="4" fill="#2060B0"/>
+      <!-- shoulders highlight -->
+      <rect x="3" y="10" width="1" height="1" fill="#4080D0"/>
+      <rect x="12" y="10" width="1" height="1" fill="#4080D0"/>
+      <!-- neck -->
+      <rect x="7" y="7" width="2" height="2" fill="#F0C080"/>
+      <!-- ground shadow -->
+      <rect x="3" y="15" width="10" height="1" fill="#0040A0"/>
+    </svg>
+    <span>About Me</span>
+  </div>
+
+  <!-- Resume -->
+  <div class="dico" id="di-resume" ondblclick="openW('w-resume');event.stopPropagation()" onclick="selI('di-resume')">
+    <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
+      <!-- pixel art document -->
+      <rect x="1" y="0" width="10" height="1" fill="#F0F0F0"/>
+      <rect x="0" y="1" width="1" height="13" fill="#F0F0F0"/>
+      <rect x="1" y="14" width="13" height="1" fill="#808080"/>
+      <rect x="14" y="1" width="1" height="13" fill="#808080"/>
+      <!-- page fill -->
+      <rect x="1" y="1" width="13" height="13" fill="#FFFFFF"/>
+      <!-- dog-ear fold -->
+      <rect x="11" y="0" width="4" height="1" fill="#C0C0C0"/>
+      <rect x="14" y="0" width="1" height="4" fill="#C0C0C0"/>
+      <rect x="11" y="1" width="3" height="3" fill="#D0D0D0"/>
+      <!-- red stripe (PDF badge) -->
+      <rect x="1" y="5" width="10" height="3" fill="#CC2020"/>
+      <rect x="1" y="5" width="10" height="1" fill="#EE4040"/>
+      <!-- PDF text pixels (simplified) -->
+      <rect x="3" y="6" width="1" height="1" fill="#FFF"/>
+      <rect x="4" y="6" width="1" height="1" fill="#FFF"/>
+      <rect x="5" y="6" width="2" height="1" fill="#FFF"/>
+      <rect x="7" y="6" width="1" height="1" fill="#FFF"/>
+      <rect x="8" y="6" width="2" height="1" fill="#FFF"/>
+      <!-- text lines -->
+      <rect x="2" y="10" width="10" height="1" fill="#AAAAAA"/>
+      <rect x="2" y="12" width="8" height="1" fill="#AAAAAA"/>
+      <!-- shadow -->
+      <rect x="2" y="15" width="13" height="1" fill="#808080"/>
+      <rect x="15" y="2" width="1" height="13" fill="#808080"/>
+    </svg>
+    <span>Resume.pdf</span>
+  </div>
+
+  <!-- My Work -->
+  <div class="dico" id="di-work" ondblclick="openW('w-work');event.stopPropagation()" onclick="selI('di-work')">
+    <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
+      <!-- pixel art XP folder — classic yellow -->
+      <!-- back panel -->
+      <rect x="0" y="4" width="15" height="11" fill="#D08000"/>
+      <rect x="0" y="5" width="15" height="9" fill="#E09800"/>
+      <!-- tab -->
+      <rect x="0" y="3" width="6" height="2" fill="#E09800"/>
+      <rect x="0" y="2" width="5" height="1" fill="#E09800"/>
+      <!-- front face -->
+      <rect x="0" y="6" width="15" height="9" fill="#FFCC00"/>
+      <!-- top shine strip -->
+      <rect x="0" y="6" width="15" height="2" fill="#FFE040"/>
+      <!-- left edge highlight -->
+      <rect x="0" y="6" width="1" height="9" fill="#FFE040"/>
+      <!-- bottom/right shadow -->
+      <rect x="0" y="14" width="15" height="1" fill="#A06000"/>
+      <rect x="14" y="6" width="1" height="8" fill="#C07800"/>
+      <!-- inner doc lines (white paper) -->
+      <rect x="3" y="9" width="9" height="4" fill="#FFFFF0"/>
+      <rect x="4" y="10" width="7" height="1" fill="#C8C8A0"/>
+      <rect x="4" y="12" width="5" height="1" fill="#C8C8A0"/>
+    </svg>
+    <span>My Work</span>
+  </div>
+
+  <!-- Minesweeper -->
+  <div class="dico" id="di-mine" ondblclick="openW('w-mine');event.stopPropagation()" onclick="selI('di-mine')">
+    <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
+      <!-- pixel art Minesweeper board -->
+      <!-- board bg -->
+      <rect x="0" y="0" width="16" height="16" fill="#C0C0C0"/>
+      <!-- raised outer border -->
+      <rect x="0" y="0" width="16" height="1" fill="#FFFFFF"/>
+      <rect x="0" y="0" width="1" height="16" fill="#FFFFFF"/>
+      <rect x="15" y="0" width="1" height="16" fill="#808080"/>
+      <rect x="0" y="15" width="16" height="1" fill="#808080"/>
+      <!-- 3x3 cell grid starting at 2,3 each cell 4x4 with 1px gap -->
+      <!-- row1 cell1: unrevealed -->
+      <rect x="2" y="3" width="4" height="4" fill="#C0C0C0"/>
+      <rect x="2" y="3" width="4" height="1" fill="#FFFFFF"/>
+      <rect x="2" y="3" width="1" height="4" fill="#FFFFFF"/>
+      <rect x="5" y="3" width="1" height="4" fill="#808080"/>
+      <rect x="2" y="6" width="4" height="1" fill="#808080"/>
+      <!-- row1 cell2: flag -->
+      <rect x="7" y="3" width="4" height="4" fill="#C0C0C0"/>
+      <rect x="7" y="3" width="4" height="1" fill="#FFFFFF"/>
+      <rect x="7" y="3" width="1" height="4" fill="#FFFFFF"/>
+      <rect x="10" y="3" width="1" height="4" fill="#808080"/>
+      <rect x="7" y="6" width="4" height="1" fill="#808080"/>
+      <!-- flag pole and flag -->
+      <rect x="9" y="3" width="1" height="4" fill="#404040"/>
+      <rect x="8" y="3" width="2" height="2" fill="#FF0000"/>
+      <!-- row1 cell3: unrevealed -->
+      <rect x="12" y="3" width="4" height="4" fill="#C0C0C0"/>
+      <rect x="12" y="3" width="4" height="1" fill="#FFFFFF"/>
+      <rect x="12" y="3" width="1" height="4" fill="#FFFFFF"/>
+      <rect x="15" y="3" width="1" height="4" fill="#808080"/>
+      <rect x="12" y="6" width="4" height="1" fill="#808080"/>
+      <!-- row2 cell1: "1" revealed -->
+      <rect x="2" y="8" width="4" height="4" fill="#C0C0C0"/>
+      <rect x="2" y="8" width="4" height="1" fill="#808080"/>
+      <rect x="2" y="8" width="1" height="4" fill="#808080"/>
+      <rect x="4" y="9" width="1" height="2" fill="#0000CC"/>
+      <rect x="3" y="10" width="1" height="1" fill="#0000CC"/>
+      <rect x="3" y="11" width="3" height="1" fill="#0000CC"/>
+      <!-- row2 cell2: MINE EXPLODED red -->
+      <rect x="7" y="8" width="4" height="4" fill="#FF0000"/>
+      <!-- mine pixels -->
+      <rect x="9" y="9" width="2" height="2" fill="#000000"/>
+      <rect x="8" y="10" width="4" height="1" fill="#000000"/>
+      <rect x="9" y="8" width="2" height="1" fill="#000000"/>
+      <rect x="9" y="11" width="2" height="1" fill="#000000"/>
+      <!-- row2 cell3: "2" revealed -->
+      <rect x="12" y="8" width="4" height="4" fill="#C0C0C0"/>
+      <rect x="12" y="8" width="4" height="1" fill="#808080"/>
+      <rect x="12" y="8" width="1" height="4" fill="#808080"/>
+      <rect x="13" y="9" width="2" height="1" fill="#007700"/>
+      <rect x="14" y="9" width="1" height="2" fill="#007700"/>
+      <rect x="13" y="10" width="2" height="1" fill="#007700"/>
+      <rect x="13" y="11" width="1" height="1" fill="#007700"/>
+      <rect x="13" y="12" width="2" height="1" fill="#007700"/>
+      <!-- row3 cells all unrevealed -->
+      <rect x="2" y="13" width="4" height="3" fill="#C0C0C0"/>
+      <rect x="2" y="13" width="4" height="1" fill="#FFFFFF"/>
+      <rect x="2" y="13" width="1" height="3" fill="#FFFFFF"/>
+      <rect x="7" y="13" width="4" height="3" fill="#C0C0C0"/>
+      <rect x="7" y="13" width="4" height="1" fill="#FFFFFF"/>
+      <rect x="7" y="13" width="1" height="3" fill="#FFFFFF"/>
+      <rect x="12" y="13" width="4" height="3" fill="#C0C0C0"/>
+      <rect x="12" y="13" width="4" height="1" fill="#FFFFFF"/>
+      <rect x="12" y="13" width="1" height="3" fill="#FFFFFF"/>
+    </svg>
+    <span>Minesweeper</span>
+  </div>
+
+</div><!-- /#icons -->
+
+<!-- ════════════════════════════════════════════════════════════════════
+     WINDOW: ABOUT ME
+     ════════════════════════════════════════════════════════════════════
+     Three panes accessed via the left sidebar nav:
+       · Bio & Summary  (#aw-bio)   — resume summary + contact
+       · Skills & Tools (#aw-skills) — radar chart + tech tags
+       · Outside of Work(#aw-outside)— photos + running + photography
+
+     TO EDIT BIO TEXT:
+       Find <div id="aw-bio"> and edit the .aw-p paragraphs directly.
+       Contact line is the <div style="margin-bottom:10px..."> row.
+
+     TO ADD/REMOVE SIDEBAR NAVIGATION ITEMS:
+       Find the .aw-nav div and copy/remove .aw-ni items.
+       Each .aw-ni calls awTab('pane-id', this) where pane-id matches
+       the id of the corresponding .aw-pane div (e.g. "aw-bio").
+
+     TO EDIT RADAR CHART SKILLS:
+       Find the RADAR array in the <script> section at the bottom.
+       Each entry: { label:'Name', value:1-10, color:'#245EDC' }
+       Edit value to change bar length. Edit label to rename the axis.
+       RADAR_AVG is the red benchmark overlay — adjust those numbers too.
+
+     TO ADD PHOTOS:
+       Open the site, go to Outside of Work, click a photo slot to upload.
+       Then click "Save photos to site" to download an updated index.html
+       with your photos baked in. Re-upload that file to GitHub.
+
+     TO EDIT OUTSIDE OF WORK TEXT:
+       Find <div id="aw-outside"> and edit the .aw-p paragraphs.
+       Update the Strava link href to your actual Strava profile URL.
+     ════════════════════════════════════════════════════════════════════ -->
+<div class="xw" id="w-about" style="width:680px;height:520px;top:26px;left:80px">
+  <div class="tb" onmousedown="drag(event,'w-about')">
+    <svg class="tb-ico" viewBox="0 0 16 16"><rect x="1" y="1" width="14" height="14" rx="3" fill="#1BA1E2"/><circle cx="8" cy="5.5" r="2.5" fill="#fff"/><ellipse cx="8" cy="12" rx="4" ry="2.5" fill="#fff"/></svg>
+    <span class="tb-t">About Me — Logan Heft</span>
+    <div class="tb-btns">
+      <div class="xb xbn" onclick="minW('w-about')">_</div>
+      <div class="xb xbn" onclick="maxW('w-about')">□</div>
+      <div class="xb xbx" onclick="closeW('w-about')">✕</div>
+    </div>
+  </div>
+  <div class="wmb"><span class="wmi">File</span><span class="wmi">Edit</span><span class="wmi">View</span><span class="wmi">Help</span></div>
+  <div class="wbody" style="padding:0;overflow:hidden">
+    <div class="aw-wrap">
+      <div class="aw-nav">
+        <div class="aw-nav-hd">SECTIONS</div>
+        <div class="aw-ni on" onclick="awTab('bio',this)">👤 Bio &amp; Summary</div>
+        <div class="aw-ni" onclick="awTab('skills',this)">⚡ Skills &amp; Tools</div>
+        <div class="aw-ni" onclick="awTab('outside',this)">🏃 Outside of Work</div>
+      </div>
+      <div class="aw-main">
+
+        <!-- BIO -->
+        <div class="aw-pane on" id="aw-bio">
+          <div class="aw-h1">Logan Heft — Technical Program Manager</div>
+          <div style="margin-bottom:10px;font-size:10.5px;font-family:var(--f);color:#444">LoganHeft1@gmail.com &nbsp;·&nbsp; 908-334-2696 &nbsp;·&nbsp; New York, NY</div>
+          <div class="aw-p">Technical Program Manager specializing in AI-driven decisioning at scale. Led initiatives generating <strong>$31M+ in risk-adjusted revenue</strong> while navigating strict Fair Lending and regulatory constraints at PNC Bank. Before that, built national security intelligence pipelines at MIT Lincoln Laboratory.</div>
+          <div class="aw-p">Core strength: <strong>technical translation</strong> — deep-diving into decision engine logic and model architecture with engineers, then pivoting to explain risk-adjusted return and compliance implications to executives. I operate at the intersection of technical depth and program leadership.</div>
+          <div class="aw-p" style="margin-bottom:0">Outside the office: competitive distance runner, semi-professional photographer, and someone who believes the discipline of training for a race and shipping enterprise software are governed by the same principles.</div>
+        </div>
+
+        <!-- SKILLS — Radar Chart -->
+        <div class="aw-pane" id="aw-skills">
+          <div class="aw-h1">Skills &amp; Tools</div>
+          <div style="background:#fff;border:2px inset #ACA899;padding:3px;margin-bottom:8px">
+            <div style="background:#000080;color:#fff;font-size:10px;font-weight:700;padding:2px 6px;font-family:var(--f)">Capability Radar — Logan vs. Avg TPM</div>
+            <svg id="radar-svg" width="100%" viewBox="0 0 400 360" preserveAspectRatio="xMidYMid meet" style="display:block;max-height:350px;background:#fff"></svg>
+          </div>
+          <div class="aw-h2">Tools &amp; Technologies</div>
+          <div style="margin-bottom:6px">
+            <span class="chip">Python</span><span class="chip">SQL</span><span class="chip">LLMs / GPT</span>
+            <span class="chip">BERT / NLP</span><span class="chip">Graph Networks</span><span class="chip">REST APIs</span>
+            <span class="chip">Elastic / Kibana</span><span class="chip">dbt</span><span class="chip">WSJF</span>
+          </div>
+          <div class="aw-h2">Domains</div>
+          <div>
+            <span class="chip">Credit Decisioning</span><span class="chip">Fair Lending / ECOA</span>
+            <span class="chip">ML Model Lifecycle</span><span class="chip">Real-Time APIs</span>
+            <span class="chip">National Security / NLP</span><span class="chip">Data Integrity Architecture</span>
+          </div>
+        </div>
+
+        <!-- OUTSIDE OF WORK -->
+        <div class="aw-pane" id="aw-outside">
+          <div class="aw-h1">Outside of Work</div>
+          <div class="photo-hint">📷 Click a slot to upload (4×5 portrait). Then hit <strong>Save photos to site</strong> to download an updated index.html with photos baked in — upload that to GitHub to make them live permanently.</div>
+          <div class="photo-grid">
+            <div class="photo-slot" id="ps0"><div class="ps-ico">📸</div><div class="ps-lbl">Upload photo</div><input type="file" accept="image/*" onchange="loadPic(this,0)"/></div>
+            <div class="photo-slot" id="ps1"><div class="ps-ico">📸</div><div class="ps-lbl">Upload photo</div><input type="file" accept="image/*" onchange="loadPic(this,1)"/></div>
+            <div class="photo-slot" id="ps2"><div class="ps-ico">📸</div><div class="ps-lbl">Upload photo</div><input type="file" accept="image/*" onchange="loadPic(this,2)"/></div>
+            <div class="photo-slot" id="ps3"><div class="ps-ico">📸</div><div class="ps-lbl">Upload photo</div><input type="file" accept="image/*" onchange="loadPic(this,3)"/></div>
+            <div class="photo-slot" id="ps4"><div class="ps-ico">📸</div><div class="ps-lbl">Upload photo</div><input type="file" accept="image/*" onchange="loadPic(this,4)"/></div>
+            <div class="photo-slot" id="ps5"><div class="ps-ico">📸</div><div class="ps-lbl">Upload photo</div><input type="file" accept="image/*" onchange="loadPic(this,5)"/></div>
+          </div>
+          <button onclick="savePhotosToHTML()" style="display:block;width:100%;margin:6px 0 10px;padding:5px 14px;background:linear-gradient(180deg,#6CB4F5,#3A7FD5);border:2px outset #fff;color:#fff;font-size:11px;font-weight:700;font-family:Tahoma,sans-serif;cursor:pointer;text-align:center;">&#128190; Save photos to site (download updated index.html)</button>
+
+          <div class="aw-h2">Running</div>
+          <div class="aw-p">Competed as a Division I distance runner at NJIT — graduated Summa Cum Laude while training 60+ miles a week. Running at that level teaches you that the gap between good and great is almost entirely about consistency, not talent. That same principle shapes how I manage programs.</div>
+          <div class="aw-p">Still racing. The discipline of a training block — structured preparation, trust the process, execute on race day — translates directly to how I approach a product launch.</div>
+          <div style="margin:10px 0">
+            <a class="strava-link" href="https://www.strava.com/athletes/loganheft" target="_blank">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599l2.836 5.598h4.172L10.463 0l-7 13.828h4.169"/></svg>
+              View on Strava
+            </a>
+          </div>
+
+          <div class="aw-h2">Photography</div>
+          <div class="aw-p">Semi-professional photographer — primarily landscape, trail, and action work. The process of photography (patience, composition, reading light) sharpens the same visual thinking that makes a good roadmap or a clean product spec. The photos above are mine.</div>
+          <div class="aw-p">Shooting on a Sony A7 series. Available for freelance projects — reach out via email.</div>
+
+          <div class="aw-h2">Why this matters for a company like Nike or Columbia</div>
+          <div class="aw-p" style="margin-bottom:0">A TPM who genuinely lives the product — who trains in the gear, photographs in the field, understands the community — brings something different to the role than someone who ships software about a world they've never entered. I'm not a spectator in the outdoor and performance space. I'm a participant.</div>
+        </div>
+
+
+      </div><!-- /.aw-main -->
+    </div>
+  </div>
+  <div class="wst">About Me — Logan Heft</div>
+  <div class="wrz" onmousedown="resz(event,'w-about')"></div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     WINDOW: RESUME (PDF Viewer)
+     ════════════════════════════════════════════════════════════════════
+     Displays your resume PDF in an Adobe Reader–style window.
+
+     TO UPDATE YOUR RESUME:
+       Replace LoganHeft_Resume.pdf in the same folder as index.html.
+       Keep the filename identical, or update the two references:
+         1. <a href="LoganHeft_Resume.pdf" download="...">
+         2. <iframe src="LoganHeft_Resume.pdf" ...>
+
+     TO CHANGE SIDEBAR METADATA:
+       Find the .rv-meta div and edit the text directly.
+       This is purely decorative — change name, email, pages, etc.
+     ════════════════════════════════════════════════════════════════════ -->
+<div class="xw" id="w-resume" style="width:660px;height:520px;top:35px;left:100px">
+  <div class="tb" onmousedown="drag(event,'w-resume')">
+    <svg class="tb-ico" viewBox="0 0 16 16"><path d="M2 1h8l5 5v10H2z" fill="#D93025"/><path d="M10 1l5 5h-5z" fill="#A52018"/></svg>
+    <span class="tb-t">LoganHeft_Resume.pdf — Adobe Reader</span>
+    <div class="tb-btns">
+      <div class="xb xbn" onclick="minW('w-resume')">_</div>
+      <div class="xb xbn" onclick="maxW('w-resume')">□</div>
+      <div class="xb xbx" onclick="closeW('w-resume')">✕</div>
+    </div>
+  </div>
+  <div class="wmb"><span class="wmi">File</span><span class="wmi">Edit</span><span class="wmi">View</span><span class="wmi">Tools</span><span class="wmi">Help</span></div>
+  <div class="wbody" style="padding:0;overflow:hidden">
+    <div class="rv-wrap">
+      <div class="rv-sb">
+        <a href="LoganHeft_Resume.pdf" download="LoganHeft_Resume.pdf" class="rv-dl">⬇ Download PDF</a>
+        <div class="rv-meta">
+          <strong>Document</strong><br/>
+          LoganHeft_Resume.pdf<br/><br/>
+          <strong>Author</strong><br/>
+          Logan Heft<br/><br/>
+          <strong>Pages</strong><br/>
+          1<br/><br/>
+          <strong>Contact</strong><br/>
+          LoganHeft1@gmail.com<br/>
+          908-334-2696<br/>
+          New York, NY
+        </div>
+      </div>
+      <div class="rv-main">
+        <iframe src="LoganHeft_Resume.pdf" title="Resume"></iframe>
+      </div>
+    </div>
+  </div>
+  <div class="wst">Page 1 of 1 &nbsp;<span style="margin-left:auto">100%</span></div>
+  <div class="wrz" onmousedown="resz(event,'w-resume')"></div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     WINDOW: MY WORK (Career Arc)
+     ════════════════════════════════════════════════════════════════════
+     Seven tabs — each is a .panel div with id="mw-{name}":
+       Overview · AI Income Encoder · Infrastructure · Data Integrity
+       Prioritization · Crisis Management · MIT Lincoln Lab
+
+     TO ADD A NEW TAB:
+       1. Add a tab button in the .tabbar div:
+            <div class="tab" onclick="mwTab('mw-newtab',this)">Tab Name</div>
+       2. Add the panel content div below the existing panels:
+            <div class="panel" id="mw-newtab">
+              <div class="p-sec">Section Title</div>
+              <div class="p-p">Your content here.</div>
+            </div>
+
+     TO EDIT EXISTING TAB CONTENT:
+       Find the panel by its id (e.g. id="mw-ai") and edit freely.
+       .p-sec    = section heading (bold, underlined)
+       .p-p      = body paragraph
+       .p-ul li  = bullet list item
+       .p-hl     = highlighted callout box (has » prefix)
+       .p-quote  = italic pull quote (left border)
+       .kpis     = 4-column KPI grid
+       .tl / .tl-i = timeline entries
+
+     TO UPDATE THE SIDEBAR "AT A GLANCE" SECTION:
+       Find the sidebar div (search for "At a Glance") and edit the
+       company name, date range, and job title for each entry.
+       To add a new company, copy one of the existing entry blocks.
+
+     TO RENAME THE WINDOW TITLE BAR:
+       Find <span class="tb-t">Career Arc — Logan Heft</span>
+       and change the text between the tags.
+     ════════════════════════════════════════════════════════════════════ -->
+<div class="xw" id="w-work" style="width:760px;height:560px;top:30px;left:110px">
+  <div class="tb" onmousedown="drag(event,'w-work')">
+    <svg class="tb-ico" viewBox="0 0 16 16"><rect x="1" y="5" width="14" height="9" rx="1" fill="#003B6E"/><rect x="1" y="5" width="14" height="4" fill="#0063CC"/><polygon points="8,1 11,5 5,5" fill="#0063CC"/></svg>
+    <span class="tb-t">My Work — PNC Bank & MIT Lincoln Laboratory</span>
+    <div class="tb-btns">
+      <div class="xb xbn" onclick="minW('w-work')">_</div>
+      <div class="xb xbn" onclick="maxW('w-work')">□</div>
+      <div class="xb xbx" onclick="closeW('w-work')">✕</div>
+    </div>
+  </div>
+  <div class="wmb"><span class="wmi">File</span><span class="wmi">Edit</span><span class="wmi">View</span><span class="wmi">Help</span></div>
+  <div class="wbody" style="padding:0;overflow:hidden">
+    <div class="mw-wrap">
+      <!-- XP Explorer address bar -->
+      <div style="background:#ECE9D8;border-bottom:1px solid #ACA899;display:flex;align-items:center;height:24px;padding:0 6px;gap:4px;flex-shrink:0">
+        <span style="font-size:11px;font-family:var(--f);color:#000">Address</span>
+        <div style="flex:1;height:17px;background:#fff;border:1px solid #7F9DB9;font-size:11px;font-family:var(--f);color:#000;padding:0 4px;display:flex;align-items:center">C:\Logan\Career Arc</div>
+      </div>
+      <!-- XP left-panel + main layout -->
+      <div style="display:flex;flex:1;overflow:hidden">
+        <!-- left sidebar -->
+        <div style="width:150px;flex-shrink:0;background:#EEF4FF;border-right:1px solid #ACA899;overflow-y:auto;padding:0">
+          <div style="background:#316AC5;color:#fff;font-size:10px;font-weight:700;padding:5px 8px;font-family:var(--f)">Career Details</div>
+          <div style="padding:8px 8px 0;font-size:10.5px;font-family:var(--f);color:#000">
+            <div style="font-weight:700;margin-bottom:4px;color:#000080">Logan Heft</div>
+            <div style="color:#444;margin-bottom:8px;line-height:1.5">Technical Program Manager<br/>New York, NY</div>
+            <div style="height:1px;background:#D4D0C8;margin-bottom:8px"></div>
+            <div style="font-weight:700;font-size:10px;color:#000080;text-transform:uppercase;margin-bottom:4px">At a Glance</div>
+            <div style="line-height:1.5;font-size:10.5px;margin-bottom:5px">
+              <span style="color:#000;font-weight:700">PNC Bank</span><br/>
+              <span style="color:#444;font-size:10px">Jan 2024 – Present</span><br/>
+              <span style="color:#000080;font-size:10px;font-style:italic">Technical Product Manager</span>
+            </div>
+            <div style="line-height:1.5;font-size:10.5px;margin-bottom:5px">
+              <span style="color:#000;font-weight:700">MIT Lincoln Lab</span><br/>
+              <span style="color:#444;font-size:10px">May 2022 – Jan 2023</span><br/>
+              <span style="color:#000080;font-size:10px;font-style:italic">Data Scientist Intern</span>
+            </div>
+            <div style="line-height:1.5;font-size:10.5px;margin-bottom:5px">
+              <span style="color:#000;font-weight:700">Global X</span><br/>
+              <span style="color:#444;font-size:10px">May 2020 – May 2022</span><br/>
+              <span style="color:#000080;font-size:10px;font-style:italic">Data Scientist Intern</span>
+            </div>
+            <div style="line-height:1.5;font-size:10.5px">
+              <span style="color:#000;font-weight:700">ConnectOne Bank</span><br/>
+              <span style="color:#444;font-size:10px">May 2019 – May 2021</span><br/>
+              <span style="color:#000080;font-size:10px;font-style:italic">Data Scientist Intern</span>
+            </div>
+            <div style="height:1px;background:#D4D0C8;margin:8px 0"></div>
+            <div style="font-weight:700;font-size:10px;color:#000080;text-transform:uppercase;margin-bottom:4px">Impact</div>
+            <div style="color:#000080;font-size:11px;font-weight:700;font-family:var(--f)">$31M+</div>
+            <div style="color:#444;font-size:9.5px;margin-bottom:4px">Revenue delivered</div>
+            <div style="color:#000080;font-size:11px;font-weight:700;font-family:var(--f)">215K</div>
+            <div style="color:#444;font-size:9.5px;margin-bottom:4px">Customers unlocked</div>
+            <div style="color:#000080;font-size:11px;font-weight:700;font-family:var(--f)">25+</div>
+            <div style="color:#444;font-size:9.5px">Engineers led</div>
+          </div>
+        </div>
+        <!-- main content -->
+        <div class="mw-body">
+        <div class="tabbar">
+          <div class="tab on" onclick="mwTab('mw-overview',this)">Overview</div>
+          <div class="tab" onclick="mwTab('mw-ai',this)">AI Income Encoder</div>
+          <div class="tab" onclick="mwTab('mw-infra',this)">Infrastructure</div>
+          <div class="tab" onclick="mwTab('mw-integrity',this)">Data Integrity</div>
+          <div class="tab" onclick="mwTab('mw-strategy',this)">Prioritization</div>
+          <div class="tab" onclick="mwTab('mw-crisis',this)">Crisis Management</div>
+          <div class="tab" onclick="mwTab('mw-mit',this)">MIT Lincoln Lab</div>
+        </div>
+        <div style="flex:1;overflow-y:auto">
+
+          <div class="panel on" id="mw-overview">
+            <div class="kpis">
+              <div class="kpi"><div class="kpi-v">$31M+</div><div class="kpi-l">Risk-adj. revenue (12mo)</div></div>
+              <div class="kpi"><div class="kpi-v">215K</div><div class="kpi-l">Customers unlocked</div></div>
+              <div class="kpi"><div class="kpi-v">$8.6M</div><div class="kpi-l">Yearly profit added</div></div>
+              <div class="kpi"><div class="kpi-v">400+</div><div class="kpi-l">LLM credit signals</div></div>
+            </div>
+            <div class="p-sec">What I own</div>
+            <div class="p-p">As Technical PM for Consumer &amp; Business Credit Cards, I own the data infrastructure and decision engine that determines credit line changes for millions of PNC customers. This means the pipelines that feed the engine, the vendor integrations, the model inputs, the validation layers, and the governance policies that determine when decisions can and cannot run.</div>
+            <div class="p-p">The role sits at an unusual intersection: technical enough to write API contracts and diagnose production incidents at midnight, commercial enough to quantify risk-adjusted return and navigate Fair Lending compliance in front of a regulator. I was promoted from Data Scientist to TPM after eight months — unusual for a role typically staffed from product management tracks.</div>
+            <div class="p-sec" style="margin-top:12px">Career arc at PNC</div>
+            <div class="tl">
+              <div class="tl-i"><div class="tl-date">May 2022 – January 2023</div><div class="tl-title">Research Data Scientist · MIT Lincoln Laboratory</div><div class="tl-desc">[Add your own description here — what you built, what the mission was, what you're proud of from this role.]</div></div>
+              <div class="tl-i"><div class="tl-date">May 2023</div><div class="tl-title">Data Scientist · PNC Bank</div><div class="tl-desc">Built live PSI and drift detection monitoring in Python. Designed automated threshold-based decisioning pauses. Implemented Kibana anomaly detection, cutting manual validation by 80% and time-to-detection to minutes. Quickly identified a gap between the data science team's capabilities and the TPM layer above — and started filling it.</div></div>
+              <div class="tl-i"><div class="tl-date">January 2024 — Promoted</div><div class="tl-title">Technical Product Manager · PNC Bank, Consumer &amp; Business Credit Cards</div><div class="tl-desc">Took full ownership of the decisioning stack. First 90 days: mapped every upstream dependency, audited all vendor SLAs, and identified three critical infrastructure gaps blocking real-time capabilities. Built the program plan that would eventually deliver $31M in risk-adjusted revenue over 12 months.</div></div>
+              <div class="tl-i"><div class="tl-date">Q1–Q2 2024</div><div class="tl-title">Foundational infrastructure sprint</div><div class="tl-desc">Designed the Floodgate data integrity architecture after a costly data failure. Began the batch-to-real-time API migration across four systems. Resolved the three-party Experian SLA failure. All three programs running in parallel, coordinating 25+ engineers across different workstreams.</div></div>
+              <div class="tl-i"><div class="tl-date">Q3 2024</div><div class="tl-title">AI and model programs</div><div class="tl-desc">Championed and shipped the AI Income Encoder — 215K customers unlocked, $8.6M in yearly profit. Deployed the LLM transaction taxonomy generating 400+ new credit signals. Both programs passed Fair Lending model validation and disparate impact review.</div></div>
+              <div class="tl-i"><div class="tl-date">Q4 2024</div><div class="tl-title">Crisis and consolidation</div><div class="tl-desc">Managed a live decisioning incident — 25% failure rate, $3–5M at risk. Ran the war room, diagnosed a vendor load balancer issue vs. a logic failure, and made the call to stay live. Recovered the full RAR. Built circuit breaker logic into all vendor integrations. Began planning next-gen real-time CRCLI architecture.</div></div>
+            </div>
+          </div>
+
+          <div class="panel" id="mw-ai">
+            <div class="p-sec">The problem I found</div>
+            <div class="p-p">While reviewing campaign performance data in Q2 2024, I noticed a segment of customers who were systematically dropped from proactive credit line increase campaigns — not because they were risky, but because our income verification logic had a gap. These customers had strong credit signals: low utilization, no delinquencies, years of on-time payments. But without a directly verifiable income field, the decision engine excluded them entirely.</div>
+            <div class="p-p">I modeled the opportunity: if we could verify income for this segment through an alternative approach, the incremental RAR was significant. This became the business case for the AI Encoder.</div>
+            <div class="p-hl">I identified this gap myself through data analysis — it wasn't a ticket or a request. Spotting the excluded segment required reading campaign drop-off data with a different frame than normal.</div>
+            <div class="p-sec">What I built and shipped</div>
+            <div class="p-p">Partnered with the data science team to scope an LLM-based income derivation model — the AI Encoder — that infers income from transactional behavior where direct verification isn't possible. My role spanned the full lifecycle:</div>
+            <ul class="p-ul">
+              <li>Wrote the business case and got executive sponsorship for a novel AI approach in a regulated lending environment — not a trivial ask</li>
+              <li>Defined the model requirements: confidence score gating, confidence threshold for decisioning activation, fallback logic when confidence was low</li>
+              <li>Coordinated the model governance process: credit risk model validation, disparate impact testing against ECOA-protected classes, documentation for regulator review</li>
+              <li>Authored the API integration spec extending the decisioning engine payload schema to accept model-generated income fields</li>
+              <li>Defined the monitoring runbook: what to watch for, what triggers a rollback, what constitutes a Fair Lending flag</li>
+            </ul>
+            <div class="kpis" style="margin-top:12px">
+              <div class="kpi"><div class="kpi-v">215K</div><div class="kpi-l">Customers unlocked</div></div>
+              <div class="kpi"><div class="kpi-v">$8.6M</div><div class="kpi-l">Yearly profit</div></div>
+              <div class="kpi"><div class="kpi-v">0</div><div class="kpi-l">Fair lending findings</div></div>
+              <div class="kpi"><div class="kpi-v">Pass</div><div class="kpi-l">Model validation</div></div>
+            </div>
+            <div class="p-quote">"The most impactful opportunities live in what the system is not doing — in the gaps where logic stops rather than in the decisions it makes."</div>
+          </div>
+
+          <div class="panel" id="mw-infra">
+            <div class="p-sec">The legacy architecture problem</div>
+            <div class="p-p">PNC's credit decisioning infrastructure ran on overnight batch jobs when I joined. Decisions were made on data that was up to 24 hours stale. This wasn't just a performance issue — it blocked four critical product capabilities that the business needed and that customers were beginning to expect from a modern bank:</div>
+            <ul class="p-ul">
+              <li><strong>Instant CRCLI</strong> — customers requesting a credit line increase via the app expected a response in seconds, not a letter three days later</li>
+              <li><strong>FICO 10T</strong> — the next-generation FICO model using trended credit data was only useful in real time; batch processing negated the benefit</li>
+              <li><strong>FEMA API</strong> — disaster exclusion rules were applied manually at the state level, error-prone, and operationally expensive during hurricane season</li>
+              <li><strong>Automated income verification</strong> — real-time income checks replacing a batch document review process that took days</li>
+            </ul>
+            <div class="p-sec">How I ran the migration</div>
+            <div class="p-p">This was a four-track parallel program across 25+ engineers, with each track having a different technical complexity, vendor dependency, and regulatory consideration. I used WSJF to sequence delivery and ran shadow mode (parallel batch + real-time) before every production cutover — zero cold cutovers.</div>
+            <div class="p-hl">The hardest technical problem was audit trail continuity. Batch decisions logged themselves naturally at cycle end. Real-time decisions needed atomic event-based logging that satisfied compliance, supported regulatory disclosure reconstruction, and didn't degrade response latency. I designed the event schema and worked with engineering to ensure atomic writes before any response returned.</div>
+            <div class="p-p">I also built circuit breaker logic into all vendor integrations: if a vendor API timeout rate exceeded 15%, the system automatically rerouted to a backup endpoint rather than failing the decision. This pattern came directly out of the Q4 crisis incident.</div>
+            <div class="kpis" style="margin-top:10px">
+              <div class="kpi"><div class="kpi-v">$31M</div><div class="kpi-l">RAR (12mo)</div></div>
+              <div class="kpi"><div class="kpi-v">4</div><div class="kpi-l">Systems migrated</div></div>
+              <div class="kpi"><div class="kpi-v">25+</div><div class="kpi-l">Engineers</div></div>
+              <div class="kpi"><div class="kpi-v">0</div><div class="kpi-l">Cold cutovers</div></div>
+            </div>
+          </div>
+
+          <div class="panel" id="mw-integrity">
+            <div class="p-sec">The incident that changed how we work</div>
+            <div class="p-p">In early 2024, an upstream table that populated our student segmentation flag failed to load before a decisioning cycle. The field appeared null. The engine treated every student in our portfolio as a non-student and applied the standard rule set — which is deliberately harsher, because students are a segment we handle carefully to build long-term relationships.</div>
+            <div class="p-p">We decreased credit lines for customers we had no business touching. The remediation took weeks: customer outreach letters, decision reversals, reconciliation across three systems of record, and an internal review with compliance. The full cost — operational hours, customer trust, regulatory exposure — ran well into six figures. And it was entirely preventable.</div>
+            <div class="p-sec">The Floodgate I designed</div>
+            <div class="p-p">I designed what became known as the Floodgate — a pre-campaign validation layer that runs before any decisioning cycle begins. The core idea: query every upstream critical field and validate it against configurable threshold logic. If anything fails, the campaign doesn't run. Full stop. No exceptions, no manual overrides without documented approval.</div>
+            <ul class="p-ul">
+              <li><strong>Completeness checks:</strong> null tolerance per field, expected record count validation</li>
+              <li><strong>Statistical drift detection:</strong> z-score variance against a 90-day rolling baseline — catches semantic changes, not just missing data</li>
+              <li><strong>Range and referential integrity:</strong> values within expected bounds, foreign key consistency across systems</li>
+            </ul>
+            <div class="p-p">The drift detection proved its value almost immediately. Six months after launch, an upstream data provider changed a field that had always represented monthly income to annual income — with zero notification to us. Our engine was built to annualize monthly income by multiplying by twelve. If it had run, every customer in that population would have appeared to have twelve times their actual income. Credit lines would have been increased to catastrophic levels.</div>
+            <div class="p-hl">The z-score on that field hit 11.8 standard deviations. The campaign was blocked automatically before a single decision ran. What would have been a regulatory disclosure event became a near-miss caught by architecture.</div>
+            <div class="p-quote">"Bad data that looks clean is the most dangerous kind. A null field is easy to catch. A field that silently changed its semantic meaning will fool you every time — unless you're also watching the shape of the distribution."</div>
+          </div>
+
+          <div class="panel" id="mw-strategy">
+            <div class="p-sec">Three P1s, one team, one framework</div>
+            <div class="p-p">In Q2 2024, three different senior stakeholders escalated Priority 1 requests simultaneously: the Risk team needed a FEMA API integration before hurricane season, Marketing needed an email delivery channel integration to bypass a physical mail capacity cap, and Analytics needed a complete overhaul of the waterfall decisioning logging architecture. Each team had a legitimate business case. None could wait. I had one engineering team.</div>
+            <div class="p-p">I used Weighted Shortest Job First to score them objectively. The formula: WSJF = (Business Value + Time Criticality + Risk Reduction) / Job Size.</div>
+            <table class="wsjf">
+              <thead><tr><th>Initiative</th><th>Biz Value</th><th>Time Crit.</th><th>Risk Red.</th><th>Effort</th><th>WSJF</th></tr></thead>
+              <tbody>
+                <tr class="wsjf-w"><td>FEMA API ✓</td><td>8</td><td>9</td><td>7</td><td>3</td><td><strong>8.0</strong></td></tr>
+                <tr><td>Email Integration</td><td>4</td><td>6</td><td>3</td><td>5</td><td>2.6</td></tr>
+                <tr><td>Waterfall Logging</td><td>7</td><td>3</td><td>5</td><td>8</td><td>1.9</td></tr>
+              </tbody>
+            </table>
+            <div class="p-p" style="margin-top:8px">FEMA API won by a wide margin. Hurricane season was approaching, ZIP-code granularity vs. the existing state-level approach unlocked thousands of eligible accounts previously caught in broad exclusion zones, and it was a single stable API endpoint — low effort, high yield. The email integration had a workaround (staggered campaign scheduling). The logging overhaul was genuinely valuable but had zero urgency.</div>
+            <div class="p-hl">I personally wanted the logging overhaul most. I'd been frustrated by the analytical gap it created for months. That's exactly why the framework was valuable — it protected the decision from my own preference. WSJF is not just a prioritization tool. It's a bias check.</div>
+            <div class="p-sec" style="margin-top:12px">LLM transaction taxonomy — generating 400+ new signals</div>
+            <div class="p-p">Separately, I identified an opportunity to enrich the decisioning model with new leading indicators. Standard credit features relied heavily on FICO and bureau signals — lagging indicators by design. I worked with data science to scope an LLM-based transaction classifier that generates a normalized category taxonomy from raw transaction descriptions, aggregated across 30, 60, and 90-day windows.</div>
+            <div class="p-p">The result was 400+ distinct credit health signals feeding into the feature store at decision time. The approach distinguished between, for example, customers increasing grocery spend (stable) versus increasing restaurant and discretionary spend against a declining income signal (elevated risk). This improved model precision across the full portfolio without touching the core decisioning logic.</div>
+          </div>
+
+          <div class="panel" id="mw-crisis">
+            <div class="p-sec">The incident: live campaign, 25% failure rate</div>
+            <div class="p-p">On a Tuesday morning in Q4 2024, our Decision Modeler began experiencing processing failures during a proactive credit line increase campaign. Within 20 minutes, we were seeing a 25% failure rate across hundreds of thousands of accounts — each failed account representing ~$40 in Risk-Adjusted Return that would be permanently lost if the campaign timed out. The campaign was generating over $1M per hour at full throughput.</div>
+            <div class="p-p">The immediate response from the team and from my leadership was to shut the campaign down. I asked for 30 minutes to diagnose before we pulled the plug.</div>
+            <div class="p-sec">The diagnosis — and why it mattered</div>
+            <div class="p-p">I convened a war room with our line-of-business Risk lead, the Credit Card Director, and tech leadership. Two parallel analyses running simultaneously:</div>
+            <ul class="p-ul">
+              <li><strong>Root cause:</strong> Infrastructure logs showed 25% of API requests timing out at the FICO vendor's load balancer layer. The decision logic itself was processing correctly — the engine wasn't broken, the highway had a traffic jam.</li>
+              <li><strong>Disparate impact analysis:</strong> I pulled the demographic and credit profile distribution of failed accounts vs. successful accounts in real time. No correlation with credit score band, geographic cluster, income proxy, or any protected class attribute. The failures were statistically random — a true infrastructure fault, not a logic fault.</li>
+            </ul>
+            <div class="p-hl">This distinction — random infrastructure failure vs. systematic logic failure — was the linchpin of the entire decision. A systematic logic failure means the engine is making wrong decisions, and you must stop immediately. A random infrastructure failure means some decisions aren't being made at all, but the ones that are made are correct. These require completely different responses.</div>
+            <div class="p-sec">The decision framework I presented</div>
+            <div class="p-p">Three data points to leadership in the war room:</div>
+            <ul class="p-ul">
+              <li>75% of decisions were processing successfully and correctly</li>
+              <li>The error pattern showed zero demographic or credit-score clustering — no Fair Lending exposure</li>
+              <li>We were inside the pre-notification window — no customer had been informed of any decision, so failed accounts could be requeued with zero legal consequence</li>
+            </ul>
+            <div class="p-p">My proposal: monitored-live approach. Stay operational with hourly error-rate checkpoints and an automatic kill switch if failures exceeded 30%. If root cause resolved before then, we recover the full RAR. If it didn't, we had a clean exit with a defined threshold.</div>
+            <div class="p-p">FICO identified and resolved the load balancer issue within eight hours. We stayed live the entire time.</div>
+            <div class="kpis" style="margin-top:10px">
+              <div class="kpi"><div class="kpi-v">$3–5M</div><div class="kpi-l">RAR recovered</div></div>
+              <div class="kpi"><div class="kpi-v">8 hrs</div><div class="kpi-l">Resolution time</div></div>
+              <div class="kpi"><div class="kpi-v">0</div><div class="kpi-l">Fair lending impact</div></div>
+              <div class="kpi"><div class="kpi-v">✓</div><div class="kpi-l">Circuit breaker built</div></div>
+            </div>
+            <div class="p-quote">"Reversibility is a feature, not a fallback. I now explicitly map rollback paths and pre-notification windows before every launch. The difference between a recoverable situation and an unrecoverable one is often a 20-minute diagnostic window."</div>
+          </div>
+
+          <div class="panel" id="mw-mit">
+            <div style="background:#ECE9D8;border:2px inset #ACA899;padding:8px 12px;margin-bottom:12px">
+              <div style="font-size:12px;font-weight:700;color:#000;font-family:var(--f);margin-bottom:1px">MIT Lincoln Laboratory</div>
+              <div style="font-size:10px;color:#444;font-family:var(--f)">Research Data Scientist · Lexington, MA · May 2022 – June 2023</div>
+            </div>
+            <div class="kpis">
+              <div class="kpi"><div class="kpi-v">20M+</div><div class="kpi-l">Posts processed</div></div>
+              <div class="kpi"><div class="kpi-v">40K+</div><div class="kpi-l">Network nodes</div></div>
+              <div class="kpi"><div class="kpi-v">60%</div><div class="kpi-l">Analyst review reduction</div></div>
+              <div class="kpi"><div class="kpi-v">NLP</div><div class="kpi-l">BERT · Graph · NLI</div></div>
+            </div>
+            <div class="p-sec">The mission</div>
+            <div class="p-p">MIT Lincoln Laboratory is a federally funded R&D center that supports national security research for the Department of Defense. I joined as a Research Data Scientist to build intelligence infrastructure for an active threat research program — specifically, automated analysis of a targeted extremist online community with 40,000+ active users generating millions of posts per month.</div>
+            <div class="p-p">The analyst team was spending the majority of their time on manual content review — reading posts, identifying patterns, flagging actors of interest. My job was to build the system that automated the noise and surfaced the signal.</div>
+            <div class="p-sec">What I built</div>
+            <div class="p-p">An end-to-end NLP intelligence pipeline — from raw data ingestion to analyst-facing intelligence outputs:</div>
+            <ul class="p-ul">
+              <li><strong>Ingestion layer:</strong> Async multi-threaded scraper with bot detection avoidance, rate limiting, and multi-threaded preprocessing. Ingested 20M+ posts across the full user network with full metadata preservation.</li>
+              <li><strong>Data architecture:</strong> Normalized relational schema designed for the analytical queries the team actually needed — not just storage, but structured for downstream ML and graph analysis.</li>
+              <li><strong>Semantic modeling:</strong> BERT-based embedding pipeline for post content vectorization, feeding HDBSCAN clustering for semantic similarity grouping. This surfaced thematic communities and coordinated messaging patterns that weren't visible through keyword search.</li>
+              <li><strong>Topic classification:</strong> Zero-shot NLI classifier for emergent topic labeling — no labeled training data required, which was critical given the sensitivity of the source material and the rapidly evolving topic space.</li>
+              <li><strong>Social network analysis:</strong> NetworkX graph model mapping interaction patterns across the full 40K+ node network. Centrality metrics (betweenness, eigenvector) identified high-influence actors and detected coordinated behavior clusters invisible through individual post analysis.</li>
+            </ul>
+            <div class="p-hl">The graph model was the key differentiator. Individual posts are noisy. Network structure is much harder to fake. By modeling who was amplifying whom, we identified coordination patterns that no keyword-based system would catch.</div>
+            <div class="p-sec">Impact</div>
+            <div class="p-p">The pipeline reduced analyst manual review time by approximately 60% — meaning the team could cover the same community with substantially fewer hours, or the same hours across a substantially larger target set. The system became a standing capability used by the research team after I left.</div>
+            <div class="p-quote">"Pipeline architecture matters as much as model accuracy. You can have the best BERT embeddings in the world — if the data feeding them is contaminated by bot activity, or if the schema can't support the queries analysts actually need, none of it matters."</div>
+          </div>
+
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="wst">Career Arc · Logan Heft · Technical Program Manager</div>
+  <div class="wrz" onmousedown="resz(event,'w-work')"></div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     WINDOW: MINESWEEPER
+     ════════════════════════════════════════════════════════════════════
+     Fully playable classic Minesweeper.
+       Left-click  = reveal cell
+       Right-click = toggle flag
+       Click smiley face = new game
+
+     TO CHANGE DIFFICULTY:
+       Find these three variables in the <script> section:
+         var MR = 9;   // rows (increase for harder)
+         var MC = 9;   // columns (increase for harder)
+         var MM = 10;  // number of mines (increase for harder)
+       Easy:   MR=9,  MC=9,  MM=10
+       Medium: MR=16, MC=16, MM=40
+       Hard:   MR=16, MC=30, MM=99
+       Note: larger grids may overflow the window — resize by dragging
+       the bottom-right corner handle.
+     ════════════════════════════════════════════════════════════════════ -->
+<div class="xw" id="w-mine" style="width:320px;height:380px;top:160px;left:200px">
+  <div class="tb" onmousedown="drag(event,'w-mine')">
+    <svg class="tb-ico" viewBox="0 0 16 16"><rect x="1" y="1" width="14" height="14" rx="2" fill="#C0BDB0" stroke="#807D70" stroke-width=".5"/><circle cx="8" cy="8" r="2.5" fill="#111"/><line x1="8" y1="4" x2="8" y2="12" stroke="#111" stroke-width=".8"/><line x1="4" y1="8" x2="12" y2="8" stroke="#111" stroke-width=".8"/></svg>
+    <span class="tb-t">Minesweeper</span>
+    <div class="tb-btns">
+      <div class="xb xbn" onclick="minW('w-mine')">_</div>
+      <div class="xb xbn" onclick="maxW('w-mine')">□</div>
+      <div class="xb xbx" onclick="closeW('w-mine')">✕</div>
+    </div>
+  </div>
+  <div class="wmb"><span class="wmi" onclick="mineNew()">Game</span><span class="wmi">Help</span></div>
+  <div class="wbody" style="background:#C0BDB0;display:flex;align-items:center;justify-content:center;padding:8px">
+    <div id="mine-root"></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     TASKBAR
+     ════════════════════════════════════════════════════════════════════
+     The taskbar is fixed at the bottom of the screen.
+     It contains: Start button | open window buttons | system tray + clock
+
+     The clock updates every 20 seconds. To change the interval:
+       Find setTimeout(tick, 20000) in the <script> and adjust the ms.
+
+     The system tray icons (🔊 🌐) are decorative — to add real ones,
+     add elements inside <div id="tray"> before the clock div.
+     ════════════════════════════════════════════════════════════════════ -->
+<div id="taskbar">
+  <button id="startbtn" onclick="toggleStart()">
+    <div class="sf"><div></div><div></div><div></div><div></div></div>
+    start
+  </button>
+  <div id="tbwins"></div>
+  <div id="tray">
+    <span style="font-size:13px">🔊</span>
+    <span style="font-size:13px">🌐</span>
+    <div id="clock">12:00<br/>PM</div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     START MENU
+     ════════════════════════════════════════════════════════════════════
+     The green Start button opens this menu. It has two columns:
+       Left (.sm-L)  = pinned shortcuts and recently used apps
+       Right (.sm-R) = places (My Documents, Recycle Bin, etc.)
+
+     TO ADD A SHORTCUT to the pinned left column:
+       Copy a .sm-it block inside .sm-L, change the onclick to
+       openW('your-window-id') and update the label text.
+
+     TO CHANGE YOUR NAME or subtitle in the header:
+       Find <div class="sm-nm">Logan Heft</div>
+       and <div class="sm-sr">TPM · Runner · Photographer</div>
+       Edit those strings directly.
+
+     TO CHANGE THE PIXEL AVATAR in the start menu header:
+       Find the .sm-ava div — it contains the same PIXEL AVATAR SVG.
+       See the welcome screen comments for how to edit pixel colors.
+     ════════════════════════════════════════════════════════════════════ -->
+<div id="smenu">
+  <div class="sm-hd">
+    <div class="sm-ava" style="background:none;border:2px solid rgba(255,255,255,.5);overflow:hidden;padding:0"><svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" style="image-rendering:pixelated;image-rendering:crisp-edges;width:100%;height:100%">
+      <!-- ═══════════════════════════════════════════════
+           PIXEL AVATAR — 16×16 upscaled to container size
+           To change hair color: edit fill="#602000" rects
+           To change skin tone: edit fill="#F0C080" rects
+           To change shirt:     edit fill="#2060B0" rects
+           ═══════════════════════════════════════════════ -->
+      <!-- background -->
+      <rect x="0" y="0" width="16" height="16" fill="#1868C8"/>
+      <rect x="1" y="0" width="14" height="1" fill="#3090F0"/>
+      <rect x="0" y="1" width="1" height="14" fill="#3090F0"/>
+      <!-- face -->
+      <rect x="6" y="2" width="4" height="1" fill="#F0C080"/>
+      <rect x="5" y="3" width="6" height="3" fill="#F0C080"/>
+      <rect x="5" y="3" width="1" height="1" fill="#805020"/>
+      <rect x="10" y="3" width="1" height="1" fill="#805020"/>
+      <rect x="6" y="4" width="1" height="1" fill="#805020"/>
+      <rect x="9" y="4" width="1" height="1" fill="#805020"/>
+      <rect x="6" y="5" width="4" height="1" fill="#C07040"/>
+      <rect x="5" y="6" width="6" height="1" fill="#F0C080"/>
+      <!-- hair -->
+      <rect x="5" y="2" width="6" height="1" fill="#602000"/>
+      <rect x="5" y="3" width="1" height="1" fill="#602000"/>
+      <rect x="10" y="3" width="1" height="1" fill="#602000"/>
+      <!-- neck -->
+      <rect x="7" y="7" width="2" height="2" fill="#F0C080"/>
+      <!-- shirt/body -->
+      <rect x="4" y="9" width="8" height="1" fill="#2060B0"/>
+      <rect x="3" y="10" width="10" height="5" fill="#2060B0"/>
+      <rect x="2" y="11" width="12" height="4" fill="#2060B0"/>
+      <!-- shoulder highlights -->
+      <rect x="3" y="10" width="1" height="1" fill="#4080D0"/>
+      <rect x="12" y="10" width="1" height="1" fill="#4080D0"/>
+      <!-- shadow at bottom -->
+      <rect x="3" y="15" width="10" height="1" fill="#0040A0"/>
+    </svg></div>
+    <div>
+      <div class="sm-nm">Logan Heft</div>
+      <div class="sm-sr">TPM · Runner · Photographer</div>
+    </div>
+  </div>
+  <div class="sm-cols">
+    <div class="sm-L">
+      <div class="sm-lbl">Pinned</div>
+      <div class="sm-it" onclick="openW('w-about');closeStart()">
+        <svg viewBox="0 0 22 22"><rect x="1" y="1" width="20" height="20" rx="4" fill="#1BA1E2"/><circle cx="11" cy="8" r="4" fill="#fff"/><ellipse cx="11" cy="17" rx="6" ry="4" fill="#fff"/></svg>
+        <div class="sm-it-wrap"><span class="sm-it-main">About Me</span><span class="sm-it-s">Bio, skills, photos</span></div>
+      </div>
+      <div class="sm-it" onclick="openW('w-work');closeStart()">
+        <svg viewBox="0 0 22 22"><rect x="1" y="6" width="20" height="14" rx="2" fill="#003B6E"/><rect x="1" y="6" width="20" height="6" fill="#0063CC"/><polygon points="11,1 14,6 8,6" fill="#0063CC"/></svg>
+        <div class="sm-it-wrap"><span class="sm-it-main">Career Arc</span><span class="sm-it-s">PNC &amp; MIT Lincoln Lab</span></div>
+      </div>
+      <div class="sm-sep"></div>
+      <div class="sm-it" onclick="openW('w-resume');closeStart()">
+        <svg viewBox="0 0 22 22"><path d="M3 1h10l8 8v13H3z" fill="#D93025"/><path d="M13 1l8 8h-8z" fill="#A52018"/></svg>
+        <div class="sm-it-wrap"><span class="sm-it-main">Resume</span><span class="sm-it-s">PDF download</span></div>
+      </div>
+    </div>
+    <div class="sm-R">
+      <div class="sm-lbl">Places</div>
+      <div class="sm-it" onclick="openW('w-about');awTab('outside',null);closeStart()">
+        <svg viewBox="0 0 22 22"><path d="M1 8h5l3 3h12v11H1z" fill="#FFCC44" stroke="#C8860A" stroke-width=".8"/></svg>
+        My Photos
+      </div>
+      <div class="sm-it" onclick="openW('w-mine');closeStart()">
+        <svg viewBox="0 0 22 22"><rect x="1" y="1" width="20" height="20" rx="2" fill="#C0BDB0" stroke="#808078" stroke-width=".8"/><circle cx="11" cy="11" r="3.5" fill="#111"/><line x1="11" y1="5" x2="11" y2="17" stroke="#111" stroke-width="1"/><line x1="5" y1="11" x2="17" y2="11" stroke="#111" stroke-width="1"/></svg>
+        Minesweeper
+      </div>
+      <div class="sm-sep"></div>
+      <div class="sm-it" onclick="closeStart()">Control Panel</div>
+    </div>
+  </div>
+  <div class="sm-ft">
+    <div class="sm-fb" onclick="closeStart()">Log Off</div>
+    <div class="sm-fb" onclick="shutdown()">🔴 Turn Off</div>
+  </div>
+</div>
+
+<!-- ── CONTEXT MENU ────────────────────────────────────── -->
+<div id="ctx">
+  <div class="cxi" onclick="ctxHide()">Arrange Icons By</div>
+  <div class="cxi" onclick="ctxHide()">Refresh</div>
+  <div class="cxs"></div>
+  <div class="cxi" onclick="openW('w-about');ctxHide()">Open About Me</div>
+  <div class="cxi" onclick="openW('w-work');ctxHide()">Open Career Arc</div>
+  <div class="cxi" onclick="openW('w-mine');ctxHide()">Open Minesweeper</div>
+  <div class="cxs"></div>
+  <div class="cxi" onclick="ctxHide()">Properties</div>
+</div>
+
+</div><!-- /#desktop -->
+
+<script>
+/* ════════════════════════════════════════════════════════════════════
+   JAVASCRIPT — SITE ENGINE
+   ════════════════════════════════════════════════════════════════════
+   This section controls all interactive behaviour on the site.
+   It is divided into clearly labeled sections below.
+
+   QUICK REFERENCE — what to edit for common tasks:
+
+   ┌─────────────────────────────┬──────────────────────────────────┐
+   │ Task                        │ Find this in the script           │
+   ├─────────────────────────────┼──────────────────────────────────┤
+   │ Edit radar chart skills     │ var RADAR = [...]                 │
+   │ Edit avg TPM benchmark      │ var RADAR_AVG = [...]             │
+   │ Change minesweeper size     │ var MR, MC, MM                    │
+   │ Change boot delay speed     │ setTimeout(..., 2600) in boot()   │
+   │ Add a new window            │ openW() / closeW() / WM dict      │
+   │ Update clock refresh rate   │ setTimeout(tick, 20000)           │
+   └─────────────────────────────┴──────────────────────────────────┘
+   ════════════════════════════════════════════════════════════════════ */
+
+/* ============================================================
+   WINDOW ENGINE
+   ============================================================ */
+var Z=200, WS={}, MX={};
+var WM={'w-about':'About Me','w-resume':'Resume.pdf','w-work':'Career Arc','w-mine':'Minesweeper'};
+
+function focusW(id){
+  document.querySelectorAll('.xw').forEach(function(w){w.classList.remove('ftop');w.classList.add('blur')});
+  var w=document.getElementById(id);
+  if(w){w.classList.add('ftop');w.classList.remove('blur');w.style.zIndex=++Z}
+  renderTB();
+}
+function openW(id){
+  var w=document.getElementById(id);if(!w)return;
+  if(!w.classList.contains('show')){w.classList.add('show');WS[id]={min:false}}
+  else if(WS[id]&&WS[id].min){w.style.display='flex';WS[id].min=false}
+  focusW(id);
+}
+function closeW(id){
+  var w=document.getElementById(id);
+  if(w){w.classList.remove('show');w.style.display='';delete WS[id]}
+  renderTB();
+}
+function minW(id){
+  var w=document.getElementById(id);
+  if(w){w.style.display='none';if(!WS[id])WS[id]={};WS[id].min=true}
+  renderTB();
+}
+function maxW(id){
+  var w=document.getElementById(id);if(!w)return;
+  if(MX[id]){Object.assign(w.style,MX[id]);delete MX[id]}
+  else{
+    MX[id]={top:w.style.top,left:w.style.left,width:w.style.width,height:w.style.height};
+    Object.assign(w.style,{top:'0',left:'0',width:'100vw',height:'calc(100vh - 30px)'});
+  }
+  focusW(id);
+}
+function renderTB(){
+  var bar=document.getElementById('tbwins');bar.innerHTML='';
+  document.querySelectorAll('.xw.show').forEach(function(w){
+    var id=w.id;
+    var b=document.createElement('div');
+    b.className='tbw'+(w.classList.contains('ftop')?' on':'');
+    b.textContent=WM[id]||id;
+    b.onclick=function(){
+      if(WS[id]&&WS[id].min)openW(id);
+      else if(w.classList.contains('ftop'))minW(id);
+      else focusW(id);
+    };
+    bar.appendChild(b);
+  });
+}
+
+/* ── Drag ─────────────────────────────────────────────── */
+var DW=null,DX=0,DY=0;
+function drag(e,id){
+  if(e.target.closest('.tb-btns'))return;
+  DW=document.getElementById(id);DX=e.clientX-DW.offsetLeft;DY=e.clientY-DW.offsetTop;
+  focusW(id);e.preventDefault();
+}
+document.addEventListener('mousemove',function(e){
+  if(DW){DW.style.left=Math.max(0,e.clientX-DX)+'px';DW.style.top=Math.max(0,Math.min(e.clientY-DY,innerHeight-60))+'px'}
+  if(RW){RW.style.width=Math.max(300,RW0+e.clientX-RX)+'px';RW.style.height=Math.max(200,RH0+e.clientY-RY)+'px'}
+});
+document.addEventListener('mouseup',function(){DW=null;RW=null});
+
+/* ── Resize ────────────────────────────────────────────── */
+var RW=null,RX=0,RY=0,RW0=0,RH0=0;
+function resz(e,id){
+  RW=document.getElementById(id);RX=e.clientX;RY=e.clientY;
+  RW0=RW.offsetWidth;RH0=RW.offsetHeight;e.preventDefault();e.stopPropagation();
+}
+
+/* ── Start menu ────────────────────────────────────────── */
+var SO=false;
+function toggleStart(){SO=!SO;document.getElementById('smenu').classList.toggle('open',SO)}
+function closeStart(){SO=false;document.getElementById('smenu').classList.remove('open')}
+document.addEventListener('click',function(e){if(SO&&!e.target.closest('#smenu,#startbtn'))closeStart()});
+
+/* ── Context menu ──────────────────────────────────────── */
+document.getElementById('desktop').addEventListener('contextmenu',function(e){
+  e.preventDefault();
+  var m=document.getElementById('ctx');
+  m.style.cssText='display:block;left:'+Math.min(e.clientX,innerWidth-175)+'px;top:'+Math.min(e.clientY,innerHeight-130)+'px';
+});
+document.addEventListener('click',function(e){if(!e.target.closest('#ctx'))ctxHide()});
+function ctxHide(){document.getElementById('ctx').style.display='none'}
+
+/* ── Icon select ───────────────────────────────────────── */
+function selI(id){
+  document.querySelectorAll('.dico').forEach(function(i){i.classList.remove('sel')});
+  var el=document.getElementById(id);if(el)el.classList.add('sel');
+}
+document.getElementById('desktop').addEventListener('click',function(e){
+  if(!e.target.closest('.dico'))document.querySelectorAll('.dico').forEach(function(i){i.classList.remove('sel')});
+});
+
+/* ── About Me panes ────────────────────────────────────── */
+function awTab(pane,el){
+  document.querySelectorAll('.aw-pane').forEach(function(p){p.classList.remove('on')});
+  document.querySelectorAll('.aw-ni').forEach(function(n){n.classList.remove('on')});
+  var p=document.getElementById('aw-'+pane);if(p)p.classList.add('on');
+  if(el)el.classList.add('on');
+  if(pane==='skills')drawRadar();
+}
+
+/* ── My Work tabs ──────────────────────────────────────── */
+function mwTab(id,el){
+  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('on')});
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('on')});
+  var p=document.getElementById(id);if(p)p.classList.add('on');
+  if(el)el.classList.add('on');
+}
+
+/* ── Photo upload ──────────────────────────────────────── */
+function loadPic(input,idx){
+  var f=input.files[0];if(!f)return;
+  var r=new FileReader();
+  r.onload=function(e){
+    var data=e.target.result;
+    // Persist to localStorage
+    try{ localStorage.setItem('lh_photo_'+idx, data); }catch(ex){}
+    renderPhoto(idx, data);
+  };
+  r.readAsDataURL(f);
+}
+function renderPhoto(idx, src){
+  var slot=document.getElementById('ps'+idx);
+  if(!slot)return;
+  slot.innerHTML='<img src="'+src+'" alt="photo" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"/>'
+    +'<div style="position:absolute;bottom:0;right:0;background:rgba(0,0,0,.45);padding:1px 4px;font-size:8px;color:#fff;font-family:Tahoma">✕</div>';
+  slot.querySelector('div').onclick=function(e){e.stopPropagation();deletePhoto(idx);};
+}
+function deletePhoto(idx){
+  try{ localStorage.removeItem('lh_photo_'+idx); }catch(ex){}
+  var slot=document.getElementById('ps'+idx);
+  if(slot){slot.innerHTML='<div class="ps-ico">📸</div><div class="ps-lbl">Upload photo</div><input type="file" accept="image/*" onchange="loadPic(this,'+idx+')"/>';}
+}
+function restorePhotos(){
+  for(var i=0;i<6;i++){
+    try{
+      var data=localStorage.getItem('lh_photo_'+i);
+      if(data) renderPhoto(i,data);
+    }catch(ex){}
+  }
+}
+
+/* ── Clock ─────────────────────────────────────────────── */
+function tick(){
+  var d=new Date(),h=d.getHours(),m=d.getMinutes();
+  var ap=h>=12?'PM':'AM',h12=(h%12)||12;
+  document.getElementById('clock').innerHTML=h12+':'+('0'+m).slice(-2)+'<br/>'+ap;
+  setTimeout(tick,20000);
+}
+
+/* ── Radar Chart ───────────────────────────────────────── */
+/*
+  EDIT RADAR: Change the RADAR array below.
+  Each item: { label, value (0-10), color }
+  You can add/remove items — the chart auto-adjusts.
+  Keep to 6-10 items for best readability.
+*/
+var RADAR = [
+  {label:'Program Leadership', value:10, color:'#245EDC'},
+  {label:'Technical Depth',    value:9,  color:'#245EDC'},
+  {label:'Stakeholder Comms',  value:9,  color:'#245EDC'},
+  {label:'AI / ML',            value:8,  color:'#245EDC'},
+  {label:'Data Engineering',   value:9,  color:'#245EDC'},
+  {label:'Roadmap / Strategy', value:9,  color:'#245EDC'},
+  {label:'Crisis Management',  value:9,  color:'#245EDC'},
+  {label:'Vendor / SLA Mgmt',  value:8,  color:'#245EDC'},
+];
+
+/* ════════════════════════════════════════════════════════════════════
+   RADAR CHART DATA
+   ════════════════════════════════════════════════════════════════════
+   RADAR      = your skills (blue polygon, solid)
+   RADAR_AVG  = average TPM benchmark (red polygon, dashed)
+
+   TO EDIT YOUR SKILLS:
+     Change the value (1–10) for any entry.
+     Change the label to rename the axis.
+     Add a new object to add an axis.
+     Remove an object to remove an axis.
+     If you add/remove axes, also update RADAR_AVG with the
+     same number of values in the same order.
+
+   TO EDIT THE BENCHMARK:
+     Change numbers in RADAR_AVG. Values are 1–10, one per axis,
+     in the same order as the RADAR array above.
+   ════════════════════════════════════════════════════════════════════ */
+
+/* Average TPM benchmark — same order as RADAR array */
+var RADAR_AVG = [6, 5.5, 6, 4.5, 5, 5.5, 4, 5];
+
+function drawRadar(){
+  var svg = document.getElementById('radar-svg');
+  if(!svg) return;
+  var N = RADAR.length;
+  var CX = 200, CY = 155, R = 105;
+  var PAD = 52; // label padding from ring edge
+  var step = 2 * Math.PI / N;
+  var o = '';
+
+  // rings
+  [0.25, 0.5, 0.75, 1].forEach(function(f){
+    var pts = [];
+    for(var i=0;i<N;i++){
+      var a = -Math.PI/2 + i*step;
+      pts.push((CX+R*f*Math.cos(a)).toFixed(1)+','+(CY+R*f*Math.sin(a)).toFixed(1));
+    }
+    o += '<polygon points="'+pts.join(' ')+'" fill="none" stroke="#D4D0C8" stroke-width="0.8"/>';
+  });
+
+  // spokes
+  for(var i=0;i<N;i++){
+    var a = -Math.PI/2 + i*step;
+    o += '<line x1="'+CX+'" y1="'+CY+'" x2="'+(CX+R*Math.cos(a)).toFixed(1)+'" y2="'+(CY+R*Math.sin(a)).toFixed(1)+'" stroke="#D4D0C8" stroke-width="0.8"/>';
+  }
+
+  // avg polygon (red, dashed, under)
+  var ap = [];
+  for(var i=0;i<N;i++){
+    var a = -Math.PI/2 + i*step, f = (RADAR_AVG[i]||5)/10;
+    ap.push((CX+R*f*Math.cos(a)).toFixed(1)+','+(CY+R*f*Math.sin(a)).toFixed(1));
+  }
+  o += '<polygon points="'+ap.join(' ')+'" fill="rgba(210,30,30,0.16)" stroke="rgba(190,20,20,0.6)" stroke-width="1.5" stroke-dasharray="4,3"/>';
+
+  // user polygon (blue, solid, on top)
+  var dp = [];
+  for(var i=0;i<N;i++){
+    var a = -Math.PI/2 + i*step, f = RADAR[i].value/10;
+    dp.push((CX+R*f*Math.cos(a)).toFixed(1)+','+(CY+R*f*Math.sin(a)).toFixed(1));
+  }
+  o += '<polygon points="'+dp.join(' ')+'" fill="rgba(36,94,220,0.18)" stroke="#245EDC" stroke-width="2"/>';
+
+  // dots
+  for(var i=0;i<N;i++){
+    var a = -Math.PI/2 + i*step, f = RADAR[i].value/10;
+    o += '<circle cx="'+(CX+R*f*Math.cos(a)).toFixed(1)+'" cy="'+(CY+R*f*Math.sin(a)).toFixed(1)+'" r="3.5" fill="#245EDC" stroke="#fff" stroke-width="1.2"/>';
+  }
+
+  // labels — dynamic offset + two-line word wrap
+  for(var i=0;i<N;i++){
+    var a = -Math.PI/2 + i*step;
+    var ca = Math.cos(a), sa = Math.sin(a);
+    var LR = R + PAD;
+    var lx = CX + LR*ca;
+    var ly = CY + LR*sa;
+
+    // anchor based on left/right quadrant
+    var anchor = 'middle';
+    if(ca > 0.15)  anchor = 'start';
+    if(ca < -0.15) anchor = 'end';
+
+    // vertical centering: pull up if near top, down if near bottom
+    var baseY = ly;
+    if(sa < -0.5) baseY = ly - 6;
+    if(sa >  0.5) baseY = ly + 14;
+    // extra push for labels that are almost exactly at bottom (sa > 0.85)
+    if(sa > 0.85) baseY = ly + 18;
+
+    var words = RADAR[i].label.split(' ');
+    var lineH = 11;
+    var lines = [];
+    // group into lines of max 2 words
+    for(var w=0; w<words.length; w+=2){
+      lines.push(words.slice(w, w+2).join(' '));
+    }
+    var totalH = lines.length * lineH;
+    var startY = baseY - (totalH/2) + lineH*0.7;
+    lines.forEach(function(line, li){
+      o += '<text x="'+lx.toFixed(1)+'" y="'+(startY+li*lineH).toFixed(1)+'"'
+          +' text-anchor="'+anchor+'"'
+          +' font-size="9.5" fill="#222" font-family="Tahoma,sans-serif" font-weight="600">'
+          + line + '</text>';
+    });
+  }
+
+  // scale tick labels (along top spoke)
+  ['2.5','5','7.5','10'].forEach(function(v,i){
+    var f=(i+1)/4;
+    o += '<text x="'+(CX+3)+'" y="'+(CY - R*f + 3.5).toFixed(1)+'"'
+        +' font-size="7.5" fill="#BBBBBB" font-family="Tahoma,sans-serif">'+v+'</text>';
+  });
+
+  // legend
+  var lgy = CY + R + PAD + 22;
+  o += '<rect x="'+(CX-90)+'" y="'+lgy+'" width="9" height="4" fill="rgba(210,30,30,0.3)" stroke="rgba(190,20,20,0.6)" stroke-width="1" stroke-dasharray="3,2"/>';
+  o += '<text x="'+(CX-78)+'" y="'+(lgy+4)+'" font-size="9" fill="#555" font-family="Tahoma,sans-serif">Avg TPM benchmark</text>';
+  o += '<rect x="'+(CX+22)+'" y="'+lgy+'" width="9" height="4" fill="rgba(36,94,220,0.25)" stroke="#245EDC" stroke-width="1.5"/>';
+  o += '<text x="'+(CX+34)+'" y="'+(lgy+4)+'" font-size="9" fill="#245EDC" font-family="Tahoma,sans-serif" font-weight="600">Logan Heft</text>';
+
+  svg.innerHTML = o;
+}
+
+/* ── Boot ──────────────────────────────────────────────── */
+function boot(){
+  document.getElementById('welcome').style.display='none';
+  var ld=document.getElementById('loading');ld.style.display='flex';
+  setTimeout(function(){document.getElementById('ldfill').style.width='100%'},80);
+  setTimeout(function(){
+    ld.style.display='none';
+    document.getElementById('desktop').style.display='block';
+    tick();
+    // Open About Me first
+    setTimeout(function(){openW('w-about');mineNew();restorePhotos();},350);
+  },2600);
+}
+
+/* ── Misc ──────────────────────────────────────────────── */
+function shutdown(){
+  closeStart();
+  document.body.innerHTML='<div style="position:fixed;inset:0;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font-family:Tahoma"><div style="color:#fff;font-size:15px">It is now safe to turn off your computer.</div><a href="" style="color:#5090F0;font-size:12px" onclick="location.reload()">↺ Restart</a></div>';
+}
+
+/* ── XP scrollbar (CSS only handles track/thumb; JS handles arrow buttons) */
+
+/* ════════════════════════════════════════════════════════════════════
+   MINESWEEPER ENGINE
+   ════════════════════════════════════════════════════════════════════
+   TO CHANGE DIFFICULTY — edit these three values:
+     var MR = 9;   rows     (9=easy, 16=medium/hard)
+     var MC = 9;   columns  (9=easy, 16/30=medium/hard)
+     var MM = 10;  mines    (10=easy, 40=medium, 99=hard)
+   ════════════════════════════════════════════════════════════════════ */
+var MR=9,MC=9,MM=10;
+var mBoard=[],mRev=[],mFlag=[],mDead=false,mWon=false,mMLeft=MM;
+
+function mineNew(){
+  mBoard=[];mRev=[];mFlag=[];mDead=false;mWon=false;mMLeft=MM;
+  for(var r=0;r<MR;r++){mBoard.push([]);mRev.push([]);mFlag.push([]);for(var c=0;c<MC;c++){mBoard[r].push(0);mRev[r].push(false);mFlag[r].push(false);}}
+  var placed=0;
+  while(placed<MM){var r=Math.floor(Math.random()*MR),c=Math.floor(Math.random()*MC);if(mBoard[r][c]!==-1){mBoard[r][c]=-1;placed++;}}
+  for(var r=0;r<MR;r++)for(var c=0;c<MC;c++){
+    if(mBoard[r][c]===-1)continue;
+    var n=0;
+    for(var dr=-1;dr<=1;dr++)for(var dc=-1;dc<=1;dc++){var nr=r+dr,nc=c+dc;if(nr>=0&&nr<MR&&nc>=0&&nc<MC&&mBoard[nr][nc]===-1)n++;}
+    mBoard[r][c]=n;
+  }
+  mineRender();
+}
+
+function mineRender(){
+  var root=document.getElementById('mine-root');if(!root)return;
+  var h='<div class="mine-wrap">';
+  h+='<div class="mine-topbar">';
+  h+='<div class="mine-counter">'+String(mMLeft).padStart(3,'0')+'</div>';
+  h+='<div class="mine-face" onclick="mineNew()" id="mface">'+(mDead?'😵':mWon?'😎':'🙂')+'</div>';
+  h+='<div class="mine-counter" id="mtime">000</div>';
+  h+='</div>';
+  h+='<div class="mine-grid" style="grid-template-columns:repeat('+MC+',22px)">';
+  for(var r=0;r<MR;r++)for(var c=0;c<MC;c++){
+    var classes='mc';
+    var inner='';
+    if(mRev[r][c]){
+      classes+=' rev';
+      if(mBoard[r][c]===-1){classes+=' boom';inner='💣';}
+      else if(mBoard[r][c]>0){inner='<span class="c'+mBoard[r][c]+'">'+mBoard[r][c]+'</span>';}
+    } else if(mFlag[r][c]){
+      classes+=' flagged';inner='🚩';
+    }
+    h+='<div class="'+classes+'" data-r="'+r+'" data-c="'+c+'"'+
+       ' onclick="mClick('+r+','+c+')"'+
+       ' oncontextmenu="mFlag(event,'+r+','+c+')">'+inner+'</div>';
+  }
+  h+='</div></div>';
+  root.innerHTML=h;
+}
+
+function mClick(r,c){
+  if(mDead||mWon||mRev[r][c]||mFlag[r][c])return;
+  if(mBoard[r][c]===-1){mRev[r][c]=true;mDead=true;mRevealAll();mineRender();return;}
+  mFlood(r,c);mineRender();mCheckWin();
+}
+function mFlag(e,r,c){
+  e.preventDefault();if(mDead||mWon||mRev[r][c])return;
+  mFlag[r][c]=!mFlag[r][c];mMLeft+=mFlag[r][c]?-1:1;mineRender();
+}
+function mFlood(r,c){
+  if(r<0||r>=MR||c<0||c>=MC||mRev[r][c]||mFlag[r][c])return;
+  mRev[r][c]=true;
+  if(mBoard[r][c]===0)for(var dr=-1;dr<=1;dr++)for(var dc=-1;dc<=1;dc++)mFlood(r+dr,c+dc);
+}
+function mRevealAll(){for(var r=0;r<MR;r++)for(var c=0;c<MC;c++)if(mBoard[r][c]===-1)mRev[r][c]=true;}
+function mCheckWin(){
+  for(var r=0;r<MR;r++)for(var c=0;c<MC;c++)if(mBoard[r][c]!==-1&&!mRev[r][c])return;
+  mWon=true;mineRender();
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   PHOTO EMBED SYSTEM
+   ════════════════════════════════════════════════════════════════════
+   How it works:
+   1. User uploads photos via the slot click-targets in Outside of Work
+   2. Photos are stored in localStorage (survive browser refreshes)
+   3. User clicks "Save photos to site" → savePhotosToHTML() runs
+   4. That function clones the current page HTML, injects a <script>
+      block containing all photos as base64 data (window._PHOTOS),
+      then triggers a download of the modified index.html
+   5. User uploads that downloaded file to GitHub → photos are permanent
+
+   TO ADD MORE PHOTO SLOTS:
+     In the HTML, find id="aw-outside" and copy a .photo-slot div.
+     Increment the index in onchange="loadPic(this, N)" and id="psN".
+     Also increment the loop limit in restorePhotos() from 6 to N+1.
+   ════════════════════════════════════════════════════════════════════ */
+function savePhotosToHTML(){
+  // Get current page HTML
+  var src = document.documentElement.outerHTML;
+  // For each photo slot, if localStorage has data, inject it
+  for(var i=0;i<6;i++){
+    var data;
+    try{ data = localStorage.getItem('lh_photo_'+i); }catch(e){}
+    if(data){
+      // Replace the placeholder slot with a pre-filled version
+      // We inject a script tag that auto-restores on load
+    }
+  }
+  // Build a version with photos as inline preloads
+  // Inject a <script> before </body> that sets the images
+  var inject = '<script>window._PHOTOS={';
+  var hasAny = false;
+  for(var i=0;i<6;i++){
+    var d;
+    try{ d = localStorage.getItem('lh_photo_'+i); }catch(e){}
+    if(d){ inject += ''+i+':"'+d+'",'; hasAny=true; }
+  }
+  inject += '};<\/script>';
+  if(!hasAny){ alert('No photos uploaded yet. Upload photos first, then click Save.'); return; }
+  // Insert before </body>
+  src = src.replace('</body>', inject + '</body>');
+  // Trigger download
+  var blob = new Blob([src], {type:'text/html'});
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url; a.download = 'index.html'; a.click();
+  URL.revokeObjectURL(url);
+  alert('✓ Downloaded updated index.html with your photos embedded!\nUpload this file to your GitHub repo to make them live.');
+}
+
+// Auto-restore photos embedded via savePhotosToHTML
+if(window._PHOTOS){
+  for(var _pi in window._PHOTOS){
+    (function(idx,src){
+      // Queue after DOM ready
+      setTimeout(function(){ renderPhoto(idx,src); }, 600);
+    })(parseInt(_pi), window._PHOTOS[_pi]);
+  }
+}
+</script>
+</body>
 </html>   ============================================================ */
 #loading{
   position:fixed;inset:0;z-index:9998;background:#000;
