@@ -45,40 +45,146 @@ html,body{width:100%;height:100%;overflow:hidden;-webkit-font-smoothing:antialia
 
 /* ============================================================
    WELCOME SCREEN
+   Improvements:
+   - Radial gradient background matches real XP login screen
+     (lighter centre, dark navy edges)
+   - Tahoma font stack for accurate XP typography
+   - Fade-out animation on tile click before navigating
+   - Improved vertical rhythm: more breathing room between elements
+   - Avatar tile: rounded corners, thicker border, inner shadow, hover glow
+   - Bottom bar with XP-style shortcut buttons
    ============================================================ */
 #welcome{
   position:fixed;inset:0;z-index:9999;
-  background:linear-gradient(160deg,#1A3A7A,#0D1F42);
+  /* Real XP login uses a radial from a mid-blue centre to dark navy edges */
+  background:radial-gradient(ellipse 80% 70% at 50% 40%, #2A5CAA 0%, #1A4090 35%, #0E2460 70%, #071840 100%);
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  font-family:var(--f);
+  font-family:Tahoma,Verdana,sans-serif; /* XP-era font stack */
+  /* Fade transition: opacity animates to 0 when .fading class is added via JS */
+  transition:opacity .5s ease;
 }
-.wc-flag{width:52px;height:52px;display:grid;grid-template-columns:1fr 1fr;gap:2px;border-radius:3px;overflow:hidden;margin-bottom:20px}
+#welcome.fading{opacity:0;pointer-events:none}
+
+/* Windows logo flag — unchanged pixels, just adjusted margin */
+.wc-flag{
+  width:56px;height:56px;
+  display:grid;grid-template-columns:1fr 1fr;gap:2px;
+  border-radius:3px;overflow:hidden;
+  margin-bottom:28px; /* more breathing room below logo */
+  filter:drop-shadow(0 2px 6px rgba(0,0,0,.45));
+}
 .wc-flag div:nth-child(1){background:#F25022}
 .wc-flag div:nth-child(2){background:#7FBA00}
 .wc-flag div:nth-child(3){background:#00A4EF}
 .wc-flag div:nth-child(4){background:#FFB900}
-.wc-brand{color:#fff;font-size:26px;letter-spacing:3px;font-weight:200;margin-bottom:4px}
-.wc-xp{font-weight:700;color:#FF8C00}
-.wc-rule{width:340px;height:1px;background:rgba(255,255,255,.18);margin:20px 0 16px}
-.wc-hint{color:rgba(255,255,255,.5);font-size:11px;margin-bottom:16px}
-.wc-user{
-  display:flex;flex-direction:column;align-items:center;gap:9px;
-  cursor:pointer;padding:14px 28px;border-radius:4px;transition:background .12s;
+
+/* "Microsoft XP" label — lighter weight + spacing matching XP */
+.wc-brand{
+  color:#fff;
+  font-size:28px;
+  letter-spacing:4px;   /* XP used wide letter spacing on the login title */
+  font-weight:200;
+  margin-bottom:2px;
+  font-family:Tahoma,Verdana,sans-serif;
+  text-shadow:0 1px 3px rgba(0,0,0,.4);
 }
-.wc-user:hover{background:rgba(255,255,255,.08)}
+.wc-xp{font-weight:700;color:#FF8C00;letter-spacing:2px}
+
+/* Divider — taller margin on both sides for breathing room */
+.wc-rule{
+  width:380px;
+  height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);
+  margin:22px 0 18px;
+}
+
+/* "To begin, click your user name" — now sits below the name, inside the tile */
+.wc-hint{
+  color:rgba(255,255,255,.55);
+  font-size:11px;
+  letter-spacing:.3px;
+  margin-top:2px;
+  font-family:Tahoma,Verdana,sans-serif;
+}
+
+/* User account tile — behaves like a real clickable XP login button */
+.wc-user{
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  cursor:pointer;
+  padding:16px 32px;
+  border-radius:6px;           /* rounded corners */
+  border:2px solid rgba(255,255,255,.18);
+  /* subtle inner shadow so it looks recessed like an XP tile */
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.15), 0 2px 8px rgba(0,0,0,.3);
+  background:rgba(255,255,255,.06);
+  transition:background .15s, border-color .15s, box-shadow .15s;
+}
+/* Hover: soft blue glow matching XP selection highlight */
+.wc-user:hover{
+  background:rgba(255,255,255,.13);
+  border-color:rgba(100,160,255,.55);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.2), 0 0 14px rgba(80,140,255,.35), 0 2px 8px rgba(0,0,0,.3);
+}
+
+/* Avatar image container */
 .wc-ava{
-  width:60px;height:60px;border-radius:4px;border:2.5px solid rgba(255,255,255,.4);
+  width:64px;height:64px;
+  border-radius:5px;
+  border:2.5px solid rgba(255,255,255,.55); /* thicker, more visible border */
   background:linear-gradient(135deg,#4fffb0,#2563eb);
   display:flex;align-items:center;justify-content:center;
   font-size:22px;font-weight:800;color:#fff;letter-spacing:-1px;
+  /* inner shadow to make it look like a framed photo */
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.2), 0 2px 4px rgba(0,0,0,.4);
+  overflow:hidden;padding:0;
 }
-.wc-name{color:#fff;font-size:13px;font-weight:700}
+
+/* Account name */
+.wc-name{
+  color:#fff;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:.3px;
+  font-family:Tahoma,Verdana,sans-serif;
+  text-shadow:0 1px 2px rgba(0,0,0,.5);
+}
 .wc-sub{color:rgba(255,255,255,.5);font-size:10px;margin-top:1px}
+
+/* Bottom bar — XP-style with shortcut buttons */
 .wc-foot{
-  position:absolute;bottom:0;left:0;right:0;height:48px;
-  background:linear-gradient(90deg,#0E2E96,#1A4DD4,#0E2E96);
-  border-top:1px solid rgba(255,255,255,.2);
-  display:flex;align-items:center;padding:0 20px;
+  position:absolute;bottom:0;left:0;right:0;height:52px;
+  background:linear-gradient(180deg,#0A2878 0%,#0A2060 100%);
+  border-top:2px solid rgba(255,255,255,.15);
+  display:flex;align-items:center;justify-content:center;
+  gap:8px;padding:0 24px;
+}
+/* XP-style bottom bar shortcut buttons */
+.wc-btn{
+  display:flex;align-items:center;gap:5px;
+  padding:4px 14px;
+  background:linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,.05));
+  border:1px solid rgba(255,255,255,.22);
+  border-radius:3px;
+  color:#fff;
+  font-family:Tahoma,Verdana,sans-serif;
+  font-size:11px;
+  cursor:pointer;
+  transition:background .1s, border-color .1s;
+}
+.wc-btn:hover{
+  background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,.1));
+  border-color:rgba(255,255,255,.4);
+}
+.wc-btn:active{
+  background:rgba(0,0,0,.15);
+  border-style:inset;
+}
+/* Small separator dots between bottom bar items */
+.wc-foot-sep{
+  color:rgba(255,255,255,.25);
+  font-size:16px;
+  line-height:1;
+  user-select:none;
 }
 
 /* ============================================================
@@ -531,10 +637,6 @@ html,body{width:100%;height:100%;overflow:hidden;-webkit-font-smoothing:antialia
        div class="wc-sub" - Your subtitle here - /div
      ════════════════════════════════════════════════════════════════════ -->
 <div id="welcome">
-  <div class="wc-flag"><div></div><div></div><div></div><div></div></div>
-  <div><span class="wc-brand">Microsoft </span><span class="wc-xp">XP</span></div>
-  <div class="wc-rule"></div>
-  <div class="wc-hint">To begin, click your user name</div>
   <div class="wc-user" onclick="boot()">
     <div class="wc-ava" style="background:none;border:2.5px solid rgba(255,255,255,.5);overflow:hidden;padding:0"><svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" style="image-rendering:pixelated;image-rendering:crisp-edges;width:100%;height:100%">
       <!-- ═══════════════════════════════════════════════
@@ -573,6 +675,7 @@ html,body{width:100%;height:100%;overflow:hidden;-webkit-font-smoothing:antialia
       <rect x="3" y="15" width="10" height="1" fill="#0040A0"/>
     </svg></div>
     <div class="wc-name">Logan Heft</div>
+    <div class="wc-hint">To begin, click your user name</div>
   </div>
   <div class="wc-foot"></div>
 </div>
@@ -840,12 +943,21 @@ html,body{width:100%;height:100%;overflow:hidden;-webkit-font-smoothing:antialia
           <div class="aw-p" style="margin-bottom:0">Outside the office: competitive distance runner, semi-professional photographer, and someone who believes the discipline of training for a race and shipping enterprise software are governed by the same principles.</div>
         </div>
 
-        <!-- SKILLS — Radar Chart -->
+        <!-- SKILLS — Radar Chart
+             Improvements:
+             - Outer wrapper uses flex centering so chart sits in the middle of the panel
+             - max-width: 520px prevents the SVG from stretching too wide
+             - XP panel: inset border + navy title bar preserved from existing style
+        -->
         <div class="aw-pane" id="aw-skills">
           <div class="aw-h1">Skills &amp; Tools</div>
-          <div style="background:#fff;border:2px inset #ACA899;padding:3px;margin-bottom:8px">
-            <div style="background:#000080;color:#fff;font-size:10px;font-weight:700;padding:2px 6px;font-family:var(--f)">Capability Radar — Logan vs. Avg TPM</div>
-            <svg id="radar-svg" width="100%" viewBox="0 0 400 360" preserveAspectRatio="xMidYMid meet" style="display:block;max-height:350px;background:#fff"></svg>
+          <!-- Radar wrapper: flex column, centered horizontally -->
+          <div style="display:flex;flex-direction:column;align-items:center;width:100%;margin-bottom:8px">
+            <div style="background:#fff;border:2px inset #ACA899;padding:3px;width:100%;max-width:520px">
+              <div style="background:#000080;color:#fff;font-size:10px;font-weight:700;padding:2px 6px;font-family:var(--f)">Capability Radar — Logan vs. Avg TPM</div>
+              <!-- viewBox is 500×360 — chart centre is at (250,170) giving equal left/right space for labels -->
+              <svg id="radar-svg" width="100%" viewBox="0 0 500 360" preserveAspectRatio="xMidYMid meet" style="display:block;background:#fff"></svg>
+            </div>
           </div>
           <div class="aw-h2">Tools &amp; Technologies</div>
           <div style="margin-bottom:6px">
@@ -1062,31 +1174,33 @@ html,body{width:100%;height:100%;overflow:hidden;-webkit-font-smoothing:antialia
           <div class="panel on" id="mw-overview">
             <div class="kpis">
               <div class="kpi"><div class="kpi-v">$31M+</div><div class="kpi-l">Risk-adj. revenue (12mo)</div></div>
-              <div class="kpi"><div class="kpi-v">215K</div><div class="kpi-l">Customers unlocked</div></div>
+              <div class="kpi"><div class="kpi-v">1.5B</div><div class="kpi-l">Yearly decisions </div></div>
               <div class="kpi"><div class="kpi-v">$8.6M</div><div class="kpi-l">Yearly profit added</div></div>
-              <div class="kpi"><div class="kpi-v">400+</div><div class="kpi-l">LLM credit signals</div></div>
+              <div class="kpi"><div class="kpi-v">620k</div><div class="kpi-l">Line Increases</div></div>
             </div>
             <div class="p-sec">What I own</div>
-            <div class="p-p">As Technical PM for Consumer &amp; Business Credit Cards, I own the data infrastructure and decision engine that determines credit line changes for millions of PNC customers. This means the pipelines that feed the engine, the vendor integrations, the model inputs, the validation layers, and the governance policies that determine when decisions can and cannot run.</div>
-            <div class="p-p">The role sits at an unusual intersection: technical enough to write API contracts and diagnose production incidents at midnight, commercial enough to quantify risk-adjusted return and navigate Fair Lending compliance in front of a regulator. I was promoted from Data Scientist to TPM after eight months — unusual for a role typically staffed from product management tracks.</div>
+            <div class="p-p">As Technical Product Manager for Consumer &amp; Business Credit Cards at PNC, I own both the data infrastructure and decision engine that the credit worthiness of millions of PNC customers. This means the data pipelines that feed the engine, vendor integrations, model inputs, ETL layers, governance policies that determine how we protect our portfolio. </div>
+            <div class="p-p">My role sits at an unusual intersection: technical enough to write API contracts, diagnose production incidents at midnight, or talk SHAP values with Machine Learning Engineers, but its also commercial enough to quantify risk-adjusted return and navigate Fair Lending compliance in front of a regulator. I was promoted from Data Scientist to TPM after eight months which is unusual for a role typically staffed from an MBA track.</div>
+            <div class="p-p">I am both equally fluent in engineer and executive alike. I know how to bridge the gap between the deeply technical and the completely non technical which is becoming increasingly important in the ever changing AI landscape.</div>
+
             <div class="p-sec" style="margin-top:12px">Career arc at PNC</div>
             <div class="tl">
-              <div class="tl-i"><div class="tl-date">May 2022 – January 2023</div><div class="tl-title">Research Data Scientist · MIT Lincoln Laboratory</div><div class="tl-desc">[Add your own description here — what you built, what the mission was, what you're proud of from this role.]</div></div>
-              <div class="tl-i"><div class="tl-date">May 2023</div><div class="tl-title">Data Scientist · PNC Bank</div><div class="tl-desc">Built live PSI and drift detection monitoring in Python. Designed automated threshold-based decisioning pauses. Implemented Kibana anomaly detection, cutting manual validation by 80% and time-to-detection to minutes. Quickly identified a gap between the data science team's capabilities and the TPM layer above — and started filling it.</div></div>
-              <div class="tl-i"><div class="tl-date">January 2024 — Promoted</div><div class="tl-title">Technical Product Manager · PNC Bank, Consumer &amp; Business Credit Cards</div><div class="tl-desc">Took full ownership of the decisioning stack. First 90 days: mapped every upstream dependency, audited all vendor SLAs, and identified three critical infrastructure gaps blocking real-time capabilities. Built the program plan that would eventually deliver $31M in risk-adjusted revenue over 12 months.</div></div>
-              <div class="tl-i"><div class="tl-date">Q1–Q2 2024</div><div class="tl-title">Foundational infrastructure sprint</div><div class="tl-desc">Designed the Floodgate data integrity architecture after a costly data failure. Began the batch-to-real-time API migration across four systems. Resolved the three-party Experian SLA failure. All three programs running in parallel, coordinating 25+ engineers across different workstreams.</div></div>
-              <div class="tl-i"><div class="tl-date">Q3 2024</div><div class="tl-title">AI and model programs</div><div class="tl-desc">Championed and shipped the AI Income Encoder — 215K customers unlocked, $8.6M in yearly profit. Deployed the LLM transaction taxonomy generating 400+ new credit signals. Both programs passed Fair Lending model validation and disparate impact review.</div></div>
-              <div class="tl-i"><div class="tl-date">Q4 2024</div><div class="tl-title">Crisis and consolidation</div><div class="tl-desc">Managed a live decisioning incident — 25% failure rate, $3–5M at risk. Ran the war room, diagnosed a vendor load balancer issue vs. a logic failure, and made the call to stay live. Recovered the full RAR. Built circuit breaker logic into all vendor integrations. Began planning next-gen real-time CRCLI architecture.</div></div>
+              <div class="tl-i"><div class="tl-date">May 2019 – May 2020</div><div class="tl-title">ConnectOne Bank · Data Scientist (Part Time)</div><div class="tl-desc"></div></div>
+
+              <div class="tl-i"><div class="tl-date">May 2020 – May 2022</div><div class="tl-title">Global X ETFs · Data Scientist (Part Time)</div><div class="tl-desc"></div></div>
+
+              <div class="tl-i"><div class="tl-date">May 2022 – January 2023</div><div class="tl-title">Research Data Scientist · MIT Lincoln Laboratory</div><div class="tl-desc"></div></div>
+              <div class="tl-i"><div class="tl-date">May 2023</div><div class="tl-title">Data Scientist · PNC Bank</div><div class="tl-desc"></div></div>
+              <div class="tl-i"><div class="tl-date">Jan 2024</div><div class="tl-title">Technical Product Manager</div><div class="tl-desc"></div></div>
             </div>
           </div>
 
           <div class="panel" id="mw-ai">
-            <div class="p-sec">The problem I found</div>
-            <div class="p-p">While reviewing campaign performance data in Q2 2024, I noticed a segment of customers who were systematically dropped from proactive credit line increase campaigns — not because they were risky, but because our income verification logic had a gap. These customers had strong credit signals: low utilization, no delinquencies, years of on-time payments. But without a directly verifiable income field, the decision engine excluded them entirely.</div>
-            <div class="p-p">I modeled the opportunity: if we could verify income for this segment through an alternative approach, the incremental RAR was significant. This became the business case for the AI Encoder.</div>
-            <div class="p-hl">I identified this gap myself through data analysis — it wasn't a ticket or a request. Spotting the excluded segment required reading campaign drop-off data with a different frame than normal.</div>
+            <div class="p-sec">The Problem</div>
+            <div class="p-p">While reviewing campaign performance data from 2024, I found that the number one reason customers were being deemed ineligible for a line increase was due to missing income. These customers had strong credit signals: low utilization, no delinquencies, years of on-time payments, but without a directly verifiable income field, the decision engine had to exclude them entirely.</div>
+            <div class="p-p">I modeled the opportunity: if we could verify income for even a small perfect of this segment through an alternative approach, the incremental RAR would be significant. This became the business case for the AI Encoder.</div>
             <div class="p-sec">What I built and shipped</div>
-            <div class="p-p">Partnered with the data science team to scope an LLM-based income derivation model — the AI Encoder — that infers income from transactional behavior where direct verification isn't possible. My role spanned the full lifecycle:</div>
+            <div class="p-p">Partnered with the model development team to scope an LLM-based income derivation model — the AI Encoder — that infers income from transactional behavior where direct verification isn't possible. My role spanned the full lifecycle:</div>
             <ul class="p-ul">
               <li>Wrote the business case and got executive sponsorship for a novel AI approach in a regulated lending environment — not a trivial ask</li>
               <li>Defined the model requirements: confidence score gating, confidence threshold for decisioning activation, fallback logic when confidence was low</li>
@@ -1094,36 +1208,36 @@ html,body{width:100%;height:100%;overflow:hidden;-webkit-font-smoothing:antialia
               <li>Authored the API integration spec extending the decisioning engine payload schema to accept model-generated income fields</li>
               <li>Defined the monitoring runbook: what to watch for, what triggers a rollback, what constitutes a Fair Lending flag</li>
             </ul>
+            <div class="p-sec">The Outcome</div>
+            <div class="p-p">Below you will see some key outcomes of the initiative.</div>
+            <div class="p-p">.</div>
+            
             <div class="kpis" style="margin-top:12px">
               <div class="kpi"><div class="kpi-v">215K</div><div class="kpi-l">Customers unlocked</div></div>
               <div class="kpi"><div class="kpi-v">$8.6M</div><div class="kpi-l">Yearly profit</div></div>
               <div class="kpi"><div class="kpi-v">0</div><div class="kpi-l">Fair lending findings</div></div>
               <div class="kpi"><div class="kpi-v">Pass</div><div class="kpi-l">Model validation</div></div>
+            <div class="p-sec">The Limitations</div>
+            <div class="p-p">When standing up this project one thing I did no consider is that since we are using the direct deposit information for these customers, this would be post tax income. When we ask a user for their income they submit the pre tax number. While there is nothing wrong with using the post tax number, it does make it seem like the customer makes less than they do. We continue to figure out solutions around this, but the alternative to the lower income is no income therefore this project has still been a resounding success</div>
+
             </div>
-            <div class="p-quote">"The most impactful opportunities live in what the system is not doing — in the gaps where logic stops rather than in the decisions it makes."</div>
           </div>
 
           <div class="panel" id="mw-infra">
-            <div class="p-sec">The legacy architecture problem</div>
-            <div class="p-p">PNC's credit decisioning infrastructure ran on overnight batch jobs when I joined. Decisions were made on data that was up to 24 hours stale. This wasn't just a performance issue — it blocked four critical product capabilities that the business needed and that customers were beginning to expect from a modern bank:</div>
+            <div class="p-sec">Legacy architecture problem</div>
+            <div class="p-p">When I first joined the team PNC's credit decisioning infrastructure ran on overnight batch jobs. Decisions were made on data that was up to two weeks stale depending on table load frequency. This wasn't just a performance issue — it blocked three critical product capabilities that the business needed and that customers were beginning to expect from a modern bank:</div>
             <ul class="p-ul">
               <li><strong>Instant CRCLI</strong> — customers requesting a credit line increase via the app expected a response in seconds, not a letter three days later</li>
               <li><strong>FICO 10T</strong> — the next-generation FICO model using trended credit data was only useful in real time; batch processing negated the benefit</li>
               <li><strong>FEMA API</strong> — disaster exclusion rules were applied manually at the state level, error-prone, and operationally expensive during hurricane season</li>
-              <li><strong>Automated income verification</strong> — real-time income checks replacing a batch document review process that took days</li>
             </ul>
             <div class="p-sec">How I ran the migration</div>
-            <div class="p-p">This was a four-track parallel program across 25+ engineers, with each track having a different technical complexity, vendor dependency, and regulatory consideration. I used WSJF to sequence delivery and ran shadow mode (parallel batch + real-time) before every production cutover — zero cold cutovers.</div>
-            <div class="p-hl">The hardest technical problem was audit trail continuity. Batch decisions logged themselves naturally at cycle end. Real-time decisions needed atomic event-based logging that satisfied compliance, supported regulatory disclosure reconstruction, and didn't degrade response latency. I designed the event schema and worked with engineering to ensure atomic writes before any response returned.</div>
-            <div class="p-p">I also built circuit breaker logic into all vendor integrations: if a vendor API timeout rate exceeded 15%, the system automatically rerouted to a backup endpoint rather than failing the decision. This pattern came directly out of the Q4 crisis incident.</div>
+            <div class="p-p">This was a four-track parallel program across 25+ engineers, with each track having a different technical role, vendor dependency, and regulatory consideration. I used Weighted Shortest Job First (WSJF) framework in an aigle workflow to sequence delivery and ran shadow mode (parallel batch + real-time) before every production cutover.</div>
+            <div class="p-p">We later built circuit breaker logic into all vendor integrations: if a vendor API timeout rate exceeded 15%, the system automatically rerouted to a backup endpoint rather than failing the decision.</div>
             <div class="kpis" style="margin-top:10px">
-              <div class="kpi"><div class="kpi-v">$31M</div><div class="kpi-l">RAR (12mo)</div></div>
-              <div class="kpi"><div class="kpi-v">4</div><div class="kpi-l">Systems migrated</div></div>
-              <div class="kpi"><div class="kpi-v">25+</div><div class="kpi-l">Engineers</div></div>
-              <div class="kpi"><div class="kpi-v">0</div><div class="kpi-l">Cold cutovers</div></div>
             </div>
           </div>
-
+//END POINT HERE
           <div class="panel" id="mw-integrity">
             <div class="p-sec">The incident that changed how we work</div>
             <div class="p-p">In early 2024, an upstream table that populated our student segmentation flag failed to load before a decisioning cycle. The field appeared null. The engine treated every student in our portfolio as a non-student and applied the standard rule set — which is deliberately harsher, because students are a segment we handle carefully to build long-term relationships.</div>
@@ -1621,73 +1735,99 @@ function drawRadar(){
   var svg = document.getElementById('radar-svg');
   if(!svg) return;
   var N = RADAR.length;
-  var CX = 200, CY = 155, R = 105;
-  var PAD = 52; // label padding from ring edge
+
+  /* ── Geometry ────────────────────────────────────────────────────────
+     viewBox is now 500×360.
+     CX=250 places the chart dead-centre horizontally — equal space for
+     labels on both sides (was 200 in a 400-wide box, creating left-push).
+     CY=165 leaves ~90px above for the top label and ~105px below for the
+     bottom label + legend row.
+     R=100 keeps the rings compact enough that 52px of label padding never
+     clips out of the 500px canvas.
+  ──────────────────────────────────────────────────────────────────── */
+  var CX = 250, CY = 162, R = 100;
+  var PAD = 50; /* label clearance beyond the outermost ring */
   var step = 2 * Math.PI / N;
   var o = '';
 
-  // rings
-  [0.25, 0.5, 0.75, 1].forEach(function(f){
+  /* ── Grid rings — softer colour, slightly thinner than before ──── */
+  [0.25, 0.5, 0.75, 1].forEach(function(f, ri){
     var pts = [];
     for(var i=0;i<N;i++){
       var a = -Math.PI/2 + i*step;
       pts.push((CX+R*f*Math.cos(a)).toFixed(1)+','+(CY+R*f*Math.sin(a)).toFixed(1));
     }
-    o += '<polygon points="'+pts.join(' ')+'" fill="none" stroke="#D4D0C8" stroke-width="0.8"/>';
+    /* Outer ring slightly darker so it anchors the chart */
+    var sc = (ri === 3) ? '#C8C4BC' : '#E0DDD6';
+    o += '<polygon points="'+pts.join(' ')+'" fill="none" stroke="'+sc+'" stroke-width="0.7"/>';
   });
 
-  // spokes
+  /* ── Spokes — soft, non-distracting ─────────────────────────────── */
   for(var i=0;i<N;i++){
     var a = -Math.PI/2 + i*step;
-    o += '<line x1="'+CX+'" y1="'+CY+'" x2="'+(CX+R*Math.cos(a)).toFixed(1)+'" y2="'+(CY+R*Math.sin(a)).toFixed(1)+'" stroke="#D4D0C8" stroke-width="0.8"/>';
+    o += '<line x1="'+CX+'" y1="'+CY
+        +'" x2="'+(CX+R*Math.cos(a)).toFixed(1)
+        +'" y2="'+(CY+R*Math.sin(a)).toFixed(1)
+        +'" stroke="#DDD9D0" stroke-width="0.7"/>';
   }
 
-  // avg polygon (red, dashed, under)
+  /* ── Avg TPM polygon — red, dashed, drawn first (under user shape) */
   var ap = [];
   for(var i=0;i<N;i++){
     var a = -Math.PI/2 + i*step, f = (RADAR_AVG[i]||5)/10;
     ap.push((CX+R*f*Math.cos(a)).toFixed(1)+','+(CY+R*f*Math.sin(a)).toFixed(1));
   }
-  o += '<polygon points="'+ap.join(' ')+'" fill="rgba(210,30,30,0.16)" stroke="rgba(190,20,20,0.6)" stroke-width="1.5" stroke-dasharray="4,3"/>';
+  /* Lighter fill transparency — benchmark shouldn't dominate */
+  o += '<polygon points="'+ap.join(' ')
+      +'" fill="rgba(200,30,30,0.10)" stroke="rgba(180,20,20,0.55)"'
+      +' stroke-width="1.4" stroke-dasharray="4,3"/>';
 
-  // user polygon (blue, solid, on top)
+  /* ── Logan polygon — blue, solid, drawn on top ───────────────────
+     Slightly thicker stroke (2.5) so Logan's shape reads clearly.
+     Fill transparency kept light so grid shows through.
+  ──────────────────────────────────────────────────────────────── */
   var dp = [];
   for(var i=0;i<N;i++){
     var a = -Math.PI/2 + i*step, f = RADAR[i].value/10;
     dp.push((CX+R*f*Math.cos(a)).toFixed(1)+','+(CY+R*f*Math.sin(a)).toFixed(1));
   }
-  o += '<polygon points="'+dp.join(' ')+'" fill="rgba(36,94,220,0.18)" stroke="#245EDC" stroke-width="2"/>';
+  o += '<polygon points="'+dp.join(' ')
+      +'" fill="rgba(30,80,210,0.14)" stroke="#1E50D2" stroke-width="2.5"/>';
 
-  // dots
+  /* ── Vertex dots — white ring so they pop off both polygons ─────── */
   for(var i=0;i<N;i++){
     var a = -Math.PI/2 + i*step, f = RADAR[i].value/10;
-    o += '<circle cx="'+(CX+R*f*Math.cos(a)).toFixed(1)+'" cy="'+(CY+R*f*Math.sin(a)).toFixed(1)+'" r="3.5" fill="#245EDC" stroke="#fff" stroke-width="1.2"/>';
+    o += '<circle cx="'+(CX+R*f*Math.cos(a)).toFixed(1)
+        +'" cy="'+(CY+R*f*Math.sin(a)).toFixed(1)
+        +'" r="3.8" fill="#1E50D2" stroke="#fff" stroke-width="1.4"/>';
   }
 
-  // labels — dynamic offset + two-line word wrap
+  /* ── Labels — two-line wrap, quadrant-aware anchor & vertical offset
+     LR = distance from centre to label anchor point.
+     Increased to R+PAD+4 to give a touch more clearance.
+  ──────────────────────────────────────────────────────────────── */
   for(var i=0;i<N;i++){
     var a = -Math.PI/2 + i*step;
     var ca = Math.cos(a), sa = Math.sin(a);
-    var LR = R + PAD;
+    var LR = R + PAD + 4;
     var lx = CX + LR*ca;
     var ly = CY + LR*sa;
 
-    // anchor based on left/right quadrant
+    /* Text anchor: start on right half, end on left half, middle on top/bottom */
     var anchor = 'middle';
-    if(ca > 0.15)  anchor = 'start';
-    if(ca < -0.15) anchor = 'end';
+    if(ca >  0.2) anchor = 'start';
+    if(ca < -0.2) anchor = 'end';
 
-    // vertical centering: pull up if near top, down if near bottom
+    /* Vertical nudge: pull up near top, push down near bottom */
     var baseY = ly;
-    if(sa < -0.5) baseY = ly - 6;
-    if(sa >  0.5) baseY = ly + 14;
-    // extra push for labels that are almost exactly at bottom (sa > 0.85)
-    if(sa > 0.85) baseY = ly + 18;
+    if(sa < -0.6) baseY = ly - 6;
+    if(sa >  0.4) baseY = ly + 12;
+    if(sa >  0.8) baseY = ly + 18;  /* extra for near-bottom labels */
 
+    /* Split label into lines of max 2 words */
     var words = RADAR[i].label.split(' ');
     var lineH = 11;
     var lines = [];
-    // group into lines of max 2 words
     for(var w=0; w<words.length; w+=2){
       lines.push(words.slice(w, w+2).join(' '));
     }
@@ -1696,40 +1836,85 @@ function drawRadar(){
     lines.forEach(function(line, li){
       o += '<text x="'+lx.toFixed(1)+'" y="'+(startY+li*lineH).toFixed(1)+'"'
           +' text-anchor="'+anchor+'"'
-          +' font-size="9.5" fill="#222" font-family="Tahoma,sans-serif" font-weight="600">'
+          /* Slightly smaller font so multi-word labels don't crowd */
+          +' font-size="9" fill="#1A1A1A" font-family="Tahoma,sans-serif" font-weight="600">'
           + line + '</text>';
     });
   }
 
-  // scale tick labels (along top spoke)
+  /* ── Scale tick markers along the top spoke ──────────────────────── */
   ['2.5','5','7.5','10'].forEach(function(v,i){
     var f=(i+1)/4;
-    o += '<text x="'+(CX+3)+'" y="'+(CY - R*f + 3.5).toFixed(1)+'"'
-        +' font-size="7.5" fill="#BBBBBB" font-family="Tahoma,sans-serif">'+v+'</text>';
+    o += '<text x="'+(CX+4)+'" y="'+(CY - R*f + 3.5).toFixed(1)+'"'
+        +' font-size="7" fill="#C0BAB0" font-family="Tahoma,sans-serif">'+v+'</text>';
   });
 
-  // legend
-  var lgy = CY + R + PAD + 22;
-  o += '<rect x="'+(CX-90)+'" y="'+lgy+'" width="9" height="4" fill="rgba(210,30,30,0.3)" stroke="rgba(190,20,20,0.6)" stroke-width="1" stroke-dasharray="3,2"/>';
-  o += '<text x="'+(CX-78)+'" y="'+(lgy+4)+'" font-size="9" fill="#555" font-family="Tahoma,sans-serif">Avg TPM benchmark</text>';
-  o += '<rect x="'+(CX+22)+'" y="'+lgy+'" width="9" height="4" fill="rgba(36,94,220,0.25)" stroke="#245EDC" stroke-width="1.5"/>';
-  o += '<text x="'+(CX+34)+'" y="'+(lgy+4)+'" font-size="9" fill="#245EDC" font-family="Tahoma,sans-serif" font-weight="600">Logan Heft</text>';
+  /* ── Legend — centred below the chart, clean horizontal row ─────────
+     lgy computed so it always sits 20px below the lowest label position.
+     We use a fixed lgy derived from CY+R+PAD+28 for the 500×360 canvas.
+  ──────────────────────────────────────────────────────────────────── */
+  var lgy = CY + R + PAD + 28; /* ≈ 340 — safely inside the 360px canvas */
+  var legendW = 200; /* total legend block width for centering */
+  var lx0 = CX - legendW/2; /* left edge so legend is centred on CX */
+
+  /* Avg TPM swatch */
+  o += '<rect x="'+lx0+'" y="'+lgy+'" width="12" height="5"'
+      +' fill="rgba(200,30,30,0.2)" stroke="rgba(180,20,20,0.6)"'
+      +' stroke-width="1" stroke-dasharray="3,2"/>';
+  o += '<text x="'+(lx0+16)+'" y="'+(lgy+4.5)+'"'
+      +' font-size="9" fill="#444" font-family="Tahoma,sans-serif">Avg TPM benchmark</text>';
+
+  /* Logan swatch */
+  var lx1 = lx0 + 120;
+  o += '<rect x="'+lx1+'" y="'+lgy+'" width="12" height="5"'
+      +' fill="rgba(30,80,210,0.2)" stroke="#1E50D2" stroke-width="1.8"/>';
+  o += '<text x="'+(lx1+16)+'" y="'+(lgy+4.5)+'"'
+      +' font-size="9" fill="#1E50D2" font-family="Tahoma,sans-serif" font-weight="700">Logan Heft</text>';
 
   svg.innerHTML = o;
 }
 
 /* ── Boot ──────────────────────────────────────────────── */
+/* boot() — standard login tile click, fades welcome then shows desktop */
 function boot(){
-  document.getElementById('welcome').style.display='none';
-  var ld=document.getElementById('loading');ld.style.display='flex';
-  setTimeout(function(){document.getElementById('ldfill').style.width='100%'},80);
+  var wc = document.getElementById('welcome');
+  /* Step 1: add .fading class which triggers CSS opacity:0 transition */
+  wc.classList.add('fading');
   setTimeout(function(){
-    ld.style.display='none';
-    document.getElementById('desktop').style.display='block';
-    tick();
-    // Open About Me first
-    setTimeout(function(){openW('w-about');mineNew();restorePhotos();},350);
-  },2600);
+    wc.style.display='none';
+    wc.classList.remove('fading');
+    var ld=document.getElementById('loading');ld.style.display='flex';
+    setTimeout(function(){document.getElementById('ldfill').style.width='100%'},80);
+    setTimeout(function(){
+      ld.style.display='none';
+      document.getElementById('desktop').style.display='block';
+      tick();
+      setTimeout(function(){openW('w-about');mineNew();restorePhotos();},350);
+    },2600);
+  },480); /* wait for fade to finish before hiding */
+}
+
+/* bootTo(windowId) — bottom bar shortcut buttons: boot and open a specific window */
+var _bootTarget = null;
+function bootTo(winId){
+  _bootTarget = winId;
+  var wc = document.getElementById('welcome');
+  wc.classList.add('fading');
+  setTimeout(function(){
+    wc.style.display='none';
+    wc.classList.remove('fading');
+    var ld=document.getElementById('loading');ld.style.display='flex';
+    setTimeout(function(){document.getElementById('ldfill').style.width='100%'},80);
+    setTimeout(function(){
+      ld.style.display='none';
+      document.getElementById('desktop').style.display='block';
+      tick();
+      setTimeout(function(){
+        mineNew();restorePhotos();
+        openW(_bootTarget || 'w-about');
+      },350);
+    },2600);
+  },480);
 }
 
 /* ── Misc ──────────────────────────────────────────────── */
