@@ -1,0 +1,1516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Logan Heft — Technical Program Manager Portfolio"/>
+<title>Logan Heft XP</title>
+<style>
+/* ================================================================
+   LOGAN HEFT XP — Authentic Windows XP Desktop Portfolio
+   Pixel-perfect XP chrome, wallpaper, sounds, full app suite
+   ================================================================ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden;font-family:'Tahoma',sans-serif;font-size:11px}
+
+/* ── XP COLORS ─────────────────────────────────────────────── */
+:root{
+  --xp-blue-dark:#0A246A;
+  --xp-blue-mid:#245EDC;
+  --xp-blue-light:#3C91F0;
+  --xp-titlebar-active:linear-gradient(to bottom,#4D9BFF 0%,#1A5FD4 3%,#1A5FD4 97%,#0A246A 100%);
+  --xp-titlebar-inactive:linear-gradient(to bottom,#9DB6CC 0%,#6A8DA8 3%,#6A8DA8 97%,#3B6B8A 100%);
+  --xp-green-start:#5BC23A;
+  --xp-btn-face:#ECE9D8;
+  --xp-btn-border:#ACA899;
+  --xp-desktop-bg:#3A6EA5;
+  --xp-panel:#ECE9D8;
+  --xp-panel-border:#ACA899;
+  --xp-selection:#316AC5;
+  --xp-taskbar:linear-gradient(to bottom,#2054B8 0%,#2563D0 3%,#1E57CC 50%,#174FAA 100%);
+  --xp-start-green:linear-gradient(to bottom,#5BC23A 0%,#3E9A2D 50%,#296D1D 100%);
+}
+
+/* ── WELCOME SCREEN ────────────────────────────────────────── */
+#welcome{
+  position:fixed;inset:0;z-index:99999;
+  background:linear-gradient(135deg,#234E96 0%,#1B3A75 40%,#0D1F42 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;
+}
+.wc-logo{display:flex;align-items:center;gap:16px;margin-bottom:32px}
+.wc-logo-flag{width:56px;height:56px;display:grid;grid-template-columns:1fr 1fr;gap:2px;border-radius:4px;overflow:hidden}
+.wc-flag-r{background:#F35325}.wc-flag-g{background:#81BC06}
+.wc-flag-b{background:#05A6F0}.wc-flag-y{background:#FFBA08}
+.wc-logo-text{color:white}
+.wc-windows{font-size:30px;font-weight:200;letter-spacing:3px}
+.wc-xp{font-size:30px;font-weight:700;color:#FF8C00}
+.wc-divider{width:400px;height:1px;background:rgba(255,255,255,0.2);margin-bottom:32px}
+.wc-user{display:flex;flex-direction:column;align-items:center;gap:12px;cursor:pointer;padding:16px 24px;border-radius:4px;transition:background 0.15s}
+.wc-user:hover{background:rgba(255,255,255,0.1)}
+.wc-avatar{width:64px;height:64px;border-radius:4px;border:3px solid rgba(255,255,255,0.5);background:linear-gradient(135deg,#4fffb0,#2563eb);display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:800;color:white}
+.wc-username{color:white;font-size:14px;font-weight:700}
+.wc-hint{color:rgba(255,255,255,0.6);font-size:11px}
+.wc-footer{position:absolute;bottom:0;left:0;right:0;height:52px;background:linear-gradient(to right,#1035A0,#245EDC,#1035A0);display:flex;align-items:center;justify-content:space-between;padding:0 24px}
+.wc-footer-btn{display:flex;align-items:center;gap:8px;color:white;font-size:12px;cursor:pointer;padding:6px 12px;border-radius:2px}
+.wc-footer-btn:hover{background:rgba(255,255,255,0.15)}
+.wc-footer-btn svg{width:20px;height:20px}
+
+/* ── LOADING (after welcome) ───────────────────────────────── */
+#loading{
+  position:fixed;inset:0;z-index:99998;background:#000;
+  display:none;flex-direction:column;align-items:center;justify-content:center;gap:24px;
+}
+.ld-logo{display:flex;align-items:center;gap:12px}
+.ld-text{color:white;font-size:24px;font-weight:200;letter-spacing:3px}
+.ld-xp{color:#FF8C00;font-weight:700}
+.ld-bar{width:200px;height:14px;background:#111;border:1px solid #444;border-radius:2px;padding:2px;overflow:hidden}
+.ld-fill{height:100%;background:linear-gradient(to right,#1A56CC,#5090F0);border-radius:1px;width:0;transition:width 2s ease}
+.ld-dots{display:flex;gap:3px}
+.ld-dot{width:14px;height:7px;background:linear-gradient(to right,#1A56CC,#5090F0);border-radius:2px;animation:ld 1.4s infinite}
+.ld-dot:nth-child(2){animation-delay:.3s}
+.ld-dot:nth-child(3){animation-delay:.6s}
+.ld-dot:nth-child(4){animation-delay:.9s}
+@keyframes ld{0%,100%{opacity:.2}50%{opacity:1}}
+
+/* ── DESKTOP ───────────────────────────────────────────────── */
+#desktop{
+  width:100vw;height:100vh;
+  background-color:var(--xp-desktop-bg);
+  /* Bliss wallpaper recreation with CSS */
+  background-image:
+    radial-gradient(ellipse 80% 60% at 50% 110%,#5A9E3A 0%,#4A8A2E 30%,transparent 60%),
+    radial-gradient(ellipse 120% 80% at 50% 100%,#3A7A2A 0%,transparent 50%),
+    radial-gradient(ellipse 100% 70% at 50% 0%,#4A8ED6 0%,#3A7AC7 30%,#2D6AB8 60%,#245AAA 100%);
+  position:relative;overflow:hidden;
+  display:none;
+}
+#desktop::after{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 30% at 30% 65%,rgba(255,255,255,0.15) 0%,transparent 60%),
+    radial-gradient(ellipse 40% 20% at 70% 72%,rgba(255,255,255,0.1) 0%,transparent 50%),
+    radial-gradient(ellipse 80% 20% at 50% 60%,rgba(200,230,150,0.2) 0%,transparent 50%);
+  pointer-events:none;
+}
+
+/* ── DESKTOP ICONS ─────────────────────────────────────────── */
+#icon-grid{
+  position:absolute;top:16px;left:16px;
+  display:flex;flex-direction:column;gap:6px;z-index:10;
+}
+.d-icon{
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+  width:76px;padding:4px 4px 6px;border-radius:2px;cursor:pointer;
+  border:1px solid transparent;
+}
+.d-icon:hover,.d-icon.active{
+  background:rgba(49,106,197,0.4);
+  border:1px solid rgba(255,255,255,0.3);
+  outline:1px dotted rgba(255,255,255,0.5);
+}
+.d-icon img{width:48px;height:48px;image-rendering:pixelated;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.6))}
+.d-icon span{
+  font-size:11px;color:white;text-align:center;line-height:1.3;
+  text-shadow:1px 1px 0 #000,0 0 3px rgba(0,0,0,0.8);
+  word-break:break-word;width:72px;
+}
+
+/* ── TASKBAR ───────────────────────────────────────────────── */
+#taskbar{
+  position:fixed;bottom:0;left:0;right:0;height:30px;z-index:9000;
+  background:var(--xp-taskbar);
+  border-top:1px solid rgba(255,255,255,0.4);
+  display:flex;align-items:stretch;
+}
+#start-btn{
+  display:flex;align-items:center;gap:6px;
+  background:var(--xp-start-green);
+  border:none;border-radius:0 14px 14px 0;
+  padding:0 16px 0 8px;cursor:pointer;
+  color:white;font-size:13px;font-weight:700;font-style:italic;
+  text-shadow:1px 1px 2px rgba(0,0,0,0.6);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.35),inset 1px 0 0 rgba(255,255,255,0.2),2px 0 4px rgba(0,0,0,0.3);
+  height:100%;flex-shrink:0;transition:filter .1s;
+}
+#start-btn:hover{filter:brightness(1.1)}
+#start-btn:active{filter:brightness(0.9)}
+#start-btn .flag{width:22px;height:22px;display:grid;grid-template-columns:1fr 1fr;gap:1px;border-radius:2px;overflow:hidden;flex-shrink:0}
+#start-btn .fr{background:#F35325}#start-btn .fg{background:#81BC06}
+#start-btn .fb{background:#05A6F0}#start-btn .fy{background:#FFBA08}
+
+#tb-windows{flex:1;display:flex;align-items:center;padding:3px 4px;gap:2px;overflow:hidden}
+.tb-btn{
+  display:flex;align-items:center;gap:4px;height:22px;
+  min-width:80px;max-width:160px;padding:0 8px;
+  background:linear-gradient(to bottom,#3A7FBF,#2060A0);
+  border:1px solid rgba(255,255,255,0.15);
+  border-bottom-color:rgba(0,0,0,0.3);
+  border-radius:3px;cursor:pointer;
+  font-size:11px;color:white;text-shadow:0 1px 1px rgba(0,0,0,0.5);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  transition:filter .1s;flex-shrink:0;
+}
+.tb-btn:hover{filter:brightness(1.15)}
+.tb-btn.focused{background:linear-gradient(to bottom,#1A4A8A,#2060A8);box-shadow:inset 0 2px 3px rgba(0,0,0,0.3)}
+.tb-btn img{width:14px;height:14px;flex-shrink:0}
+
+#systray{
+  display:flex;align-items:center;gap:8px;padding:0 10px;
+  background:linear-gradient(to bottom,#0C3A9A,#1452B8);
+  border-left:1px solid rgba(255,255,255,0.15);
+  font-size:11px;color:white;flex-shrink:0;
+}
+#tb-clock{font-size:11px;color:white;text-align:center;line-height:1.3}
+
+/* ── START MENU ────────────────────────────────────────────── */
+#start-menu{
+  position:fixed;bottom:30px;left:0;width:340px;
+  background:white;border:1px solid #0A246A;border-radius:4px 4px 0 0;
+  box-shadow:3px -3px 8px rgba(0,0,0,0.4);z-index:9500;
+  display:none;
+}
+#start-menu.open{display:block}
+.sm-head{
+  background:linear-gradient(to right,#245EDC 0%,#3C91F0 100%);
+  padding:8px 10px 12px;display:flex;align-items:center;gap:10px;
+  border-radius:4px 4px 0 0;
+}
+.sm-ava{
+  width:48px;height:48px;border-radius:4px;border:2px solid rgba(255,255,255,0.6);
+  background:linear-gradient(135deg,#4fffb0,#2563eb);
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;font-weight:800;color:white;flex-shrink:0;
+}
+.sm-head-name{color:white;font-size:13px;font-weight:700;text-shadow:0 1px 2px rgba(0,0,0,0.4)}
+.sm-head-sub{color:rgba(255,255,255,0.75);font-size:10px;margin-top:2px}
+.sm-cols{display:flex}
+.sm-left{flex:1;padding:4px 0;border-right:1px solid #D4D0C8}
+.sm-right{width:140px;padding:4px 0;background:#EBE8D4}
+.sm-lbl{font-size:10px;font-weight:700;color:#7171B5;padding:4px 12px 2px;text-transform:uppercase}
+.sm-sep{height:1px;background:#D4D0C8;margin:3px 0}
+.sm-item{
+  display:flex;align-items:center;gap:8px;
+  padding:5px 12px;cursor:pointer;font-size:12px;
+}
+.sm-item:hover{background:#316AC5;color:white}
+.sm-item:hover .sm-item-sub{color:rgba(255,255,255,0.7)}
+.sm-item img{width:22px;height:22px;flex-shrink:0}
+.sm-item-wrap{display:flex;flex-direction:column}
+.sm-item-main{font-weight:600}
+.sm-item-sub{font-size:10px;color:#666}
+.sm-foot{
+  background:linear-gradient(to right,#1035A0,#245EDC);
+  display:flex;justify-content:flex-end;gap:4px;padding:5px 8px;
+}
+.sm-foot-btn{
+  display:flex;align-items:center;gap:4px;
+  background:linear-gradient(to bottom,#3A7FE0,#1A5FCC);
+  border:1px solid rgba(255,255,255,0.3);border-radius:2px;
+  padding:3px 12px;cursor:pointer;font-size:11px;color:white;
+}
+.sm-foot-btn:hover{filter:brightness(1.15)}
+
+/* ── WINDOWS ───────────────────────────────────────────────── */
+.win{
+  position:absolute;display:none;flex-direction:column;
+  min-width:280px;min-height:200px;
+  border:1px solid #0A246A;border-radius:8px 8px 4px 4px;
+  box-shadow:3px 3px 10px rgba(0,0,0,0.5),inset 0 0 0 1px rgba(255,255,255,0.1);
+  overflow:hidden;
+}
+.win.show{display:flex}
+.win.focused{z-index:500}
+
+/* Title bar */
+.win-tb{
+  height:30px;
+  background:var(--xp-titlebar-active);
+  display:flex;align-items:center;padding:0 4px 0 6px;
+  cursor:move;flex-shrink:0;border-radius:7px 7px 0 0;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.5),inset 0 2px 0 rgba(255,255,255,0.2);
+}
+.win.unfocused .win-tb{background:var(--xp-titlebar-inactive)}
+.win-tb-icon{width:16px;height:16px;margin-right:6px;flex-shrink:0}
+.win-tb-title{
+  flex:1;font-size:12px;font-weight:700;color:white;
+  text-shadow:0 1px 2px rgba(0,0,0,0.5),0 0 4px rgba(0,0,100,0.3);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.win-btns{display:flex;gap:2px;margin-left:6px}
+.wb{
+  width:21px;height:21px;border-radius:3px;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-size:10px;font-weight:900;border:1px solid;
+  transition:filter .1s;
+}
+.wb:hover{filter:brightness(1.15)}
+.wb:active{filter:brightness(0.85)}
+.wb-min{background:linear-gradient(to bottom,#6CB0F4,#3A7FD4);border-color:#1A4A9A;color:white}
+.wb-max{background:linear-gradient(to bottom,#6CB0F4,#3A7FD4);border-color:#1A4A9A;color:white}
+.wb-cls{background:linear-gradient(to bottom,#F06060,#C83030);border-color:#8A1A1A;color:white}
+
+/* Menubar */
+.win-menu{
+  background:#ECE9D8;border-bottom:1px solid #D4D0C8;
+  display:flex;height:22px;align-items:center;padding:0 4px;flex-shrink:0;
+}
+.wm-item{padding:2px 8px;font-size:11px;cursor:pointer;border-radius:2px;color:#000}
+.wm-item:hover{background:#316AC5;color:white}
+
+/* Toolbar (IE style) */
+.win-toolbar{
+  background:#ECE9D8;border-bottom:1px solid #D4D0C8;
+  display:flex;align-items:center;height:28px;padding:2px 4px;gap:1px;flex-shrink:0;
+}
+.wt-btn{
+  display:flex;align-items:center;gap:3px;
+  padding:2px 8px;font-size:11px;cursor:pointer;
+  background:none;border:1px solid transparent;border-radius:2px;color:#000;
+}
+.wt-btn:hover{background:#D4D0C8;border-color:#ACA899}
+
+/* Address bar */
+.win-addr{
+  background:#ECE9D8;border-bottom:1px solid #D4D0C8;
+  display:flex;align-items:center;height:26px;padding:2px 6px;gap:4px;flex-shrink:0;
+}
+.wa-lbl{font-size:11px;color:#000;flex-shrink:0}
+.wa-input{
+  flex:1;height:18px;font-size:11px;padding:0 4px;
+  border:1px solid #7F9DB9;background:white;outline:none;color:#000;
+}
+.wa-go{
+  padding:1px 10px;font-size:11px;cursor:pointer;
+  background:#ECE9D8;border:1px solid #7F9DB9;border-radius:2px;
+}
+.wa-go:hover{background:#D4D0C8}
+
+/* Content area */
+.win-body{flex:1;overflow:auto;background:white;position:relative}
+
+/* Status bar */
+.win-status{
+  background:#ECE9D8;border-top:1px solid #D4D0C8;
+  height:20px;display:flex;align-items:center;padding:0 8px;
+  font-size:11px;color:#000;flex-shrink:0;
+}
+.win-resize{
+  position:absolute;bottom:0;right:0;width:16px;height:16px;
+  cursor:se-resize;z-index:10;
+}
+.win-resize::after{
+  content:'';position:absolute;bottom:3px;right:3px;
+  width:8px;height:8px;
+  background:repeating-linear-gradient(
+    -45deg,#ACA899 0px,#ACA899 1px,transparent 1px,transparent 3px
+  );
+}
+
+/* ── SCROLLBAR (XP style) ──────────────────────────────────── */
+::-webkit-scrollbar{width:17px;height:17px}
+::-webkit-scrollbar-track{background:#F0EFE7;border:1px solid #ACA899}
+::-webkit-scrollbar-thumb{background:linear-gradient(to right,#E8E5D8,#D4D0C4);border:1px solid #ACA899}
+::-webkit-scrollbar-button:single-button{
+  background:#ECE9D8;border:1px solid #ACA899;height:17px;
+  background-repeat:no-repeat;background-position:center;
+}
+
+/* ── CONTEXT MENU ──────────────────────────────────────────── */
+#ctx{
+  position:fixed;z-index:9999;display:none;
+  background:#ECE9D8;border:1px solid #0A246A;
+  box-shadow:2px 2px 5px rgba(0,0,0,0.35);
+  padding:2px 0;min-width:170px;
+}
+.ctx-i{padding:4px 24px;font-size:11px;cursor:pointer;white-space:nowrap}
+.ctx-i:hover{background:#316AC5;color:white}
+.ctx-sep{height:1px;background:#D4D0C8;margin:2px 0}
+
+/* ================================================================
+   APP CONTENT STYLES
+   ================================================================ */
+
+/* ── ABOUT ME ──────────────────────────────────────────────── */
+.about-layout{display:flex;height:100%}
+.about-sidebar{
+  width:180px;background:#EEF2FA;border-right:1px solid #D4D0C8;
+  padding:0;flex-shrink:0;overflow-y:auto;
+}
+.about-sidebar-section{
+  background:linear-gradient(to right,#245EDC,#3C91F0);
+  color:white;font-weight:700;font-size:11px;padding:4px 8px;
+  display:flex;align-items:center;gap:4px;
+}
+.about-nav-item{
+  display:flex;align-items:center;gap:6px;
+  padding:5px 10px;font-size:11px;cursor:pointer;
+  border-bottom:1px solid rgba(0,0,0,0.05);
+}
+.about-nav-item:hover,.about-nav-item.active{background:#CCE4FF;color:#0A246A}
+.about-nav-item img{width:16px;height:16px}
+.about-main{flex:1;overflow-y:auto;padding:16px}
+.about-section{display:none}
+.about-section.active{display:block}
+.about-h1{font-size:16px;font-weight:700;color:#245EDC;margin-bottom:4px;border-bottom:2px solid #245EDC;padding-bottom:4px}
+.about-h2{font-size:12px;font-weight:700;color:#245EDC;margin:12px 0 4px;text-transform:uppercase;letter-spacing:.05em}
+.about-p{font-size:12px;color:#333;line-height:1.7;margin-bottom:8px}
+.about-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
+.about-stat{background:#EEF2FA;border:1px solid #C5D9F1;border-radius:3px;padding:8px;text-align:center}
+.about-stat-val{font-size:18px;font-weight:700;color:#245EDC;line-height:1}
+.about-stat-lbl{font-size:10px;color:#666;margin-top:2px;text-transform:uppercase}
+.about-photo-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:8px 0}
+.about-photo{
+  aspect-ratio:1;background:#EEF2FA;border:2px solid #C5D9F1;border-radius:4px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:4px;cursor:pointer;overflow:hidden;position:relative;
+  transition:border-color .15s;
+}
+.about-photo:hover{border-color:#245EDC}
+.about-photo-placeholder{font-size:28px;opacity:.5}
+.about-photo-label{font-size:9px;color:#666;text-align:center;line-height:1.3}
+.about-photo-upload{
+  position:absolute;inset:0;opacity:0;cursor:pointer;
+}
+.about-photo img{width:100%;height:100%;object-fit:cover}
+.about-upload-hint{
+  background:#FFF9C4;border:1px solid #F0D060;border-radius:3px;
+  padding:6px 8px;font-size:10px;color:#666;margin:4px 0;line-height:1.5;
+}
+.about-chip{
+  display:inline-block;background:#E8F0FE;border:1px solid #C5D9F1;
+  border-radius:100px;padding:2px 8px;font-size:10px;color:#245EDC;
+  margin:2px;
+}
+.xp-tag{background:#ECE9D8;border:1px solid #ACA899;border-radius:2px;padding:1px 6px;font-size:11px;display:inline-block;margin:1px}
+
+/* ── RESUME VIEWER ─────────────────────────────────────────── */
+.resume-layout{display:flex;height:100%}
+.resume-sidebar{
+  width:180px;background:#EEF2FA;border-right:1px solid #D4D0C8;
+  padding:8px;flex-shrink:0;
+}
+.resume-dl-btn{
+  width:100%;background:linear-gradient(to bottom,#6CB0F4,#3A7FD4);
+  border:1px solid #1A4A9A;border-radius:3px;color:white;
+  font-size:11px;font-weight:700;padding:6px;cursor:pointer;
+  text-align:center;margin-bottom:8px;display:block;text-decoration:none;
+}
+.resume-dl-btn:hover{filter:brightness(1.1)}
+.resume-meta{font-size:10px;color:#666;line-height:1.7;border-top:1px solid #D4D0C8;padding-top:8px}
+.resume-main{flex:1;overflow:hidden;background:#525659;display:flex;align-items:center;justify-content:center}
+.resume-main iframe{width:100%;height:100%;border:none}
+
+/* ── INTERNET EXPLORER (Case Studies) ─────────────────────── */
+.ie-body{height:100%;display:flex;flex-direction:column}
+.ie-hero{
+  background:linear-gradient(135deg,#0A246A 0%,#245EDC 50%,#3C91F0 100%);
+  padding:24px 28px;color:white;flex-shrink:0;
+}
+.ie-hero h1{font-size:20px;font-weight:700;margin-bottom:4px}
+.ie-hero p{font-size:12px;opacity:.85;line-height:1.6}
+.ie-content{flex:1;overflow-y:auto;padding:20px 24px;background:white}
+.ie-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+.ie-card{
+  border:1px solid #D4D0C8;border-radius:4px;padding:14px;cursor:pointer;
+  background:white;transition:border-color .15s,box-shadow .15s;
+}
+.ie-card:hover{border-color:#245EDC;box-shadow:0 2px 8px rgba(36,94,220,.15);transform:translateY(-1px)}
+.ie-card-id{font-family:monospace;font-size:10px;color:#999;margin-bottom:4px}
+.ie-card-title{font-size:13px;font-weight:700;color:#0A246A;margin-bottom:6px;line-height:1.3}
+.ie-card-tags{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:8px}
+.ie-card-tag{background:#EEF2FA;border:1px solid #C5D9F1;border-radius:100px;padding:1px 6px;font-size:9px;color:#245EDC}
+.ie-card-desc{font-size:11px;color:#555;line-height:1.5;margin-bottom:10px}
+.ie-card-metrics{display:flex;gap:12px;padding-top:8px;border-top:1px solid #F0EEE6}
+.ie-cm-val{font-size:14px;font-weight:700;color:#245EDC;line-height:1}
+.ie-cm-lbl{font-size:9px;color:#999;text-transform:uppercase}
+.ie-read{font-size:10px;color:#245EDC;font-weight:700}
+
+/* Case study detail */
+.cs-detail{display:none;padding:20px 24px;background:white;height:100%;overflow-y:auto}
+.cs-detail.show{display:block}
+.cs-back{
+  display:inline-flex;align-items:center;gap:4px;
+  font-size:11px;color:#245EDC;cursor:pointer;margin-bottom:16px;
+  padding:3px 8px;border:1px solid #C5D9F1;border-radius:2px;background:#EEF2FA;
+}
+.cs-back:hover{background:#CCE4FF}
+.cs-title{font-size:18px;font-weight:700;color:#0A246A;margin-bottom:4px;line-height:1.3}
+.cs-subtitle{font-size:11px;color:#666;margin-bottom:16px;font-family:monospace}
+.cs-metrics-bar{
+  display:flex;gap:16px;background:#EEF2FA;border:1px solid #C5D9F1;
+  border-radius:4px;padding:12px 16px;margin-bottom:16px;flex-wrap:wrap;
+}
+.cs-metric{display:flex;flex-direction:column;gap:2px}
+.cs-mv{font-size:20px;font-weight:700;color:#245EDC;line-height:1;font-family:monospace}
+.cs-ml{font-size:9px;color:#666;text-transform:uppercase;letter-spacing:.05em}
+.cs-section{margin-bottom:16px}
+.cs-section-title{
+  font-size:10px;font-weight:700;color:#245EDC;
+  text-transform:uppercase;letter-spacing:.08em;
+  border-bottom:2px solid #245EDC;padding-bottom:3px;margin-bottom:6px;
+}
+.cs-section p,.cs-section li{font-size:12px;color:#333;line-height:1.75}
+.cs-section ul{padding-left:16px}
+.cs-section li{list-style:disc;margin-bottom:4px}
+.cs-quote{
+  background:#FFF9E8;border-left:3px solid #F0C040;
+  padding:8px 12px;font-size:12px;color:#444;font-style:italic;
+  margin:8px 0;border-radius:0 3px 3px 0;
+}
+
+/* ── PNC DEEP DIVE ─────────────────────────────────────────── */
+.pnc-body{height:100%;overflow-y:auto;padding:0}
+.pnc-header{
+  background:linear-gradient(135deg,#003B6E 0%,#00539F 50%,#0073CF 100%);
+  padding:20px 24px;color:white;
+}
+.pnc-logo-row{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.pnc-logo{
+  background:white;border-radius:4px;padding:4px 10px;
+  font-size:16px;font-weight:900;color:#003B6E;letter-spacing:1px;
+}
+.pnc-tagline{font-size:11px;opacity:.8}
+.pnc-header h1{font-size:18px;font-weight:700;margin-bottom:4px}
+.pnc-header p{font-size:11px;opacity:.85;line-height:1.6}
+.pnc-tabs{
+  display:flex;background:#EEF2FA;border-bottom:1px solid #D4D0C8;
+  padding:0 16px;flex-shrink:0;overflow-x:auto;
+}
+.pnc-tab{
+  padding:8px 14px;font-size:11px;font-weight:600;cursor:pointer;
+  border-bottom:3px solid transparent;color:#666;white-space:nowrap;
+}
+.pnc-tab:hover{color:#245EDC;background:rgba(36,94,220,.06)}
+.pnc-tab.active{color:#245EDC;border-bottom-color:#245EDC}
+.pnc-panel{display:none;padding:16px 24px}
+.pnc-panel.active{display:block}
+.pnc-section-title{
+  font-size:13px;font-weight:700;color:#003B6E;margin-bottom:10px;
+  padding-bottom:4px;border-bottom:2px solid #0073CF;
+}
+.pnc-impact-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px}
+.pnc-impact-tile{
+  background:white;border:1px solid #C5D9F1;border-radius:4px;
+  padding:12px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,.06);
+}
+.pnc-impact-val{font-size:20px;font-weight:700;color:#0073CF;line-height:1;font-family:monospace}
+.pnc-impact-lbl{font-size:9px;color:#666;text-transform:uppercase;margin-top:4px;line-height:1.3}
+.pnc-story{margin-bottom:16px}
+.pnc-story-title{font-size:12px;font-weight:700;color:#003B6E;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.pnc-story-title::before{content:'';width:4px;height:14px;background:#0073CF;border-radius:2px;flex-shrink:0}
+.pnc-story p{font-size:11px;color:#444;line-height:1.75;margin-bottom:6px}
+.pnc-story ul{padding-left:16px;margin-bottom:6px}
+.pnc-story li{font-size:11px;color:#444;line-height:1.75;list-style:disc}
+.pnc-tag{background:#E8F0FE;border:1px solid #C5D9F1;border-radius:100px;padding:1px 7px;font-size:10px;color:#245EDC;display:inline-block;margin:2px}
+.pnc-highlight{
+  background:#F0FDF4;border:1px solid #86EFAC;border-radius:4px;
+  padding:10px 14px;font-size:11px;color:#166534;margin:8px 0;
+  display:flex;align-items:flex-start;gap:8px;
+}
+.pnc-highlight::before{content:'✓';font-weight:700;flex-shrink:0}
+.pnc-timeline{position:relative;padding-left:20px;border-left:2px solid #C5D9F1;margin-top:8px}
+.pnc-tl-item{position:relative;margin-bottom:14px}
+.pnc-tl-item::before{
+  content:'';position:absolute;left:-25px;top:3px;
+  width:10px;height:10px;border-radius:50%;background:#0073CF;
+  border:2px solid white;box-shadow:0 0 0 1px #0073CF;
+}
+.pnc-tl-date{font-family:monospace;font-size:10px;color:#999;margin-bottom:2px}
+.pnc-tl-title{font-size:12px;font-weight:700;color:#003B6E;margin-bottom:3px}
+.pnc-tl-desc{font-size:11px;color:#555;line-height:1.65}
+.pnc-wsjf-table{width:100%;border-collapse:collapse;font-size:11px;margin:8px 0}
+.pnc-wsjf-table th{background:#003B6E;color:white;padding:5px 8px;text-align:left;font-size:10px}
+.pnc-wsjf-table td{padding:5px 8px;border-bottom:1px solid #E8E5D8}
+.pnc-wsjf-table tr:hover td{background:#EEF2FA}
+.pnc-wsjf-winner{background:#F0FDF4 !important;font-weight:700}
+</style>
+</head>
+<body>
+
+<!-- ======================================================== WELCOME -->
+<div id="welcome">
+  <div class="wc-logo">
+    <div class="wc-logo-flag">
+      <div class="wc-flag-r"></div><div class="wc-flag-g"></div>
+      <div class="wc-flag-b"></div><div class="wc-flag-y"></div>
+    </div>
+    <div class="wc-logo-text">
+      <span class="wc-windows">Microsoft </span><span class="wc-xp">XP</span>
+    </div>
+  </div>
+  <div class="wc-divider"></div>
+  <p style="color:rgba(255,255,255,0.6);font-size:12px;margin-bottom:16px">To begin, click your user name</p>
+  <div class="wc-user" onclick="doLogin()">
+    <div class="wc-avatar">LH</div>
+    <div class="wc-username">Logan Heft</div>
+    <div class="wc-hint">Technical Program Manager</div>
+  </div>
+  <div class="wc-footer">
+    <div class="wc-footer-btn">
+      <svg viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+      Turn off computer
+    </div>
+    <div style="color:rgba(255,255,255,0.6);font-size:11px">© Logan Heft XP</div>
+  </div>
+</div>
+
+<!-- ======================================================== LOADING -->
+<div id="loading">
+  <div class="ld-logo">
+    <div style="width:40px;height:40px;display:grid;grid-template-columns:1fr 1fr;gap:2px;border-radius:3px;overflow:hidden">
+      <div style="background:#F35325"></div><div style="background:#81BC06"></div>
+      <div style="background:#05A6F0"></div><div style="background:#FFBA08"></div>
+    </div>
+    <div><span class="ld-text">Microsoft </span><span class="ld-xp" style="font-size:24px;font-weight:700">XP</span></div>
+  </div>
+  <div class="ld-dots">
+    <div class="ld-dot"></div><div class="ld-dot"></div>
+    <div class="ld-dot"></div><div class="ld-dot"></div>
+  </div>
+  <div class="ld-bar"><div class="ld-fill" id="ld-fill"></div></div>
+</div>
+
+<!-- ======================================================== DESKTOP -->
+<div id="desktop">
+
+  <!-- Icons -->
+  <div id="icon-grid">
+
+    <div class="d-icon" id="di-about" ondblclick="openWin('w-about');event.stopPropagation()" onclick="selIcon('di-about')">
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect x='4' y='4' width='40' height='40' rx='4' fill='%231BA1E2'/%3E%3Ccircle cx='24' cy='18' r='7' fill='white'/%3E%3Cellipse cx='24' cy='36' rx='11' ry='7' fill='white'/%3E%3C/svg%3E" alt=""/>
+      <span>About Me</span>
+    </div>
+
+    <div class="d-icon" id="di-resume" ondblclick="openWin('w-resume');event.stopPropagation()" onclick="selIcon('di-resume')">
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath d='M8 4h22l14 14v30H8z' fill='%23E8453C'/%3E%3Cpath d='M30 4l14 14H30z' fill='%23B83028'/%3E%3Crect x='14' y='22' width='20' height='2.5' rx='1' fill='white'/%3E%3Crect x='14' y='27' width='20' height='2.5' rx='1' fill='white'/%3E%3Crect x='14' y='32' width='14' height='2.5' rx='1' fill='white'/%3E%3Ctext x='24' y='46' text-anchor='middle' fill='white' font-size='7' font-weight='bold' font-family='Arial'%3EPDF%3C/text%3E%3C/svg%3E" alt=""/>
+      <span>My Resume</span>
+    </div>
+
+    <div class="d-icon" id="di-ie" ondblclick="openWin('w-ie');event.stopPropagation()" onclick="selIcon('di-ie')">
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='20' fill='%231BA1E2'/%3E%3Ccircle cx='24' cy='24' r='20' fill='none' stroke='%230D7FBF' stroke-width='1'/%3E%3Cellipse cx='24' cy='24' rx='9' ry='20' fill='none' stroke='white' stroke-width='2.5'/%3E%3Cline x1='4' y1='24' x2='44' y2='24' stroke='white' stroke-width='2.5'/%3E%3Cline x1='6' y1='15' x2='42' y2='15' stroke='white' stroke-width='1.5'/%3E%3Cline x1='6' y1='33' x2='42' y2='33' stroke='white' stroke-width='1.5'/%3E%3Cellipse cx='34' cy='12' rx='7' ry='5' fill='%23FFD700' stroke='%23C8860A' stroke-width='1.5'/%3E%3C/svg%3E" alt=""/>
+      <span>Case Studies</span>
+    </div>
+
+    <div class="d-icon" id="di-pnc" ondblclick="openWin('w-pnc');event.stopPropagation()" onclick="selIcon('di-pnc')">
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect x='2' y='16' width='44' height='28' rx='3' fill='%23003B6E'/%3E%3Crect x='2' y='16' width='44' height='8' fill='%230073CF'/%3E%3Crect x='8' y='28' width='10' height='8' rx='1' fill='white' opacity='.8'/%3E%3Crect x='22' y='28' width='10' height='8' rx='1' fill='white' opacity='.8'/%3E%3Crect x='36' y='28' width='6' height='8' rx='1' fill='white' opacity='.8'/%3E%3Cpolygon points='24,2 32,16 16,16' fill='%230073CF'/%3E%3C/svg%3E" alt=""/>
+      <span>PNC Deep Dive</span>
+    </div>
+
+    <div class="d-icon" id="di-recycle" ondblclick="openWin('w-recycle');event.stopPropagation()" onclick="selIcon('di-recycle')">
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect x='8' y='18' width='32' height='26' rx='3' fill='%23A8D8EA' stroke='%235588AA' stroke-width='2'/%3E%3Crect x='16' y='10' width='16' height='10' rx='2' fill='%23A8D8EA' stroke='%235588AA' stroke-width='2'/%3E%3Cpath d='M12 18 L10 44 h28 L36 18' fill='none' stroke='%235588AA' stroke-width='2'/%3E%3Cline x1='20' y1='24' x2='20' y2='38' stroke='%235588AA' stroke-width='1.5'/%3E%3Cline x1='28' y1='24' x2='28' y2='38' stroke='%235588AA' stroke-width='1.5'/%3E%3C/svg%3E" alt=""/>
+      <span>Recycle Bin</span>
+    </div>
+
+  </div>
+
+  <!-- ================================================ WINDOW: ABOUT ME -->
+  <div class="win" id="w-about" style="width:700px;height:520px;top:30px;left:100px">
+    <div class="win-tb" onmousedown="startDrag(event,'w-about')">
+      <img class="win-tb-icon" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='7' fill='%231BA1E2'/%3E%3Ccircle cx='8' cy='6' r='2.5' fill='white'/%3E%3Cellipse cx='8' cy='12' rx='3.5' ry='2' fill='white'/%3E%3C/svg%3E"/>
+      <span class="win-tb-title">About Me — Logan Heft</span>
+      <div class="win-btns">
+        <div class="wb wb-min" onclick="minWin('w-about')">_</div>
+        <div class="wb wb-max" onclick="maxWin('w-about')">□</div>
+        <div class="wb wb-cls" onclick="closeWin('w-about')">✕</div>
+      </div>
+    </div>
+    <div class="win-menu">
+      <span class="wm-item">File</span><span class="wm-item">Edit</span>
+      <span class="wm-item">View</span><span class="wm-item">Help</span>
+    </div>
+    <div class="win-body">
+      <div class="about-layout">
+        <div class="about-sidebar">
+          <div class="about-sidebar-section">📋 Sections</div>
+          <div class="about-nav-item active" onclick="showAbout('a-bio',this)">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='6' r='3' fill='%23245EDC'/%3E%3Cellipse cx='8' cy='13' rx='5' ry='3' fill='%23245EDC'/%3E%3C/svg%3E"/>
+            Bio &amp; Summary
+          </div>
+          <div class="about-nav-item" onclick="showAbout('a-run',this)">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ctext y='13' font-size='12'%3E🏃%3C/text%3E%3C/svg%3E"/>
+            Running &amp; Life
+          </div>
+          <div class="about-nav-item" onclick="showAbout('a-skills',this)">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect x='1' y='4' width='14' height='8' rx='1' fill='%23245EDC'/%3E%3C/svg%3E"/>
+            Skills &amp; Tools
+          </div>
+          <div class="about-nav-item" onclick="showAbout('a-edu',this)">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpolygon points='8,2 15,6 8,10 1,6' fill='%23245EDC'/%3E%3Crect x='6' y='10' width='4' height='4' fill='%23245EDC'/%3E%3C/svg%3E"/>
+            Education
+          </div>
+        </div>
+        <div class="about-main">
+
+          <!-- BIO -->
+          <div class="about-section active" id="a-bio">
+            <div class="about-h1">👋 Logan Heft</div>
+            <div style="margin-bottom:12px">
+              <span class="xp-tag" style="background:#E8F5E9;border-color:#A5D6A7;color:#2E7D32">● Open to Senior TPM Roles</span>
+              <span class="xp-tag">New York, NY</span>
+              <span class="xp-tag">LoganHeft1@gmail.com</span>
+            </div>
+            <div class="about-p">Technical Program Manager specializing in AI-driven decisioning platforms at scale. I've led initiatives generating <strong>$31M+ in risk-adjusted revenue</strong> while navigating strict Fair Lending and regulatory constraints.</div>
+            <div class="about-p">My differentiator is balancing innovation with risk — integrating LLM-based inference models through model validation and disparate impact testing, while preventing multi-million dollar exposure events through rigorous data quality architecture.</div>
+            <div class="about-p">Core strength: <strong>technical translation</strong> — deep-diving into decision engine logic with engineers, then explaining risk-adjusted return and fair lending implications to executives.</div>
+            <div class="about-stat-grid">
+              <div class="about-stat"><div class="about-stat-val">$31M+</div><div class="about-stat-lbl">Revenue Delivered</div></div>
+              <div class="about-stat"><div class="about-stat-val">215K</div><div class="about-stat-lbl">Customers Unlocked</div></div>
+              <div class="about-stat"><div class="about-stat-val">25+</div><div class="about-stat-lbl">Engineers Led</div></div>
+              <div class="about-stat"><div class="about-stat-val">3+</div><div class="about-stat-lbl">Years Experience</div></div>
+            </div>
+          </div>
+
+          <!-- RUNNING -->
+          <div class="about-section" id="a-run">
+            <div class="about-h1">🏃 Running &amp; Life Outside Work</div>
+            <div class="about-upload-hint">💡 <strong>Add your running photos:</strong> Click any photo slot below to upload an image. Photos are stored locally in your browser.</div>
+            <div class="about-photo-grid">
+              <div class="about-photo" id="photo-0">
+                <div class="about-photo-placeholder">🏃</div>
+                <div class="about-photo-label">Race / Run<br>Photo</div>
+                <input class="about-photo-upload" type="file" accept="image/*" onchange="loadPhoto(this,0)"/>
+              </div>
+              <div class="about-photo" id="photo-1">
+                <div class="about-photo-placeholder">🥇</div>
+                <div class="about-photo-label">Finish Line /<br>Medal</div>
+                <input class="about-photo-upload" type="file" accept="image/*" onchange="loadPhoto(this,1)"/>
+              </div>
+              <div class="about-photo" id="photo-2">
+                <div class="about-photo-placeholder">🌄</div>
+                <div class="about-photo-label">Scenic Route /<br>Training</div>
+                <input class="about-photo-upload" type="file" accept="image/*" onchange="loadPhoto(this,2)"/>
+              </div>
+              <div class="about-photo" id="photo-3">
+                <div class="about-photo-placeholder">🏋️</div>
+                <div class="about-photo-label">Gym / Cross<br>Training</div>
+                <input class="about-photo-upload" type="file" accept="image/*" onchange="loadPhoto(this,3)"/>
+              </div>
+              <div class="about-photo" id="photo-4">
+                <div class="about-photo-placeholder">👟</div>
+                <div class="about-photo-label">Team / Group<br>Run</div>
+                <input class="about-photo-upload" type="file" accept="image/*" onchange="loadPhoto(this,4)"/>
+              </div>
+              <div class="about-photo" id="photo-5">
+                <div class="about-photo-placeholder">📸</div>
+                <div class="about-photo-label">Any Photo<br>You Like</div>
+                <input class="about-photo-upload" type="file" accept="image/*" onchange="loadPhoto(this,5)"/>
+              </div>
+            </div>
+            <div class="about-h2">Division I Athlete → TPM</div>
+            <div class="about-p">Competed as a Division I student athlete at NJIT while graduating Summa Cum Laude and serving as Investment Fund President. The discipline of elite athletics — managing a training load, pushing through hard sessions, trusting the process — translates directly into how I manage programs under pressure.</div>
+            <div class="about-p">Running teaches you that the best results come from consistent execution over time, not heroics on one day. Same principle applies to building reliable software systems.</div>
+          </div>
+
+          <!-- SKILLS -->
+          <div class="about-section" id="a-skills">
+            <div class="about-h1">⚙️ Skills &amp; Tools</div>
+            <div class="about-h2">TPM Capabilities</div>
+            <div style="margin-bottom:8px">
+              <span class="about-chip">Cross-functional Program Leadership</span>
+              <span class="about-chip">Roadmap Prioritization (WSJF)</span>
+              <span class="about-chip">API Contract Authoring</span>
+              <span class="about-chip">Vendor & SLA Management</span>
+              <span class="about-chip">Executive Stakeholder Communication</span>
+              <span class="about-chip">Crisis Management</span>
+              <span class="about-chip">Tech Debt Framing</span>
+            </div>
+            <div class="about-h2">Technical</div>
+            <div style="margin-bottom:8px">
+              <span class="about-chip">Python</span>
+              <span class="about-chip">SQL</span>
+              <span class="about-chip">LLMs / GPT</span>
+              <span class="about-chip">BERT / NLP</span>
+              <span class="about-chip">Graph Networks</span>
+              <span class="about-chip">REST APIs</span>
+              <span class="about-chip">Elastic / Kibana</span>
+              <span class="about-chip">dbt</span>
+            </div>
+            <div class="about-h2">Domain</div>
+            <div>
+              <span class="about-chip">Credit Decisioning</span>
+              <span class="about-chip">Fair Lending / ECOA</span>
+              <span class="about-chip">ML Model Lifecycle</span>
+              <span class="about-chip">Data Integrity Architecture</span>
+              <span class="about-chip">Financial Services</span>
+              <span class="about-chip">National Security / NLP</span>
+            </div>
+          </div>
+
+          <!-- EDUCATION -->
+          <div class="about-section" id="a-edu">
+            <div class="about-h1">🎓 Education</div>
+            <div style="border:1px solid #D4D0C8;border-radius:4px;padding:12px;margin-bottom:10px;background:#FAFAF6">
+              <div style="font-size:13px;font-weight:700;color:#0A246A">Brown University</div>
+              <div style="font-size:11px;color:#666;margin-bottom:4px">M.S. Data Science · Providence, RI · 2022–2023</div>
+              <div style="font-size:11px;color:#333">Advanced studies in machine learning, statistical modeling, and applied data science.</div>
+            </div>
+            <div style="border:1px solid #D4D0C8;border-radius:4px;padding:12px;background:#FAFAF6">
+              <div style="font-size:13px;font-weight:700;color:#0A246A">New Jersey Institute of Technology</div>
+              <div style="font-size:11px;color:#666;margin-bottom:4px">B.S. Finance, Math Minor · Newark, NJ · 2019–2022</div>
+              <div style="font-size:11px;color:#333;margin-bottom:6px">Graduated Summa Cum Laude.</div>
+              <div>
+                <span class="xp-tag">Summa Cum Laude</span>
+                <span class="xp-tag">Division I Student Athlete</span>
+                <span class="xp-tag">Investment Fund President</span>
+                <span class="xp-tag">Dean's Executive Council</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="win-status"><span>Logan Heft — Technical Program Manager</span></div>
+    <div class="win-resize" onmousedown="startResize(event,'w-about')"></div>
+  </div>
+
+  <!-- ================================================ WINDOW: RESUME -->
+  <div class="win" id="w-resume" style="width:680px;height:540px;top:40px;left:120px">
+    <div class="win-tb" onmousedown="startDrag(event,'w-resume')">
+      <img class="win-tb-icon" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M2 1h8l5 5v10H2z' fill='%23E8453C'/%3E%3Cpath d='M10 1l5 5h-5z' fill='%23B83028'/%3E%3Crect x='4' y='8' width='8' height='1.5' fill='white'/%3E%3Crect x='4' y='10.5' width='8' height='1.5' fill='white'/%3E%3C/svg%3E"/>
+      <span class="win-tb-title">LoganHeft_Resume.pdf — Adobe Reader</span>
+      <div class="win-btns">
+        <div class="wb wb-min" onclick="minWin('w-resume')">_</div>
+        <div class="wb wb-max" onclick="maxWin('w-resume')">□</div>
+        <div class="wb wb-cls" onclick="closeWin('w-resume')">✕</div>
+      </div>
+    </div>
+    <div class="win-menu">
+      <span class="wm-item">File</span><span class="wm-item">Edit</span>
+      <span class="wm-item">View</span><span class="wm-item">Document</span><span class="wm-item">Tools</span><span class="wm-item">Help</span>
+    </div>
+    <div class="win-toolbar">
+      <span class="wt-btn">◀</span>
+      <span class="wt-btn">▶</span>
+      <span style="padding:0 8px;font-size:11px">Page 1 / 1</span>
+      <span class="wt-btn">🔍 + </span>
+      <span class="wt-btn">🔍 −</span>
+    </div>
+    <div class="win-body">
+      <div class="resume-layout">
+        <div class="resume-sidebar">
+          <a href="LoganHeft_Resume.pdf" download="LoganHeft_Resume.pdf" class="resume-dl-btn">⬇ Download PDF</a>
+          <div class="resume-meta">
+            <strong>Document Info</strong><br/>
+            Name: LoganHeft_Resume.pdf<br/>
+            Author: Logan Heft<br/>
+            Pages: 1<br/>
+            <br/>
+            <strong>Contact</strong><br/>
+            LoganHeft1@gmail.com<br/>
+            908-334-2696<br/>
+            New York, NY<br/>
+          </div>
+        </div>
+        <div class="resume-main">
+          <iframe src="LoganHeft_Resume.pdf" title="Resume"></iframe>
+        </div>
+      </div>
+    </div>
+    <div class="win-status"><span>Page 1 of 1 · Logan Heft</span><span style="margin-left:auto">100%</span></div>
+    <div class="win-resize" onmousedown="startResize(event,'w-resume')"></div>
+  </div>
+
+  <!-- ================================================ WINDOW: INTERNET EXPLORER (Case Studies) -->
+  <div class="win" id="w-ie" style="width:780px;height:580px;top:25px;left:110px">
+    <div class="win-tb" onmousedown="startDrag(event,'w-ie')">
+      <img class="win-tb-icon" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='7' fill='%231BA1E2'/%3E%3Cellipse cx='8' cy='8' rx='3' ry='7' fill='none' stroke='white' stroke-width='1.5'/%3E%3Cline x1='1' y1='8' x2='15' y2='8' stroke='white' stroke-width='1.5'/%3E%3C/svg%3E"/>
+      <span class="win-tb-title">Case Studies — Microsoft Internet Explorer</span>
+      <div class="win-btns">
+        <div class="wb wb-min" onclick="minWin('w-ie')">_</div>
+        <div class="wb wb-max" onclick="maxWin('w-ie')">□</div>
+        <div class="wb wb-cls" onclick="closeWin('w-ie')">✕</div>
+      </div>
+    </div>
+    <div class="win-menu">
+      <span class="wm-item">File</span><span class="wm-item">Edit</span><span class="wm-item">View</span>
+      <span class="wm-item">Favorites</span><span class="wm-item">Tools</span><span class="wm-item">Help</span>
+    </div>
+    <div class="win-toolbar">
+      <span class="wt-btn" id="ie-back-btn" onclick="ieBack()" style="opacity:.5">◀ Back</span>
+      <span class="wt-btn">▶ Forward</span>
+      <span class="wt-btn">↺ Refresh</span>
+      <span class="wt-btn">🏠 Home</span>
+      <span class="wt-btn">⭐ Favorites</span>
+    </div>
+    <div class="win-addr">
+      <span class="wa-lbl">Address</span>
+      <input class="wa-input" type="text" id="ie-addr" value="about://case-studies" readonly/>
+    </div>
+    <div class="win-body" style="padding:0;overflow:hidden;display:flex;flex-direction:column">
+
+      <!-- Case study list view -->
+      <div id="ie-list" style="flex:1;overflow-y:auto">
+        <div class="ie-hero">
+          <h1>💼 Case Studies</h1>
+          <p>A deep-dive into programs I've shipped — the problem, the approach, the technical complexity, and the outcomes. Click any card to read the full case study.</p>
+        </div>
+        <div class="ie-content">
+          <div class="ie-grid">
+            <div class="ie-card" onclick="openCS(1)">
+              <div class="ie-card-id">LCH-001 · PNC Bank · 2024</div>
+              <div class="ie-card-title">AI Income Encoder — Unlocking 215K Customers</div>
+              <div class="ie-card-tags">
+                <span class="ie-card-tag">LLM</span><span class="ie-card-tag">Credit Decisioning</span><span class="ie-card-tag">Fair Lending</span>
+              </div>
+              <div class="ie-card-desc">Identified underserved customers excluded from credit line increases due to income verification gaps. Championed LLM-based income derivation through model validation and disparate impact testing.</div>
+              <div class="ie-card-metrics">
+                <div><div class="ie-cm-val">215K</div><div class="ie-cm-lbl">Customers</div></div>
+                <div><div class="ie-cm-val">$8.6M</div><div class="ie-cm-lbl">Yearly Profit</div></div>
+                <div><div class="ie-cm-val">0</div><div class="ie-cm-lbl">FL Violations</div></div>
+              </div>
+              <div style="margin-top:6px"><span class="ie-read">Read full case study →</span></div>
+            </div>
+            <div class="ie-card" onclick="openCS(2)">
+              <div class="ie-card-id">LCH-002 · PNC Bank · 2024</div>
+              <div class="ie-card-title">Decisioning Floodgate — Data Integrity Architecture</div>
+              <div class="ie-card-tags">
+                <span class="ie-card-tag">Infrastructure</span><span class="ie-card-tag">Data Integrity</span><span class="ie-card-tag">Risk Prevention</span>
+              </div>
+              <div class="ie-card-desc">After a critical data failure caused incorrect credit decisions for thousands of customers, designed a pre-campaign validation framework that stopped bad data before any decision ran.</div>
+              <div class="ie-card-metrics">
+                <div><div class="ie-cm-val">100%</div><div class="ie-cm-lbl">Accuracy</div></div>
+                <div><div class="ie-cm-val">$M+</div><div class="ie-cm-lbl">Prevented</div></div>
+              </div>
+              <div style="margin-top:6px"><span class="ie-read">Read full case study →</span></div>
+            </div>
+            <div class="ie-card" onclick="openCS(3)">
+              <div class="ie-card-id">LCH-003 · PNC Bank · 2024</div>
+              <div class="ie-card-title">Crisis Management — $3–5M Saved in 8 Hours</div>
+              <div class="ie-card-tags">
+                <span class="ie-card-tag">Crisis</span><span class="ie-card-tag">Vendor Management</span><span class="ie-card-tag">Decisioning</span>
+              </div>
+              <div class="ie-card-desc">25% of decisions timed out mid-campaign. Every instinct said shut it down. I argued to stay live with monitored execution — and recovered $3–5M in risk-adjusted return.</div>
+              <div class="ie-card-metrics">
+                <div><div class="ie-cm-val">$3-5M</div><div class="ie-cm-lbl">RAR Saved</div></div>
+                <div><div class="ie-cm-val">8hrs</div><div class="ie-cm-lbl">Resolution</div></div>
+              </div>
+              <div style="margin-top:6px"><span class="ie-read">Read full case study →</span></div>
+            </div>
+            <div class="ie-card" onclick="openCS(4)">
+              <div class="ie-card-id">LCH-004 · PNC Bank · 2024</div>
+              <div class="ie-card-title">Batch → Real-Time API Migration</div>
+              <div class="ie-card-tags">
+                <span class="ie-card-tag">Infrastructure</span><span class="ie-card-tag">API</span><span class="ie-card-tag">Real-Time</span>
+              </div>
+              <div class="ie-card-desc">Modernized legacy overnight batch credit decisioning to real-time APIs — delivering 4 capabilities: Instant CRCLI, FICO 10T, FEMA disaster exclusions, and automated income verification.</div>
+              <div class="ie-card-metrics">
+                <div><div class="ie-cm-val">$31M</div><div class="ie-cm-lbl">RAR</div></div>
+                <div><div class="ie-cm-val">4</div><div class="ie-cm-lbl">Systems</div></div>
+                <div><div class="ie-cm-val">25+</div><div class="ie-cm-lbl">Engineers</div></div>
+              </div>
+              <div style="margin-top:6px"><span class="ie-read">Read full case study →</span></div>
+            </div>
+            <div class="ie-card" onclick="openCS(5)">
+              <div class="ie-card-id">LCH-005 · MIT Lincoln Lab · 2022</div>
+              <div class="ie-card-title">NLP Intelligence Pipeline — National Security</div>
+              <div class="ie-card-tags">
+                <span class="ie-card-tag">NLP</span><span class="ie-card-tag">BERT</span><span class="ie-card-tag">Graph Networks</span>
+              </div>
+              <div class="ie-card-desc">End-to-end NLP pipeline processing 20M+ posts from an extremist network of 40K+ users. BERT embeddings, graph-based social network modeling, zero-shot classification.</div>
+              <div class="ie-card-metrics">
+                <div><div class="ie-cm-val">20M+</div><div class="ie-cm-lbl">Posts</div></div>
+                <div><div class="ie-cm-val">60%</div><div class="ie-cm-lbl">Time Saved</div></div>
+              </div>
+              <div style="margin-top:6px"><span class="ie-read">Read full case study →</span></div>
+            </div>
+            <div class="ie-card" onclick="openCS(6)">
+              <div class="ie-card-id">LCH-006 · PNC Bank · 2023</div>
+              <div class="ie-card-title">Three-Party SLA Resolution — Experian</div>
+              <div class="ie-card-tags">
+                <span class="ie-card-tag">Vendor Management</span><span class="ie-card-tag">SLA</span><span class="ie-card-tag">Cross-functional</span>
+              </div>
+              <div class="ie-card-desc">Experian bureau files arriving late two months in a row. First instinct: blame the vendor. Actual cause: a three-party handoff with no SLA governing the first leg — the bottleneck was us.</div>
+              <div class="ie-card-metrics">
+                <div><div class="ie-cm-val">3</div><div class="ie-cm-lbl">Teams Aligned</div></div>
+                <div><div class="ie-cm-val">0</div><div class="ie-cm-lbl">Late Files Since</div></div>
+              </div>
+              <div style="margin-top:6px"><span class="ie-read">Read full case study →</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Case study detail view -->
+      <div id="ie-detail" style="flex:1;overflow-y:auto;display:none;padding:20px 24px;background:white"></div>
+
+    </div>
+    <div class="win-status"><span id="ie-status">✓ Done</span><span style="margin-left:auto">🔒 Internet | Protected Mode: On</span></div>
+    <div class="win-resize" onmousedown="startResize(event,'w-ie')"></div>
+  </div>
+
+  <!-- ================================================ WINDOW: PNC DEEP DIVE -->
+  <div class="win" id="w-pnc" style="width:780px;height:580px;top:30px;left:115px">
+    <div class="win-tb" onmousedown="startDrag(event,'w-pnc')">
+      <img class="win-tb-icon" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect x='1' y='5' width='14' height='9' rx='1' fill='%23003B6E'/%3E%3Crect x='1' y='5' width='14' height='3' fill='%230073CF'/%3E%3Cpolygon points='8,1 11,5 5,5' fill='%230073CF'/%3E%3C/svg%3E"/>
+      <span class="win-tb-title">PNC Bank — Program Deep Dive</span>
+      <div class="win-btns">
+        <div class="wb wb-min" onclick="minWin('w-pnc')">_</div>
+        <div class="wb wb-max" onclick="maxWin('w-pnc')">□</div>
+        <div class="wb wb-cls" onclick="closeWin('w-pnc')">✕</div>
+      </div>
+    </div>
+    <div class="win-menu">
+      <span class="wm-item">File</span><span class="wm-item">Edit</span>
+      <span class="wm-item">View</span><span class="wm-item">Help</span>
+    </div>
+    <div class="win-body" style="padding:0;overflow:hidden;display:flex;flex-direction:column">
+      <div class="pnc-header">
+        <div class="pnc-logo-row">
+          <div class="pnc-logo">PNC</div>
+          <div>
+            <div style="font-size:13px;font-weight:700">Consumer &amp; Business Credit Cards</div>
+            <div class="pnc-tagline">Decisioning Infrastructure · AI/ML · Program Delivery</div>
+          </div>
+        </div>
+        <div style="font-size:11px;opacity:.8;line-height:1.6">Jan 2024 – Present · Technical Product Manager · New York, NY</div>
+      </div>
+      <div class="pnc-tabs">
+        <div class="pnc-tab active" onclick="pncTab('pnc-overview',this)">Overview</div>
+        <div class="pnc-tab" onclick="pncTab('pnc-ai',this)">AI Income Encoder</div>
+        <div class="pnc-tab" onclick="pncTab('pnc-infra',this)">Infrastructure</div>
+        <div class="pnc-tab" onclick="pncTab('pnc-integrity',this)">Data Integrity</div>
+        <div class="pnc-tab" onclick="pncTab('pnc-strategy',this)">Strategy &amp; Prioritization</div>
+        <div class="pnc-tab" onclick="pncTab('pnc-crisis',this)">Crisis Management</div>
+      </div>
+      <div style="flex:1;overflow-y:auto">
+
+        <!-- OVERVIEW -->
+        <div class="pnc-panel active" id="pnc-overview">
+          <div class="pnc-section-title">Program Impact</div>
+          <div class="pnc-impact-grid">
+            <div class="pnc-impact-tile"><div class="pnc-impact-val">$31M+</div><div class="pnc-impact-lbl">Risk-Adj. Revenue (12mo)</div></div>
+            <div class="pnc-impact-tile"><div class="pnc-impact-val">215K</div><div class="pnc-impact-lbl">Customers Unlocked</div></div>
+            <div class="pnc-impact-tile"><div class="pnc-impact-val">$8.6M</div><div class="pnc-impact-lbl">Yearly Profit (AI Encoder)</div></div>
+            <div class="pnc-impact-tile"><div class="pnc-impact-val">400+</div><div class="pnc-impact-lbl">LLM Credit Signals</div></div>
+          </div>
+          <div class="pnc-section-title">What I Own</div>
+          <div class="pnc-story">
+            <p>As Technical PM for Consumer &amp; Business Credit Cards, I own the data infrastructure and decision engine that determines credit line changes for millions of customers. This means the pipelines, the vendor integrations, the model inputs, the validation layers, and the policies that govern when decisions can and cannot run.</p>
+            <p>The role sits at an unusual intersection: I need to be technical enough to write API contracts and diagnose production incidents, while also being commercial enough to quantify risk-adjusted return and navigate Fair Lending compliance.</p>
+          </div>
+          <div class="pnc-section-title">Career Arc at PNC</div>
+          <div class="pnc-timeline">
+            <div class="pnc-tl-item">
+              <div class="pnc-tl-date">May 2023</div>
+              <div class="pnc-tl-title">Data Scientist</div>
+              <div class="pnc-tl-desc">Built live PSI/drift monitoring in Python. Implemented Kibana anomaly detection. Reduced manual validation by 80%, time-to-detection to minutes.</div>
+            </div>
+            <div class="pnc-tl-item">
+              <div class="pnc-tl-date">January 2024</div>
+              <div class="pnc-tl-title">Promoted → Technical Product Manager</div>
+              <div class="pnc-tl-desc">Took ownership of the full decisioning stack: data pipelines, decision engine, vendor integrations, and roadmap. Began coordinating 25+ engineers, QA, and analysts.</div>
+            </div>
+            <div class="pnc-tl-item">
+              <div class="pnc-tl-date">2024</div>
+              <div class="pnc-tl-title">Major Program Delivery</div>
+              <div class="pnc-tl-desc">Shipped AI Income Encoder, Floodgate architecture, LLM transaction taxonomy, FEMA API, batch→real-time migration, Experian SLA resolution, and crisis management during live incident.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI INCOME ENCODER -->
+        <div class="pnc-panel" id="pnc-ai">
+          <div class="pnc-section-title">AI Income Encoder — The Problem</div>
+          <div class="pnc-story">
+            <p>Our proactive credit line increase campaigns excluded a meaningful segment of creditworthy customers — those without directly verifiable income through standard documentation. These customers had strong credit profiles but fell outside the decisioning logic, meaning we weren't serving them and they weren't getting increases they warranted.</p>
+          </div>
+          <div class="pnc-highlight">I identified this gap through data analysis: a segment with favorable credit signals that was systematically being dropped from campaigns due to a single missing field.</div>
+          <div class="pnc-section-title">The Solution I Built</div>
+          <div class="pnc-story">
+            <p>Championed an LLM-based income derivation model — the AI Encoder — that infers income from transactional behavior and other available signals where direct verification isn't possible.</p>
+            <ul>
+              <li>Owned the full roadmap: concept → data science scope → model validation → Fair Lending review → API integration → deployment</li>
+              <li>Coordinated model validation through the credit risk governance process, including disparate impact testing against ECOA-protected classes</li>
+              <li>Extended the decisioning engine payload schema to accept model-generated income fields with confidence score gating</li>
+              <li>Authored the integration spec, test plan, and monitoring runbook</li>
+            </ul>
+          </div>
+          <div class="pnc-impact-grid" style="margin-top:12px">
+            <div class="pnc-impact-tile"><div class="pnc-impact-val">215K</div><div class="pnc-impact-lbl">Customers Unlocked</div></div>
+            <div class="pnc-impact-tile"><div class="pnc-impact-val">$8.6M</div><div class="pnc-impact-lbl">Yearly Profit</div></div>
+            <div class="pnc-impact-tile"><div class="pnc-impact-val">0</div><div class="pnc-impact-lbl">Fair Lending Findings</div></div>
+            <div class="pnc-impact-tile"><div class="pnc-impact-val">100%</div><div class="pnc-impact-lbl">Model Validation Passed</div></div>
+          </div>
+          <div class="cs-quote">"The most impactful opportunities often live in what the system is not doing — in the gaps where logic stops rather than in the decisions it makes."</div>
+        </div>
+
+        <!-- INFRASTRUCTURE -->
+        <div class="pnc-panel" id="pnc-infra">
+          <div class="pnc-section-title">Batch → Real-Time: Why It Mattered</div>
+          <div class="pnc-story">
+            <p>The legacy decisioning architecture ran overnight batch jobs — pulling data, running decisions, writing outcomes, all on a fixed schedule. This meant customers requesting an instant credit line increase were getting a decision rendered on data that was potentially 24+ hours old. Worse, it blocked four critical capabilities that required real-time signal freshness.</p>
+          </div>
+          <div class="pnc-section-title">What I Delivered</div>
+          <div class="pnc-story">
+            <ul>
+              <li><strong>Instant CRCLI</strong> — Customer-requested credit line increases, now with sub-5s response targets</li>
+              <li><strong>FICO 10T Integration</strong> — Next-generation FICO scoring model with trended credit data</li>
+              <li><strong>FEMA API</strong> — ZIP-code level disaster exclusions replacing error-prone state-level manual process</li>
+              <li><strong>Automated Income Verification</strong> — Real-time income check replacing batch document review</li>
+            </ul>
+          </div>
+          <div class="pnc-highlight">Authored all API contracts, ran shadow-mode testing (parallel batch + real-time) before every cutover, and managed 25+ engineers across 4 migration tracks simultaneously.</div>
+          <div class="pnc-section-title">Technical Complexity</div>
+          <div class="pnc-story">
+            <p>The hardest part wasn't the APIs — it was the audit trail. Batch decisions logged themselves naturally at the end of a cycle. Real-time decisions needed event-based logging that satisfied compliance, could be reconstructed for regulatory disclosure, and could be queried by analytics without degrading response latency. I designed the event schema and worked with engineering to implement atomic logging before any decision response returned.</p>
+            <p>I also built circuit breaker logic into all vendor integrations: if a vendor API timeout rate exceeded 15%, we automatically rerouted to a backup endpoint rather than failing the decision.</p>
+          </div>
+        </div>
+
+        <!-- DATA INTEGRITY -->
+        <div class="pnc-panel" id="pnc-integrity">
+          <div class="pnc-section-title">The Incident That Changed How We Work</div>
+          <div class="pnc-story">
+            <p>An upstream table that populated our student segmentation flag failed to load before a decisioning cycle. The engine saw a null flag, treated every student as a non-student, and applied the standard rule set — which is harsher for students, a segment we intentionally handle carefully.</p>
+            <p>We decreased credit lines for customers we shouldn't have touched. The remediation required outreach to affected customers, decision reversals, and reconciliation across systems. It was expensive, damaging to customer relationships, and entirely avoidable.</p>
+          </div>
+          <div class="pnc-section-title">The Floodgate I Built</div>
+          <div class="pnc-story">
+            <p>I designed a pre-campaign check — a "floodgate" — that queries all upstream tables before any decisioning cycle begins. Each critical field has a registered check with configurable threshold logic. If anything fails, the campaign doesn't run. Full stop.</p>
+            <ul>
+              <li>Null / completeness checks per field</li>
+              <li>Statistical drift detection (z-score variance from 90-day baseline)</li>
+              <li>Range validation and semantic integrity checks</li>
+            </ul>
+          </div>
+          <div class="pnc-highlight">The drift check caught a second incident before it became a crisis: an upstream provider changed a field from monthly to annual income with no notification. Our engine would have given every customer 12× their actual income. The z-score on that field was off the charts. We caught it before a single decision ran.</div>
+          <div class="cs-quote">"Bad data that looks clean is the most dangerous kind. A null field is easy to catch. A field that passes all completeness checks but has silently changed its semantic meaning will fool you every time."</div>
+        </div>
+
+        <!-- STRATEGY -->
+        <div class="pnc-panel" id="pnc-strategy">
+          <div class="pnc-section-title">WSJF Prioritization — Three P1s, One Team</div>
+          <div class="pnc-story">
+            <p>At one point I had three simultaneous Priority 1 requests from different stakeholders: a FEMA API integration, an email delivery channel integration, and a waterfall decisioning logging overhaul. Each team believed their ask was the most urgent. I needed a defensible framework — not just my gut.</p>
+            <p>I used Weighted Shortest Job First (WSJF) to score each objectively:</p>
+          </div>
+          <table class="pnc-wsjf-table">
+            <thead><tr><th>Initiative</th><th>Biz Value</th><th>Time Crit.</th><th>Risk Red.</th><th>Total</th><th>Effort</th><th>WSJF Score</th></tr></thead>
+            <tbody>
+              <tr class="pnc-wsjf-winner"><td>FEMA API ✓</td><td>8</td><td>9</td><td>7</td><td>24</td><td>3</td><td><strong>8.0</strong></td></tr>
+              <tr><td>Email Integration</td><td>4</td><td>6</td><td>3</td><td>13</td><td>5</td><td>2.6</td></tr>
+              <tr><td>Waterfall Logging</td><td>7</td><td>3</td><td>5</td><td>15</td><td>8</td><td>1.9</td></tr>
+            </tbody>
+          </table>
+          <div class="pnc-story" style="margin-top:8px">
+            <p>FEMA API won — hurricane season was approaching, manual exclusion processes were error-prone, and it was a single stable API integration. I personally wanted the logging overhaul most, which is exactly why the framework was valuable: it protected the decision from my own bias.</p>
+          </div>
+          <div class="pnc-highlight">The waterfall logging eventually got a lightweight dbt-based solution — 80% of the value at 20% of the effort. WSJF taught me to always ask: is there a simpler path to 80% of the value?</div>
+          <div class="pnc-section-title">LLM Transaction Taxonomy</div>
+          <div class="pnc-story">
+            <p>Beyond infrastructure, I identified an opportunity to enrich the decisioning model with new signals. Our existing model relied heavily on bureau and FICO inputs — lagging indicators. I worked with data science to scope an LLM-based transaction classifier that generates a normalized category taxonomy from raw transaction descriptions.</p>
+            <p>The result: 400+ new leading credit health signals, feeding into a feature store that the model reads at execution time. This improved model precision across the full credit card portfolio without touching the core decisioning logic.</p>
+          </div>
+        </div>
+
+        <!-- CRISIS -->
+        <div class="pnc-panel" id="pnc-crisis">
+          <div class="pnc-section-title">The Incident: 25% Failure Rate, Live Campaign</div>
+          <div class="pnc-story">
+            <p>During a proactive credit line increase campaign — generating approximately $40 in Risk-Adjusted Return per account — our Decision Modeler began experiencing a surge in processing failures affecting hundreds of thousands of accounts. The immediate team reaction was to shut down the campaign.</p>
+            <p>I argued to stay live with enhanced monitoring, and I was right. Here's how I reasoned through it.</p>
+          </div>
+          <div class="pnc-section-title">The Diagnosis</div>
+          <div class="pnc-story">
+            <p>I convened an emergency war room with the line-of-business Risk lead, the Credit Card Director, and tech leadership. While the team pulled logs, I ran two parallel analyses:</p>
+            <ul>
+              <li><strong>Root cause:</strong> 25% of requests were timing out at the vendor API layer. Infrastructure tracing showed the vendor's load balancer was failing intermittently — not the decision logic itself.</li>
+              <li><strong>Disparate impact check:</strong> I immediately ran demographic analysis on failed vs. successful accounts. No correlation with credit score, geography, or protected class proxies. The failures were statistically random.</li>
+            </ul>
+          </div>
+          <div class="pnc-highlight">This distinction — random infrastructure failure vs. systematic logic failure — was the linchpin. A systematic logic failure requires immediate shutdown. A random infrastructure failure can be monitored through.</div>
+          <div class="pnc-section-title">The Decision Framework</div>
+          <div class="pnc-story">
+            <p>I presented three data points to leadership: 75% of decisions processing successfully, stochastic error pattern with no demographic skew, and we were still within the pre-notification window meaning no customers had been informed of any decisions yet.</p>
+            <p>Proposal: monitored-live approach — stay operational with hourly error-rate tracking and an automatic kill switch if failures exceeded 30%. FICO resolved their infrastructure issue within 8 hours.</p>
+          </div>
+          <div class="pnc-impact-grid" style="margin-top:8px">
+            <div class="pnc-impact-tile"><div class="pnc-impact-val">$3-5M</div><div class="pnc-impact-lbl">RAR Recovered</div></div>
+            <div class="pnc-impact-tile"><div class="pnc-impact-val">8hrs</div><div class="pnc-impact-lbl">Resolution Time</div></div>
+            <div class="pnc-impact-tile"><div class="pnc-impact-val">0</div><div class="pnc-impact-lbl">Fair Lending Impact</div></div>
+            <div class="pnc-impact-tile"><div class="pnc-impact-val">✓</div><div class="pnc-impact-lbl">Circuit Breaker Built</div></div>
+          </div>
+          <div class="cs-quote">"Reversibility is a feature, not a fallback. I now explicitly map rollback paths before any launch decision."</div>
+        </div>
+
+      </div>
+    </div>
+    <div class="win-status"><span>PNC Bank · Technical Product Manager · Jan 2024–Present</span></div>
+    <div class="win-resize" onmousedown="startResize(event,'w-pnc')"></div>
+  </div>
+
+  <!-- ================================================ WINDOW: RECYCLE BIN -->
+  <div class="win" id="w-recycle" style="width:380px;height:260px;top:150px;left:200px">
+    <div class="win-tb" onmousedown="startDrag(event,'w-recycle')">
+      <img class="win-tb-icon" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect x='2' y='5' width='12' height='9' rx='1' fill='%23A8D8EA' stroke='%235588AA' stroke-width='1'/%3E%3Crect x='5' y='3' width='6' height='3' rx='0.5' fill='%23A8D8EA' stroke='%235588AA' stroke-width='1'/%3E%3C/svg%3E"/>
+      <span class="win-tb-title">Recycle Bin</span>
+      <div class="win-btns">
+        <div class="wb wb-min" onclick="minWin('w-recycle')">_</div>
+        <div class="wb wb-max" onclick="maxWin('w-recycle')">□</div>
+        <div class="wb wb-cls" onclick="closeWin('w-recycle')">✕</div>
+      </div>
+    </div>
+    <div class="win-menu">
+      <span class="wm-item">File</span><span class="wm-item">Edit</span><span class="wm-item">View</span>
+    </div>
+    <div class="win-body" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#666;text-align:center;padding:16px">
+      <div style="font-size:40px">🗑️</div>
+      <div style="font-size:12px;font-weight:700">Recycle Bin is Empty</div>
+      <div style="font-size:11px;line-height:1.6">No failed programs or bad decisions here.<br/>Everything shipped. Everything delivered. ✓</div>
+    </div>
+    <div class="win-resize" onmousedown="startResize(event,'w-recycle')"></div>
+  </div>
+
+  <!-- ================================================ TASKBAR -->
+  <div id="taskbar">
+    <button id="start-btn" onclick="toggleStart()">
+      <div class="flag"><div class="fr"></div><div class="fg"></div><div class="fb"></div><div class="fy"></div></div>
+      start
+    </button>
+    <div id="tb-windows"></div>
+    <div id="systray">
+      <span title="Volume">🔊</span>
+      <span title="Network">🌐</span>
+      <div id="tb-clock">12:00<br/>PM</div>
+    </div>
+  </div>
+
+  <!-- ================================================ START MENU -->
+  <div id="start-menu">
+    <div class="sm-head">
+      <div class="sm-ava">LH</div>
+      <div>
+        <div class="sm-head-name">Logan Heft</div>
+        <div class="sm-head-sub">Technical Program Manager</div>
+      </div>
+    </div>
+    <div class="sm-cols">
+      <div class="sm-left">
+        <div class="sm-lbl">Pinned</div>
+        <div class="sm-item" onclick="openWin('w-ie');closeStart()">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'%3E%3Ccircle cx='11' cy='11' r='10' fill='%231BA1E2'/%3E%3Cellipse cx='11' cy='11' rx='4' ry='10' fill='none' stroke='white' stroke-width='2'/%3E%3Cline x1='1' y1='11' x2='21' y2='11' stroke='white' stroke-width='2'/%3E%3C/svg%3E" alt=""/>
+          <div class="sm-item-wrap"><span class="sm-item-main">Case Studies</span><span class="sm-item-sub">Internet Explorer</span></div>
+        </div>
+        <div class="sm-item" onclick="openWin('w-pnc');closeStart()">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'%3E%3Crect x='1' y='7' width='20' height='13' rx='2' fill='%23003B6E'/%3E%3Crect x='1' y='7' width='20' height='5' fill='%230073CF'/%3E%3Cpolygon points='11,1 14,7 8,7' fill='%230073CF'/%3E%3C/svg%3E" alt=""/>
+          <div class="sm-item-wrap"><span class="sm-item-main">PNC Deep Dive</span><span class="sm-item-sub">Program details</span></div>
+        </div>
+        <div class="sm-sep"></div>
+        <div class="sm-item" onclick="openWin('w-about');closeStart()">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'%3E%3Ccircle cx='11' cy='8' r='4' fill='%231BA1E2'/%3E%3Cellipse cx='11' cy='17' rx='6' ry='4' fill='%231BA1E2'/%3E%3C/svg%3E" alt=""/>
+          <div class="sm-item-wrap"><span class="sm-item-main">About Me</span></div>
+        </div>
+        <div class="sm-item" onclick="openWin('w-resume');closeStart()">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'%3E%3Cpath d='M3 1h10l8 8v13H3z' fill='%23E8453C'/%3E%3Cpath d='M13 1l8 8h-8z' fill='%23B83028'/%3E%3C/svg%3E" alt=""/>
+          <div class="sm-item-wrap"><span class="sm-item-main">My Resume</span><span class="sm-item-sub">PDF Download</span></div>
+        </div>
+      </div>
+      <div class="sm-right">
+        <div class="sm-lbl">Places</div>
+        <div class="sm-item" onclick="openWin('w-about');closeStart()">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'%3E%3Cpath d='M1 8h5l3 3h12v11H1z' fill='%23FFCC44' stroke='%23C8860A' stroke-width='1'/%3E%3C/svg%3E" alt=""/>
+          My Documents
+        </div>
+        <div class="sm-item" onclick="openWin('w-recycle');closeStart()">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'%3E%3Crect x='3' y='8' width='16' height='13' rx='2' fill='%23A8D8EA' stroke='%235588AA' stroke-width='1'/%3E%3Crect x='8' y='5' width='6' height='4' rx='0.5' fill='%23A8D8EA' stroke='%235588AA' stroke-width='1'/%3E%3C/svg%3E" alt=""/>
+          Recycle Bin
+        </div>
+        <div class="sm-sep"></div>
+        <div class="sm-item" style="color:#333" onclick="closeStart()">Control Panel</div>
+        <div class="sm-item" style="color:#333" onclick="closeStart()">Run...</div>
+      </div>
+    </div>
+    <div class="sm-foot">
+      <div class="sm-foot-btn" onclick="closeStart()">Log Off</div>
+      <div class="sm-foot-btn" onclick="shutdown()">🔴 Turn Off</div>
+    </div>
+  </div>
+
+  <!-- ================================================ CONTEXT MENU -->
+  <div id="ctx">
+    <div class="ctx-i" onclick="ctxClose()">Arrange Icons By</div>
+    <div class="ctx-i" onclick="ctxClose()">Refresh</div>
+    <div class="ctx-sep"></div>
+    <div class="ctx-i" onclick="openWin('w-ie');ctxClose()">Open Case Studies</div>
+    <div class="ctx-i" onclick="openWin('w-pnc');ctxClose()">Open PNC Deep Dive</div>
+    <div class="ctx-sep"></div>
+    <div class="ctx-i" onclick="ctxClose()">Properties</div>
+  </div>
+
+</div><!-- /#desktop -->
+
+<script>
+/* ================================================================
+   LOGAN HEFT XP — Desktop Engine
+   ================================================================ */
+'use strict';
+
+/* ── Boot / Login ──────────────────────────────────────────── */
+function doLogin(){
+  document.getElementById('welcome').style.display='none';
+  const ld=document.getElementById('loading');
+  ld.style.display='flex';
+  setTimeout(()=>{ document.getElementById('ld-fill').style.width='100%'; },100);
+  setTimeout(()=>{
+    ld.style.display='none';
+    document.getElementById('desktop').style.display='block';
+    updateClock();
+    // Auto-open IE on load
+    setTimeout(()=>openWin('w-ie'),400);
+  },2800);
+}
+
+/* ── Clock ─────────────────────────────────────────────────── */
+function updateClock(){
+  const d=new Date(),h=d.getHours(),m=d.getMinutes();
+  const ap=h>=12?'PM':'AM',h12=(h%12)||12;
+  document.getElementById('tb-clock').innerHTML=`${h12}:${String(m).padStart(2,'0')}<br/>${ap}`;
+  setTimeout(updateClock,15000);
+}
+
+/* ── Window Z / focus ──────────────────────────────────────── */
+let zTop=100;
+const winState={};
+
+function focusWin(id){
+  document.querySelectorAll('.win').forEach(w=>{w.classList.remove('focused');w.classList.add('unfocused')});
+  const w=document.getElementById(id);
+  if(w){w.classList.add('focused');w.classList.remove('unfocused');w.style.zIndex=++zTop}
+  renderTaskbar();
+}
+
+function openWin(id){
+  const w=document.getElementById(id);
+  if(!w)return;
+  if(!w.classList.contains('show')){
+    w.classList.add('show');
+    winState[id]={min:false};
+  } else if(winState[id]?.min){
+    w.style.display='flex';
+    winState[id].min=false;
+  }
+  focusWin(id);
+}
+
+function closeWin(id){
+  const w=document.getElementById(id);
+  if(w){w.classList.remove('show');w.style.display='';delete winState[id];}
+  renderTaskbar();
+}
+
+function minWin(id){
+  const w=document.getElementById(id);
+  if(w){w.style.display='none';winState[id]={...winState[id],min:true}}
+  renderTaskbar();
+}
+
+const maxed={};
+function maxWin(id){
+  const w=document.getElementById(id);
+  if(!w)return;
+  if(maxed[id]){
+    Object.assign(w.style,maxed[id]);delete maxed[id];
+  } else {
+    maxed[id]={top:w.style.top,left:w.style.left,width:w.style.width,height:w.style.height};
+    Object.assign(w.style,{top:'0',left:'0',width:'100vw',height:'calc(100vh - 30px)'});
+  }
+  focusWin(id);
+}
+
+/* ── Taskbar ───────────────────────────────────────────────── */
+const winMeta={
+  'w-about':{icon:'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 16 16\'%3E%3Ccircle cx=\'8\' cy=\'8\' r=\'7\' fill=\'%231BA1E2\'/%3E%3C/svg%3E',label:'About Me'},
+  'w-resume':{icon:'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 16 16\'%3E%3Cpath d=\'M2 1h8l5 5v10H2z\' fill=\'%23E8453C\'/%3E%3C/svg%3E',label:'My Resume'},
+  'w-ie':{icon:'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 16 16\'%3E%3Ccircle cx=\'8\' cy=\'8\' r=\'7\' fill=\'%231BA1E2\'/%3E%3C/svg%3E',label:'Case Studies'},
+  'w-pnc':{icon:'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 16 16\'%3E%3Crect x=\'1\' y=\'5\' width=\'14\' height=\'9\' rx=\'1\' fill=\'%23003B6E\'/%3E%3C/svg%3E',label:'PNC Deep Dive'},
+  'w-recycle':{icon:'',label:'Recycle Bin'},
+};
+
+function renderTaskbar(){
+  const bar=document.getElementById('tb-windows');
+  bar.innerHTML='';
+  document.querySelectorAll('.win.show').forEach(w=>{
+    const id=w.id,meta=winMeta[id]||{icon:'',label:id};
+    const btn=document.createElement('div');
+    btn.className='tb-btn'+(w.classList.contains('focused')?' focused':'');
+    if(meta.icon){const img=document.createElement('img');img.src=meta.icon;btn.appendChild(img);}
+    btn.appendChild(Object.assign(document.createElement('span'),{textContent:meta.label}));
+    btn.onclick=()=>{
+      if(winState[id]?.min)openWin(id);
+      else if(w.classList.contains('focused'))minWin(id);
+      else focusWin(id);
+    };
+    bar.appendChild(btn);
+  });
+}
+
+/* ── Drag ──────────────────────────────────────────────────── */
+let drag=null,dox=0,doy=0;
+function startDrag(e,id){
+  if(e.target.closest('.win-btns'))return;
+  drag=document.getElementById(id);dox=e.clientX-drag.offsetLeft;doy=e.clientY-drag.offsetTop;
+  focusWin(id);e.preventDefault();
+}
+document.addEventListener('mousemove',e=>{
+  if(!drag)return;
+  drag.style.left=Math.max(0,e.clientX-dox)+'px';
+  drag.style.top=Math.max(0,Math.min(e.clientY-doy,window.innerHeight-60))+'px';
+});
+document.addEventListener('mouseup',()=>{drag=null});
+
+/* ── Resize ────────────────────────────────────────────────── */
+let rz=null,rx=0,ry=0,rw=0,rh=0;
+function startResize(e,id){
+  rz=document.getElementById(id);rx=e.clientX;ry=e.clientY;
+  rw=rz.offsetWidth;rh=rz.offsetHeight;e.preventDefault();e.stopPropagation();
+}
+document.addEventListener('mousemove',e=>{
+  if(!rz)return;
+  rz.style.width=Math.max(320,rw+e.clientX-rx)+'px';
+  rz.style.height=Math.max(200,rh+e.clientY-ry)+'px';
+});
+document.addEventListener('mouseup',()=>{rz=null});
+
+/* ── Start menu ────────────────────────────────────────────── */
+let startOpen=false;
+function toggleStart(){startOpen=!startOpen;document.getElementById('start-menu').classList.toggle('open',startOpen)}
+function closeStart(){startOpen=false;document.getElementById('start-menu').classList.remove('open')}
+document.addEventListener('click',e=>{if(startOpen&&!e.target.closest('#start-menu,#start-btn'))closeStart()});
+
+/* ── Context menu ──────────────────────────────────────────── */
+document.getElementById('desktop').addEventListener('contextmenu',e=>{
+  e.preventDefault();
+  const m=document.getElementById('ctx');
+  m.style.display='block';
+  m.style.left=Math.min(e.clientX,window.innerWidth-180)+'px';
+  m.style.top=Math.min(e.clientY,window.innerHeight-150)+'px';
+});
+document.addEventListener('click',e=>{if(!e.target.closest('#ctx'))ctxClose()});
+function ctxClose(){document.getElementById('ctx').style.display='none'}
+
+/* ── Icon select ───────────────────────────────────────────── */
+function selIcon(id){
+  document.querySelectorAll('.d-icon').forEach(i=>i.classList.remove('active'));
+  document.getElementById(id)?.classList.add('active');
+}
+document.getElementById('desktop').addEventListener('click',e=>{
+  if(!e.target.closest('.d-icon'))document.querySelectorAll('.d-icon').forEach(i=>i.classList.remove('active'));
+});
+
+/* ── About Me tabs ─────────────────────────────────────────── */
+function showAbout(id,el){
+  document.querySelectorAll('.about-section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.about-nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById(id)?.classList.add('active');
+  el?.classList.add('active');
+}
+
+/* ── Photo upload ──────────────────────────────────────────── */
+function loadPhoto(input,idx){
+  const file=input.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const slot=document.getElementById('photo-'+idx);
+    slot.innerHTML='<img src="'+e.target.result+'" style="width:100%;height:100%;object-fit:cover"/>';
+  };
+  reader.readAsDataURL(file);
+}
+
+/* ── PNC tabs ──────────────────────────────────────────────── */
+function pncTab(id,el){
+  document.querySelectorAll('.pnc-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.pnc-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id)?.classList.add('active');
+  el?.classList.add('active');
+}
+
+/* ── IE Case Studies ───────────────────────────────────────── */
+const csData={
+  1:{title:'AI Income Encoder — Unlocking 215K Customers',sub:'LCH-001 · PNC Bank · Consumer & Business Credit Cards · 2024',
+    metrics:[{v:'215K',l:'Customers Unlocked'},{v:'$8.6M',l:'Yearly Profit'},{v:'0',l:'Fair Lending Violations'}],
+    sections:[
+      {t:'Problem Context',b:'Income verification gaps were excluding a significant segment of creditworthy customers from proactive credit line increase campaigns. Customers with strong credit profiles but without directly verifiable income were falling outside the engine\'s approval logic entirely — not because they were risky, but because the system had a gap it couldn\'t fill.'},
+      {t:'My Role',b:'Technical Product Manager. I identified this customer segment gap through data analysis, championed the AI Encoder initiative to leadership, owned the full roadmap from concept through deployment, and coordinated model validation and Fair Lending review across risk, data science, and engineering.'},
+      {t:'Actions Taken',b:'Partnered with data science to scope an LLM-based income derivation model that could infer income from transactional signals. Managed the full model validation process through the credit risk governance framework — including disparate impact testing against ECOA-protected classes. Authored the API integration spec, test plan, confidence score gating logic, and monitoring runbook.'},
+      {t:'Technical Complexity',b:'The AI Encoder uses transformer-based inference to derive income estimates from transactional behavior. Integration required extending the decisioning engine\'s payload schema to accept model-generated income fields, with a confidence score threshold gate before any decision could be rendered. Statistical parity checks were embedded into model validation to satisfy Fair Lending requirements before the model could go live.'},
+      {t:'Lessons Learned',b:'The most impactful product opportunities often live in what the system is not doing — in the gaps where logic stops rather than in the decisions it makes. Championing the solution required building trust that the model could satisfy regulatory requirements before it could satisfy business ones. In regulated environments, "can we build it" and "can we ship it" are two very different questions.'},
+    ]},
+  2:{title:'Decisioning Floodgate — Data Integrity Architecture',sub:'LCH-002 · PNC Bank · 2024',
+    metrics:[{v:'100%',l:'Accuracy Post-Launch'},{v:'$M+',l:'Exposure Prevented'},{v:'0',l:'Incidents Since'}],
+    sections:[
+      {t:'Problem Context',b:'An upstream table that populated our student segmentation flag failed to load before a decisioning cycle. The engine saw a null flag, treated every student as a non-student, and applied the standard (harsher) rule set — triggering incorrect credit line decreases for the entire student portfolio. The remediation required customer outreach, decision reversals, and reconciliation across systems.'},
+      {t:'My Role',b:'TPM and architect of the solution. I designed the pre-campaign validation framework, built the business case to prioritize it as infrastructure rather than a feature, coordinated engineering, and defined the configurable check registry.'},
+      {t:'Actions Taken',b:'Designed the "floodgate" — a pre-campaign check that queries all upstream tables before any decisioning cycle begins. Each critical field has a registered check with configurable threshold logic. If anything fails, the campaign stops. Extended to include statistical drift detection after a second near-miss where an upstream provider silently changed a field from monthly to annual income.'},
+      {t:'Technical Complexity',b:'The system queries a registry of critical fields against defined thresholds before each execution. Each entry specifies null tolerance, expected range, and optional z-score drift checks vs. a 90-day baseline. The income field change was caught because the z-score was off the charts — 12× the expected value. The system is configurable: adding a new data source means registering its checks, not rewriting the framework.'},
+      {t:'Lessons Learned',b:'Bad data that looks clean is the most dangerous kind. A null field is easy to catch. A field that passes all completeness checks but has silently changed its semantic meaning will fool you every time — unless you\'re also checking distributional shape. This project became the foundation of how we think about decisioning reliability.'},
+    ]},
+  3:{title:'Crisis Management — $3–5M Saved in 8 Hours',sub:'LCH-003 · PNC Bank · 2024',
+    metrics:[{v:'$3-5M',l:'RAR Recovered'},{v:'8hrs',l:'Resolution'},{v:'0',l:'Fair Lending Impact'}],
+    sections:[
+      {t:'The Situation',b:'During a proactive credit line increase campaign generating ~$40 in Risk-Adjusted Return per account, our Decision Modeler experienced a surge in processing failures affecting hundreds of thousands of accounts. The immediate team reaction was to shut down the campaign completely.'},
+      {t:'My Diagnosis',b:'I convened an emergency war room. While the team pulled logs, I ran two parallel analyses: (1) root cause tracing — 25% of requests were timing out at the vendor API layer, with infrastructure logs showing the vendor\'s load balancer was failing intermittently, not the decision logic itself. (2) Disparate impact check — I immediately ran demographic analysis on failed vs. successful accounts. No correlation with credit score, geography, or protected class proxies. The failures were statistically random.'},
+      {t:'The Decision',b:'This distinction — random infrastructure failure vs. systematic logic failure — was the linchpin. I presented three data points to leadership: 75% of decisions processing successfully, stochastic error pattern with no demographic skew, and pre-notification window still open. Proposed: monitored-live with hourly error tracking and automatic kill switch at 30%. Leadership agreed. FICO resolved the issue in 8 hours.'},
+      {t:'Outcome',b:'Recovered an estimated $3–5M in RAR that would have been permanently lost to downtime. Post-incident analysis confirmed zero Fair Lending impact. We also implemented circuit breaker logic into the vendor integration: if timeout rates exceed 15%, we automatically retry through a backup endpoint.'},
+      {t:'Lessons Learned',b:'Reversibility is a feature, not a fallback. I now explicitly map rollback paths before any launch decision. And I learned to rigorously distinguish logic failures — which are systematic and require shutdown — from infrastructure failures — which are random and can often be managed through monitoring and escalation. The framing matters enormously.'},
+    ]},
+  4:{title:'Batch → Real-Time API Migration',sub:'LCH-004 · PNC Bank · 2024',
+    metrics:[{v:'$31M',l:'RAR Delivered'},{v:'4',l:'Systems Migrated'},{v:'25+',l:'Engineers'}],
+    sections:[
+      {t:'Problem Context',b:'Legacy credit decisioning ran on overnight batch jobs — pulling stale data and outputting decisions hours after the underlying signals changed. This architecture was incompatible with real-time product experiences and blocked four critical capabilities.'},
+      {t:'What I Delivered',b:'Instant CRCLI (customer-requested credit line increases with sub-5s response targets), FICO 10T integration (next-gen scoring with trended data), FEMA API (ZIP-code-level disaster exclusions replacing manual state-level processes), and automated income verification.'},
+      {t:'My Role',b:'TPM. Authored all API contracts and technical specs, ran WSJF prioritization across the four tracks, coordinated 25+ engineers and QA across simultaneous migration workstreams, and managed shadow-mode testing (parallel batch + real-time) before every cutover.'},
+      {t:'Technical Complexity',b:'The hardest part was audit trail continuity. Batch decisions logged naturally at cycle end. Real-time decisions needed atomic event-based logging that satisfied compliance, supported regulatory disclosure, and could be queried by analytics without degrading response latency. I designed the event schema. I also built circuit breaker logic into all vendor integrations with automatic failover to backup endpoints.'},
+      {t:'Lessons Learned',b:'Legacy migrations are change management programs with technical components. The biggest delays came from alignment gaps, not engineering gaps. Getting every team on the same dependency map before writing a spec saved weeks on each track.'},
+    ]},
+  5:{title:'NLP Intelligence Pipeline — MIT Lincoln Laboratory',sub:'LCH-005 · MIT Lincoln Laboratory · National Security · 2022–2023',
+    metrics:[{v:'20M+',l:'Posts Processed'},{v:'40K',l:'Nodes Modeled'},{v:'60%',l:'Review Time Reduced'}],
+    sections:[
+      {t:'Context',b:'Analyst teams at MIT Lincoln Laboratory needed to monitor behavioral patterns across a targeted extremist online community of 40,000+ active users — at volumes far beyond manual review capacity. There was no automated system to ingest, structure, and surface actionable intelligence from raw social data.'},
+      {t:'What I Built',b:'End-to-end NLP intelligence pipeline: async multi-threaded scraper with bot detection avoidance → ETL into normalized relational schema → BERT embeddings generation → HDBSCAN semantic clustering → zero-shot NLI classification for topic labeling → NetworkX graph model with centrality metrics for influence actor detection.'},
+      {t:'Technical Highlights',b:'The graph model enabled detection of coordinated community behavior patterns invisible through individual post analysis. Zero-shot classification surfaced emergent topic clusters without labeled training data. Named entity recognition across 20M+ posts identified high-priority actors for analyst follow-up, reducing the manual review queue by approximately 60%.'},
+      {t:'Lessons Learned',b:'Pipeline architecture matters as much as model accuracy. Getting embeddings right means nothing if the data is contaminated by bot activity or if the schema can\'t support the queries analysts actually need. I spent as much time on data architecture as on modeling — and that\'s what made the system usable in production.'},
+    ]},
+  6:{title:'Three-Party SLA Resolution — Experian',sub:'LCH-006 · PNC Bank · Vendor Management · 2023',
+    metrics:[{v:'3',l:'Teams Aligned'},{v:'0',l:'Late Files Since'},{v:'SLA',l:'Formalized'}],
+    sections:[
+      {t:'Problem Context',b:'Experian bureau files were arriving late in back-to-back months. In lending, this matters: we\'re making decisions on 30-day-old credit data, blind to recent delinquencies, utilization changes, and new inquiries. The immediate instinct was to escalate the vendor.'},
+      {t:'What I Found',b:'When I dug in, I discovered the process involved three parties — not two. Our internal team had to produce an outbound file first, Experian would run their process against it, then send back the enriched bureau file. Experian\'s clock didn\'t start until they received our file — which could itself be days late. There was no formal SLA governing the first handoff. Everyone assumed someone else owned the timeline. Nobody did.'},
+      {t:'The Fix',b:'Brought all three teams together for the first time and mapped the full end-to-end process. Once we had visibility into where time was actually being lost, establishing a formal SLA with clear deadlines at each handoff stage was straightforward. The underlying process wasn\'t broken — the accountability structure around it had been.'},
+      {t:'Lessons Learned',b:'Vendor problems are often not vendor problems. When something repeatedly fails at an integration boundary, map the full dependency chain before assuming fault. The three-party dynamic here was invisible until someone drew it on a whiteboard. Now my default for any recurring vendor issue is: draw the process before you make the call.'},
+    ]},
+};
+
+function openCS(id){
+  const c=csData[id];if(!c)return;
+  document.getElementById('ie-list').style.display='none';
+  document.getElementById('ie-addr').value='about://case-studies/'+c.title.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');
+  document.getElementById('ie-back-btn').style.opacity='1';
+  const detail=document.getElementById('ie-detail');
+  detail.style.display='block';
+  detail.innerHTML=`
+    <div class="cs-back" onclick="ieBack()">◀ Back to Case Studies</div>
+    <div class="cs-title">${c.title}</div>
+    <div class="cs-subtitle">${c.sub}</div>
+    <div class="cs-metrics-bar">${c.metrics.map(m=>`<div class="cs-metric"><div class="cs-mv">${m.v}</div><div class="cs-ml">${m.l}</div></div>`).join('')}</div>
+    ${c.sections.map(s=>`<div class="cs-section"><div class="cs-section-title">${s.t}</div><p>${s.b}</p></div>`).join('')}
+  `;
+  detail.scrollTop=0;
+  document.getElementById('ie-status').textContent='✓ Done | '+c.sub;
+}
+
+function ieBack(){
+  document.getElementById('ie-list').style.display='block';
+  document.getElementById('ie-detail').style.display='none';
+  document.getElementById('ie-addr').value='about://case-studies';
+  document.getElementById('ie-back-btn').style.opacity='.5';
+  document.getElementById('ie-status').textContent='✓ Done';
+}
+
+/* ── Misc ──────────────────────────────────────────────────── */
+function shutdown(){
+  closeStart();
+  document.getElementById('desktop').innerHTML='<div style="position:fixed;inset:0;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;color:white;font-family:Tahoma;gap:12px"><div style="font-size:16px">It is now safe to turn off your computer.</div><div style="font-size:12px;color:#888">loganheft.github.io</div><a href="" onclick="location.reload()" style="color:#5090F0;font-size:12px;margin-top:8px">↺ Restart</a></div>';
+}
+</script>
+</body>
+</html>
