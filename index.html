@@ -524,25 +524,11 @@ html,body{width:100%;height:100%;overflow:hidden;-webkit-font-smoothing:antialia
 
 <!-- ════════════════════════════════════════════════════════════════════
      WELCOME / LOGIN SCREEN
-     ════════════════════════════════════════════════════════════════════
-     This is the first thing visitors see — the XP login screen.
-
-     TO CHANGE YOUR NAME on the login screen:
-       Search for: <div class="wc-name">Logan Heft</div>
-       Replace "Logan Heft" with your name.
-
-     TO CHANGE THE PIXEL AVATAR:
-       The avatar SVG appears twice — once here on the welcome screen
-       and once in the Start Menu. Both are labeled with:
-         <!-- PIXEL AVATAR — 16×16 upscaled to container size -->
-       Edit the fill colors on the labeled rects to change hair/skin/shirt.
-       Hair color:  fill="#602000"  (dark brown)
-       Skin color:  fill="#F0C080"  (light skin)
-       Shirt color: fill="#2060B0"  (navy blue)
-
-     TO ADD/REMOVE THE SUBTITLE LINE UNDER YOUR NAME:
-       Currently deleted. To re-add, insert inside .wc-user:
-         <div class="wc-sub">Your subtitle here</div>
+     TO CHANGE YOUR NAME: search for wc-name and edit "Logan Heft"
+     TO CHANGE PIXEL AVATAR: find the SVG rects labeled with hair/skin/shirt
+       Hair color:  fill="#602000"  Skin: fill="#F0C080"  Shirt: fill="#2060B0"
+     TO RE-ADD SUBTITLE: insert inside .wc-user div:
+       div class="wc-sub" - Your subtitle here - /div
      ════════════════════════════════════════════════════════════════════ -->
 <div id="welcome">
   <div class="wc-flag"><div></div><div></div><div></div><div></div></div>
