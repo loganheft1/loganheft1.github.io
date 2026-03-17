@@ -1202,47 +1202,50 @@ html,body{width:100%;height:100%;overflow:hidden;-webkit-font-smoothing:antialia
             <div class="p-sec">What I built and shipped</div>
             <div class="p-p">Partnered with the model development team to scope an LLM-based income derivation model — the AI Encoder — that infers income from transactional behavior where direct verification isn't possible. My role spanned the full lifecycle:</div>
             <ul class="p-ul">
-              <li>Wrote the business case and got executive sponsorship for a novel AI approach in a regulated lending environment — not a trivial ask</li>
-              <li>Defined the model requirements: confidence score gating, confidence threshold for decisioning activation, fallback logic when confidence was low</li>
+              <li>Wrote the business case and got executive sponsorship for a novel AI approach in our very regulated lending environment which is no trivial ask</li>
+              <li>Defined the model requirements: confidence score gating, confidence threshold for decisioning activation, fallback logic when confidence was low, success metrics.</li>
               <li>Coordinated the model governance process: credit risk model validation, disparate impact testing against ECOA-protected classes, documentation for regulator review</li>
               <li>Authored the API integration spec extending the decisioning engine payload schema to accept model-generated income fields</li>
               <li>Defined the monitoring runbook: what to watch for, what triggers a rollback, what constitutes a Fair Lending flag</li>
             </ul>
             <div class="p-sec">The Outcome</div>
-            <div class="p-p">Below you will see some key outcomes of the initiative.</div>
             <div class="p-p">.</div>
             
             <div class="kpis" style="margin-top:12px">
-              <div class="kpi"><div class="kpi-v">215K</div><div class="kpi-l">Customers unlocked</div></div>
+              <div class="kpi"><div class="kpi-v">1mK</div><div class="kpi-l">New Incomes</div></div>
               <div class="kpi"><div class="kpi-v">$8.6M</div><div class="kpi-l">Yearly profit</div></div>
-              <div class="kpi"><div class="kpi-v">0</div><div class="kpi-l">Fair lending findings</div></div>
+              <div class="kpi"><div class="kpi-v">260k</div><div class="kpi-l">New PCLIs</div></div>
               <div class="kpi"><div class="kpi-v">Pass</div><div class="kpi-l">Model validation</div></div>
             <div class="p-sec">The Limitations</div>
-            <div class="p-p">When standing up this project one thing I did no consider is that since we are using the direct deposit information for these customers, this would be post tax income. When we ask a user for their income they submit the pre tax number. While there is nothing wrong with using the post tax number, it does make it seem like the customer makes less than they do. We continue to figure out solutions around this, but the alternative to the lower income is no income therefore this project has still been a resounding success</div>
+            <div class="p-p">When standing up this project one thing I did not consider is that since we are using the direct deposit information for these customers, this would be post tax income. When we ask a user for their income they submit the pre tax number. While there is nothing wrong with using the post tax number, it does make it seem like the customer makes less than they do. We continue to figure out solutions around this, but the alternative to the lower income is no income therefore this project has still been a resounding success</div>
 
             </div>
           </div>
 
           <div class="panel" id="mw-infra">
-            <div class="p-sec">Legacy architecture problem</div>
-            <div class="p-p">When I first joined the team PNC's credit decisioning infrastructure ran on overnight batch jobs. Decisions were made on data that was up to two weeks stale depending on table load frequency. This wasn't just a performance issue — it blocked three critical product capabilities that the business needed and that customers were beginning to expect from a modern bank:</div>
-            <ul class="p-ul">
-              <li><strong>Instant CRCLI</strong> — customers requesting a credit line increase via the app expected a response in seconds, not a letter three days later</li>
-              <li><strong>FICO 10T</strong> — the next-generation FICO model using trended credit data was only useful in real time; batch processing negated the benefit</li>
-              <li><strong>FEMA API</strong> — disaster exclusion rules were applied manually at the state level, error-prone, and operationally expensive during hurricane season</li>
-            </ul>
-            <div class="p-sec">How I ran the migration</div>
-            <div class="p-p">This was a four-track parallel program across 25+ engineers, with each track having a different technical role, vendor dependency, and regulatory consideration. I used Weighted Shortest Job First (WSJF) framework in an aigle workflow to sequence delivery and ran shadow mode (parallel batch + real-time) before every production cutover.</div>
-            <div class="p-p">We later built circuit breaker logic into all vendor integrations: if a vendor API timeout rate exceeded 15%, the system automatically rerouted to a backup endpoint rather than failing the decision.</div>
-            <div class="kpis" style="margin-top:10px">
+              <div class="p-sec">Legacy Architecture Constraints</div>
+              <div class="p-p">
+                When I joined PNC, credit decisioning was still heavily dependent on batch processing. Personal Credit Line Increase (PCLI) requests were processed on a biweekly cycle, meaning customers waited days—or even weeks—for decisions that should have taken seconds. This created a clear gap between user expectations and system capabilities, and limited our ability to deliver modern, real-time financial experiences.
+              </div>
+            
+              <div class="p-sec">Program Leadership & Real-Time Transformation</div>
+              <div class="p-p">
+                I led the migration from a biweekly batch-based system to a real-time decisioning platform, coordinating a cross-functional team of 25+ engineers across multiple workstreams. This required rethinking data flows, orchestration, and system dependencies to support low-latency, high-reliability decisioning at scale.
+              </div>
+              <div class="p-p">
+                As part of this transformation, we also built and launched <strong>Instant CRCLI</strong>, enabling customers to request and receive credit line increases directly within the app in near real time. Unlike traditional PCLI, this introduced strict latency requirements and required careful coordination across upstream data providers and downstream decision engines.
+              </div>
+              <div class="p-p">
+                To safely transition, I implemented a phased rollout using <strong>shadow mode</strong>, running batch and real-time systems in parallel to validate accuracy and performance before full cutover. I also introduced resiliency patterns across vendor integrations to ensure consistent system behavior under tight response-time constraints.
+              </div>
+
+  <div class="kpis" style="margin-top:10px">
             </div>
           </div>
-//END POINT HERE
           <div class="panel" id="mw-integrity">
-            <div class="p-sec">The incident that changed how we work</div>
-            <div class="p-p">In early 2024, an upstream table that populated our student segmentation flag failed to load before a decisioning cycle. The field appeared null. The engine treated every student in our portfolio as a non-student and applied the standard rule set — which is deliberately harsher, because students are a segment we handle carefully to build long-term relationships.</div>
+            <div class="p-p">It is the unfortunate nature of working at a large bank that there are a number of teams dependent on the same table. When these source tables are changed, there are often unrealized cascading effects. In early 2025, an upstream table that populated our student segmentation flag failed to load before a decisioning cycle. The field appeared null. The engine treated every student in our portfolio as a non-student and applied the standard rule set — which is deliberately harsher, because students are a segment we handle carefully to build long-term relationships.</div>
             <div class="p-p">We decreased credit lines for customers we had no business touching. The remediation took weeks: customer outreach letters, decision reversals, reconciliation across three systems of record, and an internal review with compliance. The full cost — operational hours, customer trust, regulatory exposure — ran well into six figures. And it was entirely preventable.</div>
-            <div class="p-sec">The Floodgate I designed</div>
+            <div class="p-sec">The Floodgate Solution</div>
             <div class="p-p">I designed what became known as the Floodgate — a pre-campaign validation layer that runs before any decisioning cycle begins. The core idea: query every upstream critical field and validate it against configurable threshold logic. If anything fails, the campaign doesn't run. Full stop. No exceptions, no manual overrides without documented approval.</div>
             <ul class="p-ul">
               <li><strong>Completeness checks:</strong> null tolerance per field, expected record count validation</li>
@@ -1250,29 +1253,84 @@ html,body{width:100%;height:100%;overflow:hidden;-webkit-font-smoothing:antialia
               <li><strong>Range and referential integrity:</strong> values within expected bounds, foreign key consistency across systems</li>
             </ul>
             <div class="p-p">The drift detection proved its value almost immediately. Six months after launch, an upstream data provider changed a field that had always represented monthly income to annual income — with zero notification to us. Our engine was built to annualize monthly income by multiplying by twelve. If it had run, every customer in that population would have appeared to have twelve times their actual income. Credit lines would have been increased to catastrophic levels.</div>
-            <div class="p-hl">The z-score on that field hit 11.8 standard deviations. The campaign was blocked automatically before a single decision ran. What would have been a regulatory disclosure event became a near-miss caught by architecture.</div>
-            <div class="p-quote">"Bad data that looks clean is the most dangerous kind. A null field is easy to catch. A field that silently changed its semantic meaning will fool you every time — unless you're also watching the shape of the distribution."</div>
+            <div class="p-p">The z-score on that field hit 11.8 standard deviations. The campaign was blocked automatically before a single decision ran. What would have been a regulatory disclosure event became a near-miss caught by architecture.</div>
           </div>
 
-          <div class="panel" id="mw-strategy">
-            <div class="p-sec">Three P1s, one team, one framework</div>
-            <div class="p-p">In Q2 2024, three different senior stakeholders escalated Priority 1 requests simultaneously: the Risk team needed a FEMA API integration before hurricane season, Marketing needed an email delivery channel integration to bypass a physical mail capacity cap, and Analytics needed a complete overhaul of the waterfall decisioning logging architecture. Each team had a legitimate business case. None could wait. I had one engineering team.</div>
-            <div class="p-p">I used Weighted Shortest Job First to score them objectively. The formula: WSJF = (Business Value + Time Criticality + Risk Reduction) / Job Size.</div>
-            <table class="wsjf">
-              <thead><tr><th>Initiative</th><th>Biz Value</th><th>Time Crit.</th><th>Risk Red.</th><th>Effort</th><th>WSJF</th></tr></thead>
-              <tbody>
-                <tr class="wsjf-w"><td>FEMA API ✓</td><td>8</td><td>9</td><td>7</td><td>3</td><td><strong>8.0</strong></td></tr>
-                <tr><td>Email Integration</td><td>4</td><td>6</td><td>3</td><td>5</td><td>2.6</td></tr>
-                <tr><td>Waterfall Logging</td><td>7</td><td>3</td><td>5</td><td>8</td><td>1.9</td></tr>
-              </tbody>
-            </table>
-            <div class="p-p" style="margin-top:8px">FEMA API won by a wide margin. Hurricane season was approaching, ZIP-code granularity vs. the existing state-level approach unlocked thousands of eligible accounts previously caught in broad exclusion zones, and it was a single stable API endpoint — low effort, high yield. The email integration had a workaround (staggered campaign scheduling). The logging overhaul was genuinely valuable but had zero urgency.</div>
-            <div class="p-hl">I personally wanted the logging overhaul most. I'd been frustrated by the analytical gap it created for months. That's exactly why the framework was valuable — it protected the decision from my own preference. WSJF is not just a prioritization tool. It's a bias check.</div>
-            <div class="p-sec" style="margin-top:12px">LLM transaction taxonomy — generating 400+ new signals</div>
-            <div class="p-p">Separately, I identified an opportunity to enrich the decisioning model with new leading indicators. Standard credit features relied heavily on FICO and bureau signals — lagging indicators by design. I worked with data science to scope an LLM-based transaction classifier that generates a normalized category taxonomy from raw transaction descriptions, aggregated across 30, 60, and 90-day windows.</div>
-            <div class="p-p">The result was 400+ distinct credit health signals feeding into the feature store at decision time. The approach distinguished between, for example, customers increasing grocery spend (stable) versus increasing restaurant and discretionary spend against a declining income signal (elevated risk). This improved model precision across the full portfolio without touching the core decisioning logic.</div>
-          </div>
+         <div class="panel" id="mw-strategy">
+  <div class="p-sec">Prioritization Under Constraint</div>
+  <div class="p-p">
+    As a TPM, I rely on a range of prioritization frameworks depending on the context—RICE for product-driven tradeoffs, cost-of-delay for time-sensitive initiatives, and stakeholder alignment models when navigating organizational complexity. In this case, I selected <strong>Weighted Shortest Job First (WSJF)</strong> because it provided a structured, objective way to balance urgency, business value, and effort under strict resource constraints.
+  </div>
 
+  <div class="p-sec">Three P1s, One Team</div>
+  <div class="p-p">
+    In Q2 2024, three  stakeholders escalated competing Priority 1 initiatives: a disaster-response integration required before hurricane season, a new digital delivery channel to mitigate physical mail capacity limits, and a foundational overhaul of decisioning observability. Each initiative had clear business justification and none could be deferred. All depended on the same engineering team.
+  </div>
+
+  <div class="p-p">
+    To drive alignment and remove subjectivity, I applied WSJF scoring across all three initiatives:
+  </div>
+
+  <table class="wsjf">
+    <thead>
+      <tr>
+        <th>Initiative</th>
+        <th>Biz Value</th>
+        <th>Time Crit.</th>
+        <th>Risk Red.</th>
+        <th>Effort</th>
+        <th>WSJF</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="wsjf-w">
+        <td>Disaster API Integration ✓</td>
+        <td>8</td>
+        <td>9</td>
+        <td>7</td>
+        <td>3</td>
+        <td><strong>8.0</strong></td>
+      </tr>
+      <tr>
+        <td>Email Delivery Integration</td>
+        <td>4</td>
+        <td>6</td>
+        <td>3</td>
+        <td>5</td>
+        <td>2.6</td>
+      </tr>
+      <tr>
+        <td>Decisioning Logging Overhaul</td>
+        <td>7</td>
+        <td>3</td>
+        <td>5</td>
+        <td>8</td>
+        <td>1.9</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="p-p" style="margin-top:8px">
+    The disaster-response integration clearly ranked highest. With hurricane season approaching, timing was critical, and finer grained eligibility logic unlocked meaningful customer and business impact. It also offered a relatively low-effort path to production compared to the other initiatives.
+  </div>
+
+  <div class="p-p">
+    The email integration, while important, had a viable short-term workaround through campaign scheduling. The logging overhaul addressed a long-standing gap in observability, but lacked immediate time sensitivity and required significantly higher engineering investment.
+  </div>
+
+  <div class="p-hl">
+    I was personally most invested in the logging overhaul due to its long-term value. That’s precisely why WSJF was critical—it ensured the prioritization reflected business impact and urgency rather than individual preference. In this case, the framework served not just as a planning tool, but as a mechanism for objective decision-making under pressure.
+  </div>
+
+  <div class="p-sec" style="margin-top:12px">LLM Transaction Taxonomy — Expanding Decision Signals</div>
+  <div class="p-p">
+    In parallel, I identified an opportunity to enhance decisioning inputs beyond traditional credit bureau signals, which are inherently lagging. I partnered with data science to define an LLM-based transaction classification system that generates a normalized category taxonomy from raw transaction data, aggregated across 30, 60, and 90 day windows.
+  </div>
+
+  <div class="p-p">
+    This approach produced 400+ incremental behavioral signals at decision time, enabling more nuanced risk assessment. For example, the model could distinguish between stable increases in essential spending and riskier shifts toward discretionary consumption against declining income signals improving precision without requiring changes to core decisioning logic.
+  </div>
+</div>
           <div class="panel" id="mw-crisis">
             <div class="p-sec">The incident: live campaign, 25% failure rate</div>
             <div class="p-p">On a Tuesday morning in Q4 2024, our Decision Modeler began experiencing processing failures during a proactive credit line increase campaign. Within 20 minutes, we were seeing a 25% failure rate across hundreds of thousands of accounts — each failed account representing ~$40 in Risk-Adjusted Return that would be permanently lost if the campaign timed out. The campaign was generating over $1M per hour at full throughput.</div>
@@ -1299,7 +1357,7 @@ html,body{width:100%;height:100%;overflow:hidden;-webkit-font-smoothing:antialia
               <div class="kpi"><div class="kpi-v">0</div><div class="kpi-l">Fair lending impact</div></div>
               <div class="kpi"><div class="kpi-v">✓</div><div class="kpi-l">Circuit breaker built</div></div>
             </div>
-            <div class="p-quote">"Reversibility is a feature, not a fallback. I now explicitly map rollback paths and pre-notification windows before every launch. The difference between a recoverable situation and an unrecoverable one is often a 20-minute diagnostic window."</div>
+            <div class="p-p">"Reversibility is a feature, not a fallback. I now explicitly map rollback paths and pre-notification windows before every launch. The difference between a recoverable situation and an unrecoverable one is often a 20-minute diagnostic window."</div>
           </div>
 
           <div class="panel" id="mw-mit">
@@ -1307,11 +1365,6 @@ html,body{width:100%;height:100%;overflow:hidden;-webkit-font-smoothing:antialia
               <div style="font-size:12px;font-weight:700;color:#000;font-family:var(--f);margin-bottom:1px">MIT Lincoln Laboratory</div>
               <div style="font-size:10px;color:#444;font-family:var(--f)">Research Data Scientist · Lexington, MA · May 2022 – June 2023</div>
             </div>
-            <div class="kpis">
-              <div class="kpi"><div class="kpi-v">20M+</div><div class="kpi-l">Posts processed</div></div>
-              <div class="kpi"><div class="kpi-v">40K+</div><div class="kpi-l">Network nodes</div></div>
-              <div class="kpi"><div class="kpi-v">60%</div><div class="kpi-l">Analyst review reduction</div></div>
-              <div class="kpi"><div class="kpi-v">NLP</div><div class="kpi-l">BERT · Graph · NLI</div></div>
             </div>
             <div class="p-sec">The mission</div>
             <div class="p-p">MIT Lincoln Laboratory is a federally funded R&D center that supports national security research for the Department of Defense. I joined as a Research Data Scientist to build intelligence infrastructure for an active threat research program — specifically, automated analysis of a targeted extremist online community with 40,000+ active users generating millions of posts per month.</div>
