@@ -379,6 +379,7 @@ html,body{width:100%;height:100%;overflow:hidden;-webkit-font-smoothing:antialia
 .wmi{padding:2px 7px;font-size:11px;cursor:pointer;border-radius:2px;color:#000;font-family:var(--f)}
 .wmi:hover{background:#316AC5;color:#fff}
 .wbody{flex:1;overflow:auto;background:#fff;position:relative}
+#w-work .wbody{display:flex;flex-direction:column;overflow:hidden}
 .wst{
   background:#ECE9D8;border-top:1px solid #D4D0C8;
   height:20px;display:flex;align-items:center;padding:0 7px;
@@ -561,7 +562,7 @@ html,body{width:100%;height:100%;overflow:hidden;-webkit-font-smoothing:antialia
    MY WORK WINDOW — header
    ============================================================ */
 .mw-wrap{height:100%;display:flex;flex-direction:column;overflow:hidden}
-.mw-body{flex:1;overflow:hidden;display:flex;flex-direction:column}
+.mw-body{flex:1;overflow:hidden;display:flex;flex-direction:column;min-height:0}
 
 /* ============================================================
    RECYCLE BIN
@@ -938,9 +939,8 @@ html,body{width:100%;height:100%;overflow:hidden;-webkit-font-smoothing:antialia
         <div class="aw-pane on" id="aw-bio">
           <div class="aw-h1">Logan Heft — Technical Program Manager</div>
           <div style="margin-bottom:10px;font-size:10.5px;font-family:var(--f);color:#444">LoganHeft1@gmail.com &nbsp;·&nbsp; 908-334-2696 &nbsp;·&nbsp; New York, NY</div>
-          <div class="aw-p">Technical Program Manager specializing in AI-driven decisioning at scale. Led initiatives generating <strong>$31M+ in risk-adjusted revenue</strong> while navigating strict Fair Lending and regulatory constraints at PNC Bank. Before that, built national security intelligence pipelines at MIT Lincoln Laboratory.</div>
-          <div class="aw-p">Core strength: <strong>technical translation</strong> — deep-diving into decision engine logic and model architecture with engineers, then pivoting to explain risk-adjusted return and compliance implications to executives. I operate at the intersection of technical depth and program leadership.</div>
-          <div class="aw-p" style="margin-bottom:0">Outside the office: competitive distance runner, semi-professional photographer, and someone who believes the discipline of training for a race and shipping enterprise software are governed by the same principles.</div>
+          <div class="aw-p">I'm a Technical Product Manager at PNC Bank, where I own the tech stack for consumer and business credit cards. That includes the databases, orchestration layers, decision engines, and business intelligence tools that power how the bank extends credit to its customers. Over the past three years there has been a large focus on modernizing this infrastructure to bring faster and more accurate decisions to customers. This work has generated over <strong>$31 million in risk-adjusted revenue</strong> for the bank this year alone.</div>
+          <div class="aw-p" style="margin-bottom:0">I have an extensive background in data science, machine learning, and artificial intelligence — with an MSc from Brown University in Data Science and experience as a Research Data Scientist at MIT Lincoln Laboratory. I possess a unique ability to sit with engineers and work through model architecture, API contracts, and production failures, while also sitting with executives and translating the same conversation into business risk and return. That's what got me into this TPM role after eight months as a data scientist, and it's the skill that matters most as AI moves into the core of how companies make decisions.</div>
         </div>
 
         <!-- SKILLS — Radar Chart
@@ -961,23 +961,24 @@ html,body{width:100%;height:100%;overflow:hidden;-webkit-font-smoothing:antialia
           </div>
           <div class="aw-h2">Tools &amp; Technologies</div>
           <div style="margin-bottom:6px">
-            <span class="chip">Python</span><span class="chip">SQL</span><span class="chip">LLMs / GPT</span>
-            <span class="chip">BERT / NLP</span><span class="chip">Graph Networks</span><span class="chip">REST APIs</span>
-            <span class="chip">Elastic / Kibana</span><span class="chip">dbt</span><span class="chip">WSJF</span>
+            <span class="chip">Python</span><span class="chip">SQL</span><span class="chip">PyTorch</span>
+            <span class="chip">scikit-learn</span><span class="chip">BERT / NLP</span><span class="chip">LLMs / GPT</span>
+            <span class="chip">Graph Networks</span><span class="chip">REST APIs</span><span class="chip">Elastic / Kibana</span>
+            <span class="chip">Snowflake</span><span class="chip">Airflow</span><span class="chip">Git</span>
           </div>
           <div class="aw-h2">Domains</div>
           <div>
-            <span class="chip">Credit Decisioning</span><span class="chip">Fair Lending / ECOA</span>
-            <span class="chip">ML Model Lifecycle</span><span class="chip">Real-Time APIs</span>
-            <span class="chip">National Security / NLP</span><span class="chip">Data Integrity Architecture</span>
+            <span class="chip">Credit Decisioning</span><span class="chip">Credit Cards</span>
+            <span class="chip">National Security</span><span class="chip">Machine Learning</span>
+            <span class="chip">AI</span>
           </div>
         </div>
 
         <!-- OUTSIDE OF WORK -->
         <div class="aw-pane" id="aw-outside">
           <div class="aw-h1">Outside of Work</div>
-          <div class="photo-hint">📷 Click a slot to upload (4×5 portrait). Then hit <strong>Save photos to site</strong> to download an updated index.html with photos baked in — upload that to GitHub to make them live permanently.</div>
-          <div class="photo-grid">
+          <!-- Photo grid: upload 4x5 portrait shots here -->
+          <div class="photo-grid" id="photo-grid-wrap">
             <div class="photo-slot" id="ps0"><div class="ps-ico">📸</div><div class="ps-lbl">Upload photo</div><input type="file" accept="image/*" onchange="loadPic(this,0)"/></div>
             <div class="photo-slot" id="ps1"><div class="ps-ico">📸</div><div class="ps-lbl">Upload photo</div><input type="file" accept="image/*" onchange="loadPic(this,1)"/></div>
             <div class="photo-slot" id="ps2"><div class="ps-ico">📸</div><div class="ps-lbl">Upload photo</div><input type="file" accept="image/*" onchange="loadPic(this,2)"/></div>
@@ -985,24 +986,20 @@ html,body{width:100%;height:100%;overflow:hidden;-webkit-font-smoothing:antialia
             <div class="photo-slot" id="ps4"><div class="ps-ico">📸</div><div class="ps-lbl">Upload photo</div><input type="file" accept="image/*" onchange="loadPic(this,4)"/></div>
             <div class="photo-slot" id="ps5"><div class="ps-ico">📸</div><div class="ps-lbl">Upload photo</div><input type="file" accept="image/*" onchange="loadPic(this,5)"/></div>
           </div>
-          <button onclick="savePhotosToHTML()" style="display:block;width:100%;margin:6px 0 10px;padding:5px 14px;background:linear-gradient(180deg,#6CB4F5,#3A7FD5);border:2px outset #fff;color:#fff;font-size:11px;font-weight:700;font-family:Tahoma,sans-serif;cursor:pointer;text-align:center;">&#128190; Save photos to site (download updated index.html)</button>
+          <!-- Save button: only shown in edit mode (see JS below) -->
+          <button id="photo-save-btn" onclick="savePhotosToHTML()" style="display:block;width:100%;margin:0 0 10px;padding:5px 14px;background:linear-gradient(180deg,#6CB4F5,#3A7FD5);border:2px outset #fff;color:#fff;font-size:11px;font-weight:700;font-family:Tahoma,sans-serif;cursor:pointer;text-align:center;">&#128190; Save photos to site</button>
 
           <div class="aw-h2">Running</div>
-          <div class="aw-p">Competed as a Division I distance runner at NJIT — graduated Summa Cum Laude while training 60+ miles a week. Running at that level teaches you that the gap between good and great is almost entirely about consistency, not talent. That same principle shapes how I manage programs.</div>
-          <div class="aw-p">Still racing. The discipline of a training block — structured preparation, trust the process, execute on race day — translates directly to how I approach a product launch.</div>
+          <div class="aw-p">After finishing my undergraduate degree as a Division I volleyball player, I needed a competitive outlet and turned to running. Since picking it up in 2021 I've completed 8 marathons, typically training 70+ miles a week.</div>
           <div style="margin:10px 0">
-            <a class="strava-link" href="https://www.strava.com/athletes/loganheft" target="_blank">
+            <a class="strava-link" href="https://strava.app.link/ZKJ3vyynA1b" target="_blank">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599l2.836 5.598h4.172L10.463 0l-7 13.828h4.169"/></svg>
               View on Strava
             </a>
           </div>
 
           <div class="aw-h2">Photography</div>
-          <div class="aw-p">Semi-professional photographer — primarily landscape, trail, and action work. The process of photography (patience, composition, reading light) sharpens the same visual thinking that makes a good roadmap or a clean product spec. The photos above are mine.</div>
-          <div class="aw-p">Shooting on a Sony A7 series. Available for freelance projects — reach out via email.</div>
-
-          <div class="aw-h2">Why this matters for a company like Nike or Columbia</div>
-          <div class="aw-p" style="margin-bottom:0">A TPM who genuinely lives the product — who trains in the gear, photographs in the field, understands the community — brings something different to the role than someone who ships software about a world they've never entered. I'm not a spectator in the outdoor and performance space. I'm a participant.</div>
+          <div class="aw-p">When I'm not working or running, you'll probably find me with a camera. Photography is my creative outlet and my favorite subjects are other runners and the landscapes of my travels. The NYC Marathon and the Oregon Coast are home to some of my favorite shots. I've been featured by companies like New Balance and the Philadelphia Marathon, and by influencers with millions of followers.</div>
         </div>
 
 
@@ -1100,10 +1097,10 @@ html,body{width:100%;height:100%;overflow:hidden;-webkit-font-smoothing:antialia
        Find <span class="tb-t">Career Arc — Logan Heft</span>
        and change the text between the tags.
      ════════════════════════════════════════════════════════════════════ -->
-<div class="xw" id="w-work" style="width:760px;height:560px;top:30px;left:110px">
+<div class="xw" id="w-work" style="width:820px;height:580px;top:30px;left:90px">
   <div class="tb" onmousedown="drag(event,'w-work')">
     <svg class="tb-ico" viewBox="0 0 16 16"><rect x="1" y="5" width="14" height="9" rx="1" fill="#003B6E"/><rect x="1" y="5" width="14" height="4" fill="#0063CC"/><polygon points="8,1 11,5 5,5" fill="#0063CC"/></svg>
-    <span class="tb-t">My Work — PNC Bank & MIT Lincoln Laboratory</span>
+    <span class="tb-t">Career Arc — Logan Heft</span>
     <div class="tb-btns">
       <div class="xb xbn" onclick="minW('w-work')">_</div>
       <div class="xb xbn" onclick="maxW('w-work')">□</div>
@@ -1111,15 +1108,15 @@ html,body{width:100%;height:100%;overflow:hidden;-webkit-font-smoothing:antialia
     </div>
   </div>
   <div class="wmb"><span class="wmi">File</span><span class="wmi">Edit</span><span class="wmi">View</span><span class="wmi">Help</span></div>
-  <div class="wbody" style="padding:0;overflow:hidden">
+  <div class="wbody" style="padding:0">
     <div class="mw-wrap">
       <!-- XP Explorer address bar -->
       <div style="background:#ECE9D8;border-bottom:1px solid #ACA899;display:flex;align-items:center;height:24px;padding:0 6px;gap:4px;flex-shrink:0">
         <span style="font-size:11px;font-family:var(--f);color:#000">Address</span>
-        <div style="flex:1;height:17px;background:#fff;border:1px solid #7F9DB9;font-size:11px;font-family:var(--f);color:#000;padding:0 4px;display:flex;align-items:center">C:\Logan\Career Arc</div>
+        <div style="flex:1;height:17px;background:#fff;border:1px solid #7F9DB9;font-size:11px;font-family:var(--f);color:#555;padding:0 4px;display:flex;align-items:center;font-style:italic">C:\Logan\Career Arc — five programs, one year, $31M</div>
       </div>
       <!-- XP left-panel + main layout -->
-      <div style="display:flex;flex:1;overflow:hidden">
+      <div style="display:flex;flex:1;overflow:hidden;min-height:0">
         <!-- left sidebar -->
         <div style="width:150px;flex-shrink:0;background:#EEF4FF;border-right:1px solid #ACA899;overflow-y:auto;padding:0">
           <div style="background:#316AC5;color:#fff;font-size:10px;font-weight:700;padding:5px 8px;font-family:var(--f)">Career Details</div>
@@ -1134,262 +1131,180 @@ html,body{width:100%;height:100%;overflow:hidden;-webkit-font-smoothing:antialia
               <span style="color:#000080;font-size:10px;font-style:italic">Technical Product Manager</span>
             </div>
             <div style="line-height:1.5;font-size:10.5px;margin-bottom:5px">
-              <span style="color:#000;font-weight:700">MIT Lincoln Lab</span><br/>
-              <span style="color:#444;font-size:10px">May 2022 – Jan 2023</span><br/>
-              <span style="color:#000080;font-size:10px;font-style:italic">Data Scientist Intern</span>
+              <span style="color:#000;font-weight:700">PNC Bank</span><br/>
+              <span style="color:#444;font-size:10px">May 2023 – Jan 2024</span><br/>
+              <span style="color:#000080;font-size:10px;font-style:italic">Data Scientist</span>
             </div>
             <div style="line-height:1.5;font-size:10.5px;margin-bottom:5px">
-              <span style="color:#000;font-weight:700">Global X</span><br/>
+              <span style="color:#000;font-weight:700">MIT Lincoln Lab</span><br/>
+              <span style="color:#444;font-size:10px">May 2022 – Jan 2023</span><br/>
+              <span style="color:#000080;font-size:10px;font-style:italic">Research Data Scientist</span>
+            </div>
+            <div style="line-height:1.5;font-size:10.5px;margin-bottom:5px">
+              <span style="color:#000;font-weight:700">Global X ETFs</span><br/>
               <span style="color:#444;font-size:10px">May 2020 – May 2022</span><br/>
-              <span style="color:#000080;font-size:10px;font-style:italic">Data Scientist Intern</span>
+              <span style="color:#000080;font-size:10px;font-style:italic">Data Scientist</span>
             </div>
             <div style="line-height:1.5;font-size:10.5px">
               <span style="color:#000;font-weight:700">ConnectOne Bank</span><br/>
-              <span style="color:#444;font-size:10px">May 2019 – May 2021</span><br/>
-              <span style="color:#000080;font-size:10px;font-style:italic">Data Scientist Intern</span>
+              <span style="color:#444;font-size:10px">May 2019 – May 2020</span><br/>
+              <span style="color:#000080;font-size:10px;font-style:italic">Data Scientist</span>
             </div>
-            <div style="height:1px;background:#D4D0C8;margin:8px 0"></div>
-            <div style="font-weight:700;font-size:10px;color:#000080;text-transform:uppercase;margin-bottom:4px">Impact</div>
-            <div style="color:#000080;font-size:11px;font-weight:700;font-family:var(--f)">$31M+</div>
-            <div style="color:#444;font-size:9.5px;margin-bottom:4px">Revenue delivered</div>
-            <div style="color:#000080;font-size:11px;font-weight:700;font-family:var(--f)">215K</div>
-            <div style="color:#444;font-size:9.5px;margin-bottom:4px">Customers unlocked</div>
-            <div style="color:#000080;font-size:11px;font-weight:700;font-family:var(--f)">25+</div>
-            <div style="color:#444;font-size:9.5px">Engineers led</div>
           </div>
         </div>
         <!-- main content -->
         <div class="mw-body">
         <div class="tabbar">
           <div class="tab on" onclick="mwTab('mw-overview',this)">Overview</div>
-          <div class="tab" onclick="mwTab('mw-ai',this)">AI Income Encoder</div>
-          <div class="tab" onclick="mwTab('mw-infra',this)">Infrastructure</div>
-          <div class="tab" onclick="mwTab('mw-integrity',this)">Data Integrity</div>
-          <div class="tab" onclick="mwTab('mw-strategy',this)">Prioritization</div>
-          <div class="tab" onclick="mwTab('mw-crisis',this)">Crisis Management</div>
+          <div class="tab" onclick="mwTab('mw-ai',this)">AI Income Model</div>
+          <div class="tab" onclick="mwTab('mw-infra',this)">Real-Time Migration</div>
+          <div class="tab" onclick="mwTab('mw-integrity',this)">Data Floodgate</div>
+          <div class="tab" onclick="mwTab('mw-strategy',this)">Product Strategy</div>
+          <div class="tab" onclick="mwTab('mw-crisis',this)">Live Crisis</div>
           <div class="tab" onclick="mwTab('mw-mit',this)">MIT Lincoln Lab</div>
         </div>
-        <div style="flex:1;overflow-y:auto">
+        <div style="flex:1;overflow-y:auto;min-height:0">
 
           <div class="panel on" id="mw-overview">
+            <div class="p-p" style="color:#555;font-style:italic;margin-bottom:10px;font-size:10.5px">This page covers my role, how I got here, and the programs I have owned. Each tab tells the story of a specific initiative.</div>
             <div class="kpis">
               <div class="kpi"><div class="kpi-v">$31M+</div><div class="kpi-l">Risk-adj. revenue (12mo)</div></div>
-              <div class="kpi"><div class="kpi-v">1.5B</div><div class="kpi-l">Yearly decisions </div></div>
+              <div class="kpi"><div class="kpi-v">1.5B</div><div class="kpi-l">Yearly decisions</div></div>
               <div class="kpi"><div class="kpi-v">$8.6M</div><div class="kpi-l">Yearly profit added</div></div>
-              <div class="kpi"><div class="kpi-v">620k</div><div class="kpi-l">Line Increases</div></div>
+              <div class="kpi"><div class="kpi-v">620K</div><div class="kpi-l">Line increases</div></div>
             </div>
-            <div class="p-sec">What I own</div>
-            <div class="p-p">As Technical Product Manager for Consumer &amp; Business Credit Cards at PNC, I own both the data infrastructure and decision engine that the credit worthiness of millions of PNC customers. This means the data pipelines that feed the engine, vendor integrations, model inputs, ETL layers, governance policies that determine how we protect our portfolio. </div>
-            <div class="p-p">My role sits at an unusual intersection: technical enough to write API contracts, diagnose production incidents at midnight, or talk SHAP values with Machine Learning Engineers, but its also commercial enough to quantify risk-adjusted return and navigate Fair Lending compliance in front of a regulator. I was promoted from Data Scientist to TPM after eight months which is unusual for a role typically staffed from an MBA track.</div>
-            <div class="p-p">I am both equally fluent in engineer and executive alike. I know how to bridge the gap between the deeply technical and the completely non technical which is becoming increasingly important in the ever changing AI landscape.</div>
-
-            <div class="p-sec" style="margin-top:12px">Career arc at PNC</div>
+            <div class="p-sec">What I do</div>
+            <div class="p-p">As Technical Product Manager for Consumer and Business Credit Cards at PNC, I own the technology that determines which customers get credit line increases and when. The stack includes the data pipelines, orchestration layers, decision engine, vendor integrations, and governance controls that keep the program both effective and compliant. At roughly 1.5 billion decisions per year, there is no room for downtime or inaccuracy.</div>
+            <div class="p-p">What makes the role unusual is the range it demands. On any given week I might be reviewing model architecture with engineers in the morning and presenting a business case to a credit risk committee in the afternoon. I came up through data science rather than an MBA program, which means I can engage with the technical work at a level most TPMs cannot. I was promoted into this role after eight months as a data scientist because I had already been doing most of it.</div>
+            <div class="p-sec" style="margin-top:12px">Career Arc</div>
             <div class="tl">
-              <div class="tl-i"><div class="tl-date">May 2019 – May 2020</div><div class="tl-title">ConnectOne Bank · Data Scientist (Part Time)</div><div class="tl-desc"></div></div>
-
-              <div class="tl-i"><div class="tl-date">May 2020 – May 2022</div><div class="tl-title">Global X ETFs · Data Scientist (Part Time)</div><div class="tl-desc"></div></div>
-
-              <div class="tl-i"><div class="tl-date">May 2022 – January 2023</div><div class="tl-title">Research Data Scientist · MIT Lincoln Laboratory</div><div class="tl-desc"></div></div>
-              <div class="tl-i"><div class="tl-date">May 2023</div><div class="tl-title">Data Scientist · PNC Bank</div><div class="tl-desc"></div></div>
-              <div class="tl-i"><div class="tl-date">Jan 2024</div><div class="tl-title">Technical Product Manager</div><div class="tl-desc"></div></div>
+              <div class="tl-i"><div class="tl-date">May 2019 – May 2020</div><div class="tl-title">Data Scientist · ConnectOne Bank</div><div class="tl-desc">A summer internship that turned into a part-time role during undergrad. My first exposure to production financial data and model deployment in a regulated environment. I worked on analyzing the performance of SBA loans during the COVID-19 epidemic.</div></div>
+              <div class="tl-i"><div class="tl-date">May 2020 – May 2022</div><div class="tl-title">Data Scientist · Global X ETFs</div><div class="tl-desc">Another summer internship that became a part-time role. I built and maintained quantitative models for ETF analysis, and worked with the sales team to develop an unsupervised machine learning client recommender to identify prime candidates for new product marketing.</div></div>
+              <div class="tl-i"><div class="tl-date">May 2022 – January 2023</div><div class="tl-title">Research Data Scientist · MIT Lincoln Laboratory</div><div class="tl-desc">Built an end-to-end NLP intelligence platform for a national security research program. The system processed 20M+ posts, cut analyst review time by 60%, and gave analysts a way to understand both what users were discussing and who was amplifying whom. The tool became a standing capability after I left.</div></div>
+              <div class="tl-i"><div class="tl-date">May 2023 – January 2024</div><div class="tl-title">Data Scientist · PNC Bank</div><div class="tl-desc">Joined the credit cards decisioning team. Built monitoring infrastructure that cut manual validation by 80%, and started bridging gaps between data science and program delivery before anyone asked me to.</div></div>
+              <div class="tl-i"><div class="tl-date">January 2024 – Present</div><div class="tl-title">Technical Product Manager · PNC Bank, Consumer &amp; Business Credit Cards</div><div class="tl-desc">Promoted after eight months. Took ownership of the full decisioning stack across 25+ engineers. Over the next twelve months: modernized the infrastructure from batch to real-time, shipped an AI income model that unlocked 215K customers, and managed a live crisis that recovered $3–5M in a single day.</div></div>
             </div>
           </div>
 
+          
           <div class="panel" id="mw-ai">
-            <div class="p-sec">The Problem</div>
-            <div class="p-p">While reviewing campaign performance data from 2024, I found that the number one reason customers were being deemed ineligible for a line increase was due to missing income. These customers had strong credit signals: low utilization, no delinquencies, years of on-time payments, but without a directly verifiable income field, the decision engine had to exclude them entirely.</div>
-            <div class="p-p">I modeled the opportunity: if we could verify income for even a small perfect of this segment through an alternative approach, the incremental RAR would be significant. This became the business case for the AI Encoder.</div>
-            <div class="p-sec">What I built and shipped</div>
-            <div class="p-p">Partnered with the model development team to scope an LLM-based income derivation model — the AI Encoder — that infers income from transactional behavior where direct verification isn't possible. My role spanned the full lifecycle:</div>
-            <ul class="p-ul">
-              <li>Wrote the business case and got executive sponsorship for a novel AI approach in our very regulated lending environment which is no trivial ask</li>
-              <li>Defined the model requirements: confidence score gating, confidence threshold for decisioning activation, fallback logic when confidence was low, success metrics.</li>
-              <li>Coordinated the model governance process: credit risk model validation, disparate impact testing against ECOA-protected classes, documentation for regulator review</li>
-              <li>Authored the API integration spec extending the decisioning engine payload schema to accept model-generated income fields</li>
-              <li>Defined the monitoring runbook: what to watch for, what triggers a rollback, what constitutes a Fair Lending flag</li>
-            </ul>
-            <div class="p-sec">The Outcome</div>
-            <div class="p-p">.</div>
-            
+            <div class="p-sec">The gap I found</div>
+            <div class="p-p">While digging through campaign performance data in early 2024, I noticed that the single most common reason customers were being excluded from proactive credit line increases had nothing to do with credit risk. It was missing income. These customers had clean profiles, low utilization, and years of on-time payments. The only problem was that the engine couldn't verify what they earned, so it had no choice but to leave them out. That felt like a solvable problem.</div>
+            <div class="p-p">I ran the numbers on what it would mean to fill that gap even partially. The incremental revenue opportunity was large enough to justify a dedicated program. That became the AI Income Encoder.</div>
+            <div class="p-sec">Getting it approved</div>
+            <div class="p-p">Pitching a novel AI model inside a regulated lending environment requires more than a good idea. I wrote the business case from the ground up, established the risk guardrails, and personally walked the proposal through credit risk review, model governance, legal, and Fair Lending approval. The argument I kept returning to was straightforward: a well-calibrated income estimate, even an imperfect one, is categorically better than no estimate at all. We had a segment of creditworthy customers being excluded not because they posed a risk but because of a data gap we had the tools to close.</div>
+            <div class="p-sec">How the model works</div>
+            <div class="p-p">The Income Encoder is a fine-tuned BERT model trained on anonymized transaction histories. Rather than trying to predict a precise income figure, we framed the problem as multi-class classification across income tiers. This gave us more reliable confidence calibration and made the outputs far easier to explain to the governance and compliance teams who needed to sign off on its use in decisioning.</div>
+            <div class="p-p">The central technical challenge was generalization. A model trained primarily on customers with verified income needed to perform well on the segment that had never been verified — exactly the population it was designed to serve. We managed the bias-variance tradeoff through dropout regularization, cross-validation across customer vintage cohorts, and by evaluating F1 score at each income band independently rather than relying on aggregate accuracy. That granular view mattered because a model that performed well on middle-income customers while systematically misclassifying the lower bands would have created the kind of disparate impact that triggers Fair Lending scrutiny.</div>
+            <div class="p-p">The final model hit a weighted F1 of 0.81 across five income tiers on a held-out validation set of customers whose income had been independently verified. We set the production confidence threshold at 0.72. Outputs above that level fed into the decision engine. Below it, the system defaulted to the previous exclusion logic rather than act on a low-confidence prediction.</div>
+            <div class="p-p">I owned the program end to end beyond the model itself: the API integration spec, the monitoring runbook, and the disparate impact testing across ECOA-protected classes. The production team had a clear definition of what a Fair Lending flag looked like before a single decision ran.</div>
+            <div class="p-p">One wrinkle we discovered post-launch: because the model reads direct deposit data, it produces post-tax income estimates. Customers who self-report tend to give pre-tax figures, so the model's number looks lower by comparison. The project has still been a clear success since the alternative remains no income estimate at all, but reconciling the two figures is something we continue to work on.</div>
             <div class="kpis" style="margin-top:12px">
-              <div class="kpi"><div class="kpi-v">1mK</div><div class="kpi-l">New Incomes</div></div>
+              <div class="kpi"><div class="kpi-v">215K</div><div class="kpi-l">Customers unlocked</div></div>
               <div class="kpi"><div class="kpi-v">$8.6M</div><div class="kpi-l">Yearly profit</div></div>
-              <div class="kpi"><div class="kpi-v">260k</div><div class="kpi-l">New PCLIs</div></div>
+              <div class="kpi"><div class="kpi-v">0</div><div class="kpi-l">Fair lending findings</div></div>
               <div class="kpi"><div class="kpi-v">Pass</div><div class="kpi-l">Model validation</div></div>
-            <div class="p-sec">The Limitations</div>
-            <div class="p-p">When standing up this project one thing I did not consider is that since we are using the direct deposit information for these customers, this would be post tax income. When we ask a user for their income they submit the pre tax number. While there is nothing wrong with using the post tax number, it does make it seem like the customer makes less than they do. We continue to figure out solutions around this, but the alternative to the lower income is no income therefore this project has still been a resounding success</div>
-
             </div>
           </div>
 
+          
           <div class="panel" id="mw-infra">
-              <div class="p-sec">Legacy Architecture Constraints</div>
-              <div class="p-p">
-                When I joined PNC, credit decisioning was still heavily dependent on batch processing. Personal Credit Line Increase (PCLI) requests were processed on a biweekly cycle, meaning customers waited days—or even weeks—for decisions that should have taken seconds. This created a clear gap between user expectations and system capabilities, and limited our ability to deliver modern, real-time financial experiences.
-              </div>
-            
-              <div class="p-sec">Program Leadership & Real-Time Transformation</div>
-              <div class="p-p">
-                I led the migration from a biweekly batch-based system to a real-time decisioning platform, coordinating a cross-functional team of 25+ engineers across multiple workstreams. This required rethinking data flows, orchestration, and system dependencies to support low-latency, high-reliability decisioning at scale.
-              </div>
-              <div class="p-p">
-                As part of this transformation, we also built and launched <strong>Instant CRCLI</strong>, enabling customers to request and receive credit line increases directly within the app in near real time. Unlike traditional PCLI, this introduced strict latency requirements and required careful coordination across upstream data providers and downstream decision engines.
-              </div>
-              <div class="p-p">
-                To safely transition, I implemented a phased rollout using <strong>shadow mode</strong>, running batch and real-time systems in parallel to validate accuracy and performance before full cutover. I also introduced resiliency patterns across vendor integrations to ensure consistent system behavior under tight response-time constraints.
-              </div>
-
-  <div class="kpis" style="margin-top:10px">
+            <div class="p-sec">The problem with batch</div>
+            <div class="p-p">When I joined PNC, the credit decisioning infrastructure ran entirely on overnight batch jobs. Depending on when upstream tables refreshed, some decisions were being made on data that was up to two weeks old. That lag wasn't just a performance issue. It was actively blocking capabilities the business needed. When a customer requested a credit line increase through the app, they expected a response in seconds — not a letter arriving three days later. The next-generation FICO model the team wanted to adopt was only useful in real time, so running it on stale batch data erased everything it was designed to offer. And disaster exclusion rules were still being applied manually at the state level, which created both operational risk and significant overhead whenever a major weather event required rapid updates.</div>
+            <div class="p-p">The mandate was to migrate four interconnected systems from batch to real-time processing, maintain zero compliance exposure throughout, and never cut over cold.</div>
+            <div class="p-sec">How I ran it</div>
+            <div class="p-p">This was a four-track parallel program across 25+ engineers. Each workstream carried distinct technical complexity, vendor relationships, and regulatory requirements, so managing it as a single project would have been a mistake. I ran weekly architecture reviews with each workstream lead, maintained a shared dependency map to keep teams from blocking each other, and required every migration to go through shadow mode before the final switch. In shadow mode, the old batch pipeline and the new real-time system ran in parallel with their outputs automatically compared. We did not cut over until both systems produced matching results across a full campaign cycle.</div>
+            <div class="p-p">The hardest problem in the whole migration turned out to have nothing to do with the infrastructure itself. It was audit trail continuity. Batch systems log decisions naturally at cycle end. Real-time systems need atomic, event-based logging that can satisfy compliance requirements, support regulatory disclosure reconstruction, and not add latency to the response. I designed the event schema and worked with engineering until we had hard guarantees that every decision was written to the audit log before any response was returned to the caller.</div>
+            <div class="p-p">We also built circuit breaker logic into every vendor integration so that if an API timeout rate crossed a set threshold, the system would reroute to a backup endpoint automatically rather than fail the decision. That turned out to matter more than expected when a production incident tested it directly — that story is in the next tab.</div>
+            <div class="kpis" style="margin-top:10px">
+              <div class="kpi"><div class="kpi-v">$31M</div><div class="kpi-l">RAR (12mo)</div></div>
+              <div class="kpi"><div class="kpi-v">4</div><div class="kpi-l">Systems migrated</div></div>
+              <div class="kpi"><div class="kpi-v">25+</div><div class="kpi-l">Engineers</div></div>
+              <div class="kpi"><div class="kpi-v">0</div><div class="kpi-l">Cold cutovers</div></div>
             </div>
           </div>
+
+          
           <div class="panel" id="mw-integrity">
-            <div class="p-p">It is the unfortunate nature of working at a large bank that there are a number of teams dependent on the same table. When these source tables are changed, there are often unrealized cascading effects. In early 2025, an upstream table that populated our student segmentation flag failed to load before a decisioning cycle. The field appeared null. The engine treated every student in our portfolio as a non-student and applied the standard rule set — which is deliberately harsher, because students are a segment we handle carefully to build long-term relationships.</div>
-            <div class="p-p">We decreased credit lines for customers we had no business touching. The remediation took weeks: customer outreach letters, decision reversals, reconciliation across three systems of record, and an internal review with compliance. The full cost — operational hours, customer trust, regulatory exposure — ran well into six figures. And it was entirely preventable.</div>
-            <div class="p-sec">The Floodgate Solution</div>
-            <div class="p-p">I designed what became known as the Floodgate — a pre-campaign validation layer that runs before any decisioning cycle begins. The core idea: query every upstream critical field and validate it against configurable threshold logic. If anything fails, the campaign doesn't run. Full stop. No exceptions, no manual overrides without documented approval.</div>
-            <ul class="p-ul">
-              <li><strong>Completeness checks:</strong> null tolerance per field, expected record count validation</li>
-              <li><strong>Statistical drift detection:</strong> z-score variance against a 90-day rolling baseline — catches semantic changes, not just missing data</li>
-              <li><strong>Range and referential integrity:</strong> values within expected bounds, foreign key consistency across systems</li>
-            </ul>
-            <div class="p-p">The drift detection proved its value almost immediately. Six months after launch, an upstream data provider changed a field that had always represented monthly income to annual income — with zero notification to us. Our engine was built to annualize monthly income by multiplying by twelve. If it had run, every customer in that population would have appeared to have twelve times their actual income. Credit lines would have been increased to catastrophic levels.</div>
-            <div class="p-p">The z-score on that field hit 11.8 standard deviations. The campaign was blocked automatically before a single decision ran. What would have been a regulatory disclosure event became a near-miss caught by architecture.</div>
+            <div class="p-sec">What went wrong</div>
+            <div class="p-p">In early 2024, an upstream table that populated our student segmentation flag failed to load before a decisioning cycle. The field came through as null. Because the engine saw no student flag, it treated the entire affected segment as non-students and applied the standard rule set. That rule set is deliberately more conservative for students, because that population represents a long-term banking relationship. Without the flag, those protections disappeared.</div>
+            <div class="p-p">We decreased credit lines for customers we had no business touching. The remediation took weeks: outreach letters, decision reversals, reconciliation across three systems of record, and a formal compliance review. The total cost in operational time, customer trust, and regulatory exposure ran well into six figures. The most frustrating part was that it was entirely avoidable.</div>
+            <div class="p-sec">Building the Floodgate</div>
+            <div class="p-p">After the incident, I designed a pre-campaign validation layer the team eventually started calling the Floodgate. The principle behind it is simple: if you cannot trust the data feeding the engine, you should not let the engine run. Before every decisioning cycle, the system queries every upstream critical field and validates it against configurable thresholds. If anything fails, the campaign stops — no exceptions, and no overrides without documented approval from a named stakeholder.</div>
+            <div class="p-p">The system checks for three categories of failure. First, completeness: are the fields present and populated within acceptable tolerances? Second, distributional drift: has the statistical shape of a field shifted from its 90-day rolling baseline? Third, referential integrity: do values fall within expected bounds and remain consistent across systems? The drift check turns out to be the most important of the three. A null field is obvious. A field that is present but has quietly changed what it measures is invisible to a standard data quality check — until it isn't.</div>
+            <div class="p-p">About six months after launch, the drift check caught exactly that scenario. An upstream data provider silently changed a field from representing monthly income to annual income with no notification to our team. Our annualization logic would have multiplied whatever value arrived by twelve, so every customer in that population would have appeared to earn twelve times their actual income. Credit lines would have been increased to catastrophic levels across a significant segment of the portfolio.</div>
+            <div class="p-hl">The z-score on that field hit 11.8 standard deviations. The campaign was stopped before a single decision ran. What would have been a regulatory disclosure event became a near-miss that only a handful of people on the team ever knew happened.</div>
           </div>
 
-         <div class="panel" id="mw-strategy">
-  <div class="p-sec">Prioritization Under Constraint</div>
-  <div class="p-p">
-    As a TPM, I rely on a range of prioritization frameworks depending on the context—RICE for product-driven tradeoffs, cost-of-delay for time-sensitive initiatives, and stakeholder alignment models when navigating organizational complexity. In this case, I selected <strong>Weighted Shortest Job First (WSJF)</strong> because it provided a structured, objective way to balance urgency, business value, and effort under strict resource constraints.
-  </div>
+          
+          <div class="panel" id="mw-strategy">
+            <div class="p-sec">When everyone's project is Priority 1</div>
+            <div class="p-p">In Q2 2024, three senior stakeholders escalated Priority 1 requests at the same time. Risk needed a FEMA API integration before hurricane season. Marketing needed an email delivery channel to bypass a physical mail capacity cap. Analytics needed a complete overhaul of the waterfall decisioning logging architecture. Every team had a legitimate case. None of them wanted to wait. I had one engineering team.</div>
+            <div class="p-p">To score them objectively I applied Weighted Shortest Job First, which weighs business value, time criticality, and risk reduction against implementation effort. The goal was to get a number on the table before anyone's preference entered the room.</div>
+            <table class="wsjf">
+              <thead><tr><th>Initiative</th><th>Biz Value</th><th>Time Crit.</th><th>Risk Red.</th><th>Effort</th><th>WSJF</th></tr></thead>
+              <tbody>
+                <tr class="wsjf-w"><td>FEMA API ✓</td><td>8</td><td>9</td><td>7</td><td>3</td><td><strong>8.0</strong></td></tr>
+                <tr><td>Email Integration</td><td>4</td><td>6</td><td>3</td><td>5</td><td>2.6</td></tr>
+                <tr><td>Waterfall Logging</td><td>7</td><td>3</td><td>5</td><td>8</td><td>1.9</td></tr>
+              </tbody>
+            </table>
+            <div class="p-p" style="margin-top:8px">FEMA API won by a wide margin. Hurricane season was weeks away, moving from state-level exclusions to ZIP-code granularity would unlock thousands of previously blocked accounts, and it was a single stable endpoint with low implementation effort. The email integration had a short-term workaround available. The logging overhaul was genuinely valuable work with no hard deadline.</div>
+            <div class="p-p">I personally wanted the logging overhaul most. I'd been frustrated by the analytical gap it created for months and already knew exactly what I'd build. That's precisely why the scoring mattered. It removed my preference from the equation and gave me something objective to show the teams that didn't get what they asked for. When stakeholders know the process is consistent and transparent, a no lands differently than when it feels arbitrary.</div>
+            <div class="p-sec" style="margin-top:12px">My approach to prioritization</div>
+            <div class="p-p">WSJF works well when you have multiple competing initiatives and need a defensible ranking. But it's one tool in a larger set. For roadmap planning I use a combination of OKR alignment and opportunity scoring to evaluate whether a project moves a metric that actually matters to the business. For shorter-horizon trade-offs, like sprint-level decisions, I rely on impact-effort mapping to quickly visualize where the team's time creates the most value relative to cost.</div>
+            <div class="p-p">For stakeholder communication I find that the most important prioritization skill isn't the scoring framework itself. It's having a consistent north star metric that everyone agrees on in advance. At PNC that metric is risk-adjusted revenue. When every team's request gets measured against the same ruler, the conversation shifts from whose project is more important to which project moves the number furthest. That's a much more productive argument to have.</div>
+            <div class="p-p">I also use MoSCoW prioritization for scope decisions within a project, especially when a deadline is fixed and trade-offs need to be made fast. Separating must-haves from should-haves from won't-haves forces the product team to get explicit about what a launch actually requires, rather than letting every feature be implicitly critical until someone has to cut something at the last minute.</div>
+            <div class="p-sec" style="margin-top:12px">Enriching the model with behavioral signals</div>
+            <div class="p-p">Running alongside the infrastructure work, I identified an opportunity to improve the quality of the decisioning model's inputs. Standard credit features draw heavily on FICO and bureau signals, which are lagging indicators by design. I worked with data science to scope an LLM-based transaction classifier that normalizes raw transaction descriptions into a consistent category taxonomy across 30, 60, and 90-day windows. The result was 400+ distinct behavioral signals feeding the feature store at decision time, giving the model visibility into spending trends rather than just credit history.</div>
+          </div>
 
-  <div class="p-sec">Three P1s, One Team</div>
-  <div class="p-p">
-    In Q2 2024, three  stakeholders escalated competing Priority 1 initiatives: a disaster-response integration required before hurricane season, a new digital delivery channel to mitigate physical mail capacity limits, and a foundational overhaul of decisioning observability. Each initiative had clear business justification and none could be deferred. All depended on the same engineering team.
-  </div>
-
-  <div class="p-p">
-    To drive alignment and remove subjectivity, I applied WSJF scoring across all three initiatives:
-  </div>
-
-  <table class="wsjf">
-    <thead>
-      <tr>
-        <th>Initiative</th>
-        <th>Biz Value</th>
-        <th>Time Crit.</th>
-        <th>Risk Red.</th>
-        <th>Effort</th>
-        <th>WSJF</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="wsjf-w">
-        <td>Disaster API Integration ✓</td>
-        <td>8</td>
-        <td>9</td>
-        <td>7</td>
-        <td>3</td>
-        <td><strong>8.0</strong></td>
-      </tr>
-      <tr>
-        <td>Email Delivery Integration</td>
-        <td>4</td>
-        <td>6</td>
-        <td>3</td>
-        <td>5</td>
-        <td>2.6</td>
-      </tr>
-      <tr>
-        <td>Decisioning Logging Overhaul</td>
-        <td>7</td>
-        <td>3</td>
-        <td>5</td>
-        <td>8</td>
-        <td>1.9</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div class="p-p" style="margin-top:8px">
-    The disaster-response integration clearly ranked highest. With hurricane season approaching, timing was critical, and finer grained eligibility logic unlocked meaningful customer and business impact. It also offered a relatively low-effort path to production compared to the other initiatives.
-  </div>
-
-  <div class="p-p">
-    The email integration, while important, had a viable short-term workaround through campaign scheduling. The logging overhaul addressed a long-standing gap in observability, but lacked immediate time sensitivity and required significantly higher engineering investment.
-  </div>
-
-  <div class="p-hl">
-    I was personally most invested in the logging overhaul due to its long-term value. That’s precisely why WSJF was critical—it ensured the prioritization reflected business impact and urgency rather than individual preference. In this case, the framework served not just as a planning tool, but as a mechanism for objective decision-making under pressure.
-  </div>
-
-  <div class="p-sec" style="margin-top:12px">LLM Transaction Taxonomy — Expanding Decision Signals</div>
-  <div class="p-p">
-    In parallel, I identified an opportunity to enhance decisioning inputs beyond traditional credit bureau signals, which are inherently lagging. I partnered with data science to define an LLM-based transaction classification system that generates a normalized category taxonomy from raw transaction data, aggregated across 30, 60, and 90 day windows.
-  </div>
-
-  <div class="p-p">
-    This approach produced 400+ incremental behavioral signals at decision time, enabling more nuanced risk assessment. For example, the model could distinguish between stable increases in essential spending and riskier shifts toward discretionary consumption against declining income signals improving precision without requiring changes to core decisioning logic.
-  </div>
-</div>
+          
           <div class="panel" id="mw-crisis">
-            <div class="p-sec">The incident: live campaign, 25% failure rate</div>
-            <div class="p-p">On a Tuesday morning in Q4 2024, our Decision Modeler began experiencing processing failures during a proactive credit line increase campaign. Within 20 minutes, we were seeing a 25% failure rate across hundreds of thousands of accounts — each failed account representing ~$40 in Risk-Adjusted Return that would be permanently lost if the campaign timed out. The campaign was generating over $1M per hour at full throughput.</div>
-            <div class="p-p">The immediate response from the team and from my leadership was to shut the campaign down. I asked for 30 minutes to diagnose before we pulled the plug.</div>
-            <div class="p-sec">The diagnosis — and why it mattered</div>
-            <div class="p-p">I convened a war room with our line-of-business Risk lead, the Credit Card Director, and tech leadership. Two parallel analyses running simultaneously:</div>
-            <ul class="p-ul">
-              <li><strong>Root cause:</strong> Infrastructure logs showed 25% of API requests timing out at the FICO vendor's load balancer layer. The decision logic itself was processing correctly — the engine wasn't broken, the highway had a traffic jam.</li>
-              <li><strong>Disparate impact analysis:</strong> I pulled the demographic and credit profile distribution of failed accounts vs. successful accounts in real time. No correlation with credit score band, geographic cluster, income proxy, or any protected class attribute. The failures were statistically random — a true infrastructure fault, not a logic fault.</li>
-            </ul>
-            <div class="p-hl">This distinction — random infrastructure failure vs. systematic logic failure — was the linchpin of the entire decision. A systematic logic failure means the engine is making wrong decisions, and you must stop immediately. A random infrastructure failure means some decisions aren't being made at all, but the ones that are made are correct. These require completely different responses.</div>
-            <div class="p-sec">The decision framework I presented</div>
-            <div class="p-p">Three data points to leadership in the war room:</div>
-            <ul class="p-ul">
-              <li>75% of decisions were processing successfully and correctly</li>
-              <li>The error pattern showed zero demographic or credit-score clustering — no Fair Lending exposure</li>
-              <li>We were inside the pre-notification window — no customer had been informed of any decision, so failed accounts could be requeued with zero legal consequence</li>
-            </ul>
-            <div class="p-p">My proposal: monitored-live approach. Stay operational with hourly error-rate checkpoints and an automatic kill switch if failures exceeded 30%. If root cause resolved before then, we recover the full RAR. If it didn't, we had a clean exit with a defined threshold.</div>
-            <div class="p-p">FICO identified and resolved the load balancer issue within eight hours. We stayed live the entire time.</div>
+            <div class="p-sec">The campaign starts breaking</div>
+            <div class="p-p">On a Tuesday morning in Q4 2024, the decision engine started throwing failures during a live credit line increase campaign. Within twenty minutes we were at a 25% failure rate across hundreds of thousands of accounts. Each failed account represented roughly $40 in Risk-Adjusted Return that would be permanently lost if the campaign timed out. At full throughput, the campaign was generating over a million dollars an hour.</div>
+            <div class="p-p">The instinct from my leadership was to shut it down immediately. I asked for thirty minutes to understand what was actually happening before we pulled the plug.</div>
+            <div class="p-sec">Figuring out what we actually had</div>
+            <div class="p-p">I pulled together the Risk lead, the Credit Card Director, and tech leadership into a war room and ran two analyses in parallel. Infrastructure logs showed 25% of API requests timing out at the FICO vendor's load balancer. The decision logic was processing correctly. The engine wasn't broken — the highway was congested.</div>
+            <div class="p-p">At the same time, I pulled the demographic and credit profile distribution of failed accounts against successful ones in real time. There was no correlation with credit score band, geographic cluster, income proxy, or any protected class attribute. The failures were statistically random.</div>
+            <div class="p-hl">That distinction matters more than it sounds. A logic failure means the engine is making wrong decisions and you stop immediately. An infrastructure failure means some decisions aren't completing, but the ones that do are correct. These situations require completely different responses, and confusing them is expensive.</div>
+            <div class="p-sec">The case for staying live</div>
+            <div class="p-p">I presented three facts. Seventy-five percent of decisions were still processing correctly. The failure distribution showed no demographic clustering, which meant no Fair Lending exposure. And we were still inside the pre-notification window, meaning every failed account could be requeued without legal consequence.</div>
+            <div class="p-p">My proposal was to stay live with hourly checkpoints and a hard automatic kill switch if failure rates crossed 30%. If the vendor resolved the issue, we recovered the full revenue. If they didn't, we had a clean exit at a defined threshold. FICO found and fixed the load balancer issue within eight hours. We stayed live the entire time.</div>
             <div class="kpis" style="margin-top:10px">
               <div class="kpi"><div class="kpi-v">$3–5M</div><div class="kpi-l">RAR recovered</div></div>
               <div class="kpi"><div class="kpi-v">8 hrs</div><div class="kpi-l">Resolution time</div></div>
               <div class="kpi"><div class="kpi-v">0</div><div class="kpi-l">Fair lending impact</div></div>
               <div class="kpi"><div class="kpi-v">✓</div><div class="kpi-l">Circuit breaker built</div></div>
             </div>
-            <div class="p-p">"Reversibility is a feature, not a fallback. I now explicitly map rollback paths and pre-notification windows before every launch. The difference between a recoverable situation and an unrecoverable one is often a 20-minute diagnostic window."</div>
           </div>
 
+          
           <div class="panel" id="mw-mit">
             <div style="background:#ECE9D8;border:2px inset #ACA899;padding:8px 12px;margin-bottom:12px">
               <div style="font-size:12px;font-weight:700;color:#000;font-family:var(--f);margin-bottom:1px">MIT Lincoln Laboratory</div>
-              <div style="font-size:10px;color:#444;font-family:var(--f)">Research Data Scientist · Lexington, MA · May 2022 – June 2023</div>
+              <div style="font-size:10px;color:#444;font-family:var(--f)">Research Data Scientist &nbsp;·&nbsp; Lexington, MA &nbsp;·&nbsp; May 2022 – January 2023</div>
             </div>
+            <div class="kpis">
+              <div class="kpi"><div class="kpi-v">20M+</div><div class="kpi-l">Posts processed</div></div>
+              <div class="kpi"><div class="kpi-v">40K+</div><div class="kpi-l">Network nodes</div></div>
+              <div class="kpi"><div class="kpi-v">60%</div><div class="kpi-l">Review time cut</div></div>
+              <div class="kpi"><div class="kpi-v">NLP</div><div class="kpi-l">BERT · Graph · NLI</div></div>
             </div>
-            <div class="p-sec">The mission</div>
-            <div class="p-p">MIT Lincoln Laboratory is a federally funded R&D center that supports national security research for the Department of Defense. I joined as a Research Data Scientist to build intelligence infrastructure for an active threat research program — specifically, automated analysis of a targeted extremist online community with 40,000+ active users generating millions of posts per month.</div>
-            <div class="p-p">The analyst team was spending the majority of their time on manual content review — reading posts, identifying patterns, flagging actors of interest. My job was to build the system that automated the noise and surfaced the signal.</div>
-            <div class="p-sec">What I built</div>
-            <div class="p-p">An end-to-end NLP intelligence pipeline — from raw data ingestion to analyst-facing intelligence outputs:</div>
-            <ul class="p-ul">
-              <li><strong>Ingestion layer:</strong> Async multi-threaded scraper with bot detection avoidance, rate limiting, and multi-threaded preprocessing. Ingested 20M+ posts across the full user network with full metadata preservation.</li>
-              <li><strong>Data architecture:</strong> Normalized relational schema designed for the analytical queries the team actually needed — not just storage, but structured for downstream ML and graph analysis.</li>
-              <li><strong>Semantic modeling:</strong> BERT-based embedding pipeline for post content vectorization, feeding HDBSCAN clustering for semantic similarity grouping. This surfaced thematic communities and coordinated messaging patterns that weren't visible through keyword search.</li>
-              <li><strong>Topic classification:</strong> Zero-shot NLI classifier for emergent topic labeling — no labeled training data required, which was critical given the sensitivity of the source material and the rapidly evolving topic space.</li>
-              <li><strong>Social network analysis:</strong> NetworkX graph model mapping interaction patterns across the full 40K+ node network. Centrality metrics (betweenness, eigenvector) identified high-influence actors and detected coordinated behavior clusters invisible through individual post analysis.</li>
-            </ul>
-            <div class="p-hl">The graph model was the key differentiator. Individual posts are noisy. Network structure is much harder to fake. By modeling who was amplifying whom, we identified coordination patterns that no keyword-based system would catch.</div>
-            <div class="p-sec">Impact</div>
-            <div class="p-p">The pipeline reduced analyst manual review time by approximately 60% — meaning the team could cover the same community with substantially fewer hours, or the same hours across a substantially larger target set. The system became a standing capability used by the research team after I left.</div>
-            <div class="p-quote">"Pipeline architecture matters as much as model accuracy. You can have the best BERT embeddings in the world — if the data feeding them is contaminated by bot activity, or if the schema can't support the queries analysts actually need, none of it matters."</div>
+            <div class="p-sec">The assignment</div>
+            <div class="p-p">MIT Lincoln Laboratory does classified applied research for the Department of Defense. The program I joined was monitoring a targeted extremist online community — roughly 40,000 active users generating millions of posts a month. The analyst team was drowning in manual content review. My job was to build the system that automated the noise and surfaced the signal, so they could focus on the work that actually required human judgment.</div>
+            <div class="p-sec">The platform</div>
+            <div class="p-p">I built an end-to-end NLP pipeline from raw ingestion to analyst-facing intelligence outputs. The ingestion layer was a multi-threaded scraper with bot detection avoidance and rate limiting that collected 20M+ posts while preserving full metadata. I designed the storage schema around the queries the team actually needed to run — not just around getting the data down.</div>
+            <div class="p-p">The modeling layer used BERT embeddings with HDBSCAN clustering to surface thematic communities and coordinated messaging patterns that a keyword search would never find. Topic labeling ran through a zero-shot NLI classifier that didn't require labeled training data, which mattered because the topic space shifted fast and the source material was too sensitive to annotate at scale.</div>
+            <div class="p-p">The piece that made the biggest difference was the social network graph. I modeled the full 40,000-node network and used betweenness and eigenvector centrality to identify high-influence actors and coordination clusters. Individual posts are noisy and easy to manufacture. Network structure is much harder to fake. Modeling who was amplifying whom surfaced patterns that no content-based approach would have found.</div>
+            <div class="p-p">The platform reduced analyst manual review time by roughly 60%, which meant the same team could cover substantially more ground or redirect their attention to higher-judgment work that the system couldn't automate. After I left, the system remained in production as a standing capability for the research program. It was the first time I built something that outlasted my tenure, and it shaped how I think about what good platform work looks like.</div>
           </div>
 
-        </div>
-      </div>
-        </div>
-      </div>
-    </div>
-  </div>
+        </div><!-- /scroll container -->
+      </div><!-- /mw-body -->
+      </div><!-- /flex row: sidebar + main -->
+    </div><!-- /mw-wrap -->
+  </div><!-- /wbody -->
   <div class="wst">Career Arc · Logan Heft · Technical Program Manager</div>
   <div class="wrz" onmousedown="resz(event,'w-work')"></div>
 </div>
@@ -1873,7 +1788,8 @@ function drawRadar(){
 
     /* Vertical nudge: pull up near top, push down near bottom */
     var baseY = ly;
-    if(sa < -0.6) baseY = ly - 6;
+    if(sa < -0.6) baseY = ly - 2;   /* top labels: less aggressive pull-up */
+    if(sa < -0.85) baseY = ly + 8;  /* near-straight-up: push DOWN so label clears title bar */
     if(sa >  0.4) baseY = ly + 12;
     if(sa >  0.8) baseY = ly + 18;  /* extra for near-bottom labels */
 
