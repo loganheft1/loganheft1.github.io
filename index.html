@@ -501,30 +501,6 @@ html,body{width:100%;height:100%;overflow:hidden;-webkit-font-smoothing:antialia
 
 /* ============================================================
    ABOUT ME — Photo grid (4×5 portrait)
-   ============================================================ */
-.photo-hint{font-size:10px;color:#555;line-height:1.5;margin-bottom:7px;font-family:var(--f)}
-.photo-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin:0 0 8px}
-.photo-slot{
-  aspect-ratio:4/5;border:2px inset #ACA899;
-  background:#fff;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;gap:3px;
-  cursor:pointer;position:relative;overflow:hidden;
-}
-.photo-slot:hover{background:#EEF4FF;border-color:#316AC5}
-.photo-slot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.ps-ico{font-size:18px;line-height:1;color:#808080}
-.ps-lbl{font-size:9px;color:#444;text-align:center;line-height:1.3;font-family:var(--f)}
-.photo-slot input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer}
-.strava-link{
-  display:inline-flex;align-items:center;gap:5px;
-  background:linear-gradient(180deg,#F07050,#C83010);
-  border:2px outset #E06040;
-  padding:4px 10px;
-  color:#fff;font-size:11px;font-weight:700;font-family:var(--f);
-  text-decoration:none;cursor:pointer;
-}
-.strava-link:hover{filter:brightness(1.08)}
-.strava-link:active{border-style:inset}
 
 /* ============================================================
    ABOUT ME — Education blurbs
@@ -975,18 +951,6 @@ html,body{width:100%;height:100%;overflow:hidden;-webkit-font-smoothing:antialia
         <!-- OUTSIDE OF WORK -->
         <div class="aw-pane" id="aw-outside">
           <div class="aw-h1">Outside of Work</div>
-          <!-- Photo grid: upload 4x5 portrait shots here -->
-          <div class="photo-grid" id="photo-grid-wrap">
-            <div class="photo-slot" id="ps0"><div class="ps-ico">📸</div><div class="ps-lbl">Upload photo</div><input type="file" accept="image/*" onchange="loadPic(this,0)"/></div>
-            <div class="photo-slot" id="ps1"><div class="ps-ico">📸</div><div class="ps-lbl">Upload photo</div><input type="file" accept="image/*" onchange="loadPic(this,1)"/></div>
-            <div class="photo-slot" id="ps2"><div class="ps-ico">📸</div><div class="ps-lbl">Upload photo</div><input type="file" accept="image/*" onchange="loadPic(this,2)"/></div>
-            <div class="photo-slot" id="ps3"><div class="ps-ico">📸</div><div class="ps-lbl">Upload photo</div><input type="file" accept="image/*" onchange="loadPic(this,3)"/></div>
-            <div class="photo-slot" id="ps4"><div class="ps-ico">📸</div><div class="ps-lbl">Upload photo</div><input type="file" accept="image/*" onchange="loadPic(this,4)"/></div>
-            <div class="photo-slot" id="ps5"><div class="ps-ico">📸</div><div class="ps-lbl">Upload photo</div><input type="file" accept="image/*" onchange="loadPic(this,5)"/></div>
-          </div>
-          <!-- Save button: only shown in edit mode (see JS below) -->
-          <button id="photo-save-btn" onclick="savePhotosToHTML()" style="display:block;width:100%;margin:0 0 10px;padding:5px 14px;background:linear-gradient(180deg,#6CB4F5,#3A7FD5);border:2px outset #fff;color:#fff;font-size:11px;font-weight:700;font-family:Tahoma,sans-serif;cursor:pointer;text-align:center;">&#128190; Save photos to site</button>
-
           <div class="aw-h2">Running</div>
           <div class="aw-p">After finishing my undergraduate degree as a Division I volleyball player, I needed a competitive outlet and turned to running. Since picking it up in 2021 I've completed 8 marathons, typically training 70+ miles a week.</div>
 
