@@ -1191,12 +1191,6 @@ html,body{width:100%;height:100%;overflow:hidden;-webkit-font-smoothing:antialia
             <div class="p-p">The final model hit a weighted F1 of 0.81 across five income tiers on a held-out validation set of customers whose income had been independently verified. We set the production confidence threshold at 0.72. Outputs above that level fed into the decision engine. Below it, the system defaulted to the previous exclusion logic rather than act on a low-confidence prediction.</div>
             <div class="p-p">I owned the program end to end beyond the model itself: the API integration spec, the monitoring runbook, and the disparate impact testing across ECOA-protected classes. The production team had a clear definition of what a Fair Lending flag looked like before a single decision ran.</div>
             <div class="p-p">One wrinkle we discovered post-launch: because the model reads direct deposit data, it produces post-tax income estimates. Customers who self-report tend to give pre-tax figures, so the model's number looks lower by comparison. The project has still been a clear success since the alternative remains no income estimate at all, but reconciling the two figures is something we continue to work on.</div>
-            <div class="kpis" style="margin-top:12px">
-              <div class="kpi"><div class="kpi-v">215K</div><div class="kpi-l">Customers unlocked</div></div>
-              <div class="kpi"><div class="kpi-v">$8.6M</div><div class="kpi-l">Yearly profit</div></div>
-              <div class="kpi"><div class="kpi-v">0</div><div class="kpi-l">Fair lending findings</div></div>
-              <div class="kpi"><div class="kpi-v">Pass</div><div class="kpi-l">Model validation</div></div>
-            </div>
           </div>
 
           
@@ -1208,12 +1202,6 @@ html,body{width:100%;height:100%;overflow:hidden;-webkit-font-smoothing:antialia
             <div class="p-p">This was a four-track parallel program across 25+ engineers. Each workstream carried distinct technical complexity, vendor relationships, and regulatory requirements, so managing it as a single project would have been a mistake. I ran weekly architecture reviews with each workstream lead, maintained a shared dependency map to keep teams from blocking each other, and required every migration to go through shadow mode before the final switch. In shadow mode, the old batch pipeline and the new real-time system ran in parallel with their outputs automatically compared. We did not cut over until both systems produced matching results across a full campaign cycle.</div>
             <div class="p-p">The hardest problem in the whole migration turned out to have nothing to do with the infrastructure itself. It was audit trail continuity. Batch systems log decisions naturally at cycle end. Real-time systems need atomic, event-based logging that can satisfy compliance requirements, support regulatory disclosure reconstruction, and not add latency to the response. I designed the event schema and worked with engineering until we had hard guarantees that every decision was written to the audit log before any response was returned to the caller.</div>
             <div class="p-p">We also built circuit breaker logic into every vendor integration so that if an API timeout rate crossed a set threshold, the system would reroute to a backup endpoint automatically rather than fail the decision. That turned out to matter more than expected when a production incident tested it directly — that story is in the next tab.</div>
-            <div class="kpis" style="margin-top:10px">
-              <div class="kpi"><div class="kpi-v">$31M</div><div class="kpi-l">RAR (12mo)</div></div>
-              <div class="kpi"><div class="kpi-v">4</div><div class="kpi-l">Systems migrated</div></div>
-              <div class="kpi"><div class="kpi-v">25+</div><div class="kpi-l">Engineers</div></div>
-              <div class="kpi"><div class="kpi-v">0</div><div class="kpi-l">Cold cutovers</div></div>
-            </div>
           </div>
 
           
@@ -1263,12 +1251,6 @@ html,body{width:100%;height:100%;overflow:hidden;-webkit-font-smoothing:antialia
             <div class="p-sec">The case for staying live</div>
             <div class="p-p">I presented three facts. Seventy-five percent of decisions were still processing correctly. The failure distribution showed no demographic clustering, which meant no Fair Lending exposure. And we were still inside the pre-notification window, meaning every failed account could be requeued without legal consequence.</div>
             <div class="p-p">My proposal was to stay live with hourly checkpoints and a hard automatic kill switch if failure rates crossed 30%. If the vendor resolved the issue, we recovered the full revenue. If they didn't, we had a clean exit at a defined threshold. FICO found and fixed the load balancer issue within eight hours. We stayed live the entire time.</div>
-            <div class="kpis" style="margin-top:10px">
-              <div class="kpi"><div class="kpi-v">$3–5M</div><div class="kpi-l">RAR recovered</div></div>
-              <div class="kpi"><div class="kpi-v">8 hrs</div><div class="kpi-l">Resolution time</div></div>
-              <div class="kpi"><div class="kpi-v">0</div><div class="kpi-l">Fair lending impact</div></div>
-              <div class="kpi"><div class="kpi-v">✓</div><div class="kpi-l">Circuit breaker built</div></div>
-            </div>
           </div>
 
           
@@ -1276,12 +1258,6 @@ html,body{width:100%;height:100%;overflow:hidden;-webkit-font-smoothing:antialia
             <div style="background:#ECE9D8;border:2px inset #ACA899;padding:8px 12px;margin-bottom:12px">
               <div style="font-size:12px;font-weight:700;color:#000;font-family:var(--f);margin-bottom:1px">MIT Lincoln Laboratory</div>
               <div style="font-size:10px;color:#444;font-family:var(--f)">Research Data Scientist &nbsp;·&nbsp; Lexington, MA &nbsp;·&nbsp; May 2022 – January 2023</div>
-            </div>
-            <div class="kpis">
-              <div class="kpi"><div class="kpi-v">20M+</div><div class="kpi-l">Posts processed</div></div>
-              <div class="kpi"><div class="kpi-v">40K+</div><div class="kpi-l">Network nodes</div></div>
-              <div class="kpi"><div class="kpi-v">60%</div><div class="kpi-l">Review time cut</div></div>
-              <div class="kpi"><div class="kpi-v">NLP</div><div class="kpi-l">BERT · Graph · NLI</div></div>
             </div>
             <div class="p-sec">The assignment</div>
             <div class="p-p">MIT Lincoln Laboratory does classified applied research for the Department of Defense. The program I joined was monitoring a targeted extremist online community — roughly 40,000 active users generating millions of posts a month. The analyst team was drowning in manual content review. My job was to build the system that automated the noise and surfaced the signal, so they could focus on the work that actually required human judgment.</div>
