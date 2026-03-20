@@ -911,12 +911,32 @@ html,body{width:100%;height:100%;overflow:hidden;-webkit-font-smoothing:antialia
       <div class="aw-main">
 
         <!-- BIO -->
-        <div class="aw-pane on" id="aw-bio">
-          <div class="aw-h1">Logan Heft — Technical Program Manager</div>
-          <div style="margin-bottom:10px;font-size:10.5px;font-family:var(--f);color:#444"><a href="loganheft1@gmail.com" class="__cf_email__" data-cfemail="b0fcdfd7d1def8d5d6c481f0d7ddd1d9dc9ed3dfdd">[email&#160;protected]</a> &nbsp;·&nbsp; 908-334-2696 &nbsp;·&nbsp; New York, NY</div>
-          <div class="aw-p">I'm a Technical Product Manager at PNC Bank, where I own the tech stack for consumer and business credit cards. That includes the databases, orchestration layers, decision engines, and business intelligence tools that power how the bank extends credit to our customers. Over the past three years there has been a large focus on modernizing this infrastructure to bring faster and more accurate decisions to customers. This work has generated over <strong>$31 million in risk-adjusted revenue</strong> for the bank this year alone.</div>
-          <div class="aw-p" style="margin-bottom:0">I have an extensive background in data science, machine learning, and artificial intelligence, and I was actually originally hired as a data scientist before moving over into the TPM space. I recieved my MSc from Brown University in Data Science and previously worked as a Research Data Scientist at MITs Lincoln Laboratory. I possess a unique ability to sit with engineers and work through platform architectures and API contracts, while also sitting with executives and translating the same conversation into business risk and return. That is why I was able to succesfully transition to this TPM role so quickly.  It's the skill that matters most as things like AI move into the core of how companies make decisions.</div>
-        </div>
+ <div class="aw-pane on" id="aw-bio">
+  <div class="aw-h1">Logan Heft — Technical Program Manager</div>
+  
+  <div style="margin-bottom:10px;font-size:10.5px;font-family:var(--f);color:#444">
+    <span id="email-link"></span>
+    &nbsp;·&nbsp; 908-334-2696 &nbsp;·&nbsp; New York, NY
+  </div>
+
+  <div class="aw-p">
+    I'm a Technical Product Manager at PNC Bank, where I own the tech stack for consumer and business credit cards. That includes the databases, orchestration layers, decision engines, and business intelligence tools that power how the bank extends credit to our customers. Over the past three years there has been a large focus on modernizing this infrastructure to bring faster and more accurate decisions to customers. This work has generated over <strong>$31 million in risk-adjusted revenue</strong> for the bank this year alone.
+  </div>
+
+  <div class="aw-p" style="margin-bottom:0">
+    I have an extensive background in data science, machine learning, and artificial intelligence, and I was actually originally hired as a data scientist before moving over into the TPM space. I recieved my MSc from Brown University in Data Science and previously worked as a Research Data Scientist at MITs Lincoln Laboratory. I possess a unique ability to sit with engineers and work through platform architectures and API contracts, while also sitting with executives and translating the same conversation into business risk and return. That is why I was able to succesfully transition to this TPM role so quickly. It's the skill that matters most as things like AI move into the core of how companies make decisions.
+  </div>
+
+  <script>
+    (function() {
+      const user = "loganheft1";
+      const domain = "gmail.com";
+      const target = document.getElementById('email-link');
+      const email = user + "@" + domain;
+      target.innerHTML = `<a href="mailto:${email}" style="color:inherit; text-decoration:none;">${email}</a>`;
+    })();
+  </script>
+</div>
 
         <!-- SKILLS — Radar Chart
              Improvements:
