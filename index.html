@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <meta name="description" content="Logan Heft — Technical Program Manager, Runner, Photographer"/>
 <title>Logan Heft</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V0B1MKXJ6E"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-V0B1MKXJ6E');
+</script>
 <style>
 /* ════════════════════════════════════════════════════════════════════
    CSS DESIGN TOKENS
@@ -691,7 +699,7 @@ html,body{width:100%;height:100%;overflow:hidden;-webkit-font-smoothing:antialia
 <div id="icons">
 
   <!-- About Me -->
-  <div class="dico" id="di-about" ondblclick="openW('w-about');event.stopPropagation()" onclick="selI('di-about')">
+  <div class="dico" id="di-about" ondblclick="openW('w-about');gtag('event','click',{event_category:'navigation',event_label:'about_me_open'});event.stopPropagation()" onclick="selI('di-about')">
     <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
       <!-- pixel art user icon — blue background card style -->
       <rect x="0" y="0" width="16" height="16" fill="#1868C8"/>
@@ -933,9 +941,19 @@ html,body{width:100%;height:100%;overflow:hidden;-webkit-font-smoothing:antialia
       const domain = "gmail.com";
       const target = document.getElementById('email-link');
       const email = user + "@" + domain;
-      target.innerHTML = `<a href="mailto:${email}" style="color:inherit; text-decoration:none;">${email}</a>`;
+      target.innerHTML = `<a href="mailto:${email}" onclick="gtag('event','click',{event_category:'contact',event_label:'email_click'})" style="color:inherit; text-decoration:none;">${email}</a>`;
     })();
   </script>
+
+  <!-- LinkedIn button -->
+  <div style="margin-top:12px">
+    <a href="https://www.linkedin.com/in/logan-heft" target="_blank"
+       onclick="gtag('event','click',{event_category:'outbound',event_label:'linkedin'})"
+       style="display:inline-flex;align-items:center;gap:5px;background:linear-gradient(180deg,#0A66C2,#0855A0);border:1px solid #084E96;border-radius:3px;padding:5px 12px;color:#fff;font-size:11px;font-weight:700;font-family:Tahoma,sans-serif;text-decoration:none;cursor:pointer;">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="#fff" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      View LinkedIn Profile
+    </a>
+  </div>
 </div>
 
         <!-- SKILLS — Radar Chart
@@ -997,7 +1015,7 @@ html,body{width:100%;height:100%;overflow:hidden;-webkit-font-smoothing:antialia
        Find the .rv-meta div and edit the text directly.
        This is purely decorative — change name, email, pages, etc.
      ════════════════════════════════════════════════════════════════════ -->
-<div class="xw" id="w-resume" style="width:820px;height:620px;top:35px;left:100px">
+<div class="xw" id="w-resume" style="width:900px;height:680px;top:20px;left:60px">
   <div class="tb" onmousedown="drag(event,'w-resume')">
     <svg class="tb-ico" viewBox="0 0 16 16"><path d="M2 1h8l5 5v10H2z" fill="#D93025"/><path d="M10 1l5 5h-5z" fill="#A52018"/></svg>
     <span class="tb-t">LoganHeft_Resume.pdf — Adobe Reader</span>
@@ -1011,7 +1029,7 @@ html,body{width:100%;height:100%;overflow:hidden;-webkit-font-smoothing:antialia
   <div class="wbody" style="padding:0;overflow:hidden">
     <div class="rv-wrap">
       <div class="rv-sb">
-        <a href="LoganHeft_Resume.pdf" download="LoganHeft_Resume.pdf" class="rv-dl">⬇ Download PDF</a>
+        <a href="LoganHeft_Resume.pdf" download="LoganHeft_Resume.pdf" class="rv-dl" onclick="gtag('event','click',{event_category:'resume',event_label:'pdf_download'})">⬇ Download PDF</a>
         <div class="rv-meta">
           <strong>Document</strong><br/>
           LoganHeft_Resume.pdf<br/><br/>
@@ -1026,7 +1044,7 @@ html,body{width:100%;height:100%;overflow:hidden;-webkit-font-smoothing:antialia
         </div>
       </div>
       <div class="rv-main">
-        <iframe src="LoganHeft_Resume.pdf#zoom=100" title="Resume"></iframe>
+        <iframe src="LoganHeft_Resume.pdf#zoom=page-width&scrollbar=0&toolbar=0&navpanes=0" title="Resume" style="width:100%;height:100%;border:none;display:block;"></iframe>
       </div>
     </div>
   </div>
@@ -1128,12 +1146,12 @@ html,body{width:100%;height:100%;overflow:hidden;-webkit-font-smoothing:antialia
         <div class="mw-body">
         <div class="tabbar">
           <div class="tab on" onclick="mwTab('mw-overview',this)">Overview</div>
-          <div class="tab" onclick="mwTab('mw-ai',this)">AI Income Model</div>
-          <div class="tab" onclick="mwTab('mw-infra',this)">Real-Time Migration</div>
-          <div class="tab" onclick="mwTab('mw-integrity',this)">Data Floodgate</div>
-          <div class="tab" onclick="mwTab('mw-strategy',this)">Product Strategy</div>
-          <div class="tab" onclick="mwTab('mw-crisis',this)">Live Crisis</div>
-          <div class="tab" onclick="mwTab('mw-mit',this)">MIT Lincoln Lab</div>
+          <div class="tab" onclick="mwTab('mw-ai',this);gtag('event','click',{event_category:'career_arc',event_label:'AI Income Model'})">AI Income Model</div>
+          <div class="tab" onclick="mwTab('mw-infra',this);gtag('event','click',{event_category:'career_arc',event_label:'Real-Time Migration'})">Real-Time Migration</div>
+          <div class="tab" onclick="mwTab('mw-integrity',this);gtag('event','click',{event_category:'career_arc',event_label:'Data Floodgate'})">Data Floodgate</div>
+          <div class="tab" onclick="mwTab('mw-strategy',this);gtag('event','click',{event_category:'career_arc',event_label:'Product Strategy'})">Product Strategy</div>
+          <div class="tab" onclick="mwTab('mw-crisis',this);gtag('event','click',{event_category:'career_arc',event_label:'Live Crisis'})">Live Crisis</div>
+          <div class="tab" onclick="mwTab('mw-mit',this);gtag('event','click',{event_category:'career_arc',event_label:'MIT Lincoln Lab'})">MIT Lincoln Lab</div>
         </div>
         <div style="flex:1;overflow-y:auto;min-height:0">
 
@@ -1381,7 +1399,7 @@ html,body{width:100%;height:100%;overflow:hidden;-webkit-font-smoothing:antialia
   <div class="sm-cols">
     <div class="sm-L">
       <div class="sm-lbl">Pinned</div>
-      <div class="sm-it" onclick="openW('w-about');closeStart()">
+      <div class="sm-it" onclick="openW('w-about');gtag('event','click',{event_category:'navigation',event_label:'about_me_open'});closeStart()">
         <svg viewBox="0 0 22 22"><rect x="1" y="1" width="20" height="20" rx="4" fill="#1BA1E2"/><circle cx="11" cy="8" r="4" fill="#fff"/><ellipse cx="11" cy="17" rx="6" ry="4" fill="#fff"/></svg>
         <div class="sm-it-wrap"><span class="sm-it-main">About Me</span><span class="sm-it-s">Bio, skills, photos</span></div>
       </div>
