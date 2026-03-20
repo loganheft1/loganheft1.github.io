@@ -1940,4 +1940,19 @@ function savePhotosToHTML(){
   var a = document.createElement('a');
   a.href = url; a.download = 'index.html'; a.click();
   URL.revokeObjectURL(url);
-  alert('✓ Downloaded updated index.html with your photos embedded!\nUpload
+  alert('✓ Downloaded! Upload the new index.html to GitHub to make your photos permanent.');
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   PHOTO AUTO-RESTORE
+   If the page was saved with photos baked in (window._PHOTOS),
+   restore them on load so they appear without re-uploading.
+   ════════════════════════════════════════════════════════════════════ */
+if(typeof window._PHOTOS !== 'undefined'){
+  for(var _pi in window._PHOTOS){
+    renderPhoto(parseInt(_pi), window._PHOTOS[_pi]);
+  }
+}
+</script>
+</body>
+</html>
